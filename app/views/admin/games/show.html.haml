@@ -1,0 +1,25 @@
+%h1 彩票
+
+.lottery
+  %p
+    彩票名称:
+    = game.game_name
+
+
+%h2 规则
+.rules
+  %table
+    %thead
+      %tr
+        %th 规则名称
+        %th 规则说明
+        %th 赔率
+        %th 操作
+    %tbody
+      - @rules.each do |rule|
+        %tr
+          %td= rule.rule_name
+          %td= rule.rule_description
+          %td= rule.odds
+          %td '修改'
+

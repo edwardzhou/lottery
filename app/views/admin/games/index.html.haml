@@ -1,0 +1,14 @@
+%h1 彩票
+
+%table
+  %head
+    %tr
+      %th 彩票名称
+      %th 说明
+      %th 操作
+  %tbody
+    - @games.each do |game|
+      %tr
+        %td= link_to(game.game_name, admin_game_path(game))
+        %td= game.description
+        %td= link_to('查看', admin_game_path(game))

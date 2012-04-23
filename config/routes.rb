@@ -1,4 +1,12 @@
 Lottery::Application.routes.draw do
+  get "ten_minute/index"
+
+  get "ten_minute/bet"
+
+  namespace :admin do
+    resources :games
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
