@@ -3,6 +3,7 @@ class Rule
   include Mongoid::Timestamps
 
   field :rule_name, type: String
+  field :rule_title, type: String
   field :rule_description, type: String
   field :odds, type: BigDecimal
   field :eval_expr, type: String

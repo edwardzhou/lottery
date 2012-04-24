@@ -1,0 +1,72 @@
+%table{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "700"}
+  %tbody
+    %tr
+      %td.F_bold{:height => "24", :width => "50%"}
+        廣東快樂十分鐘　　　
+        %span{:style => "POSITION: relative; FILTER: blur(add=1, direction=45, strength=3); FONT-FAMILY: Arial; HEIGHT: 10px; COLOR: red; FONT-SIZE: 10pt"} 今天輸贏：
+        %span#UserResult.font_r 0.0
+      %td{:align => "right", :width => "50%"}
+        %table{:border => "0", :cellpadding => "0", :cellspacing => "0"}
+          %tbody
+            %tr
+              %td{:height => "27", :width => "130"}
+                %b#UP_LID.Font_Y 2012042411
+                %b 期開獎
+              %td#BaLL_No1.No_03{:width => "27"} &nbsp;
+              %td#BaLL_No2.No_04{:width => "27"} &nbsp;
+              %td#BaLL_No3.No_18{:width => "27"} &nbsp;
+              %td#BaLL_No4.No_14{:width => "27"} &nbsp;
+              %td#BaLL_No5.No_07{:width => "27"} &nbsp;
+              %td#BaLL_No6.No_06{:width => "27"} &nbsp;
+              %td#BaLL_No7.No_13{:width => "27"} &nbsp;
+              %td#BaLL_No8.No_20{:width => "27"} &nbsp;
+
+
+%table{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "700"}
+  %tbody
+    %tr
+      %td{:height => "24", :width => "28%"}
+        %b#t_LID.Font_G> 2012042412
+        期　
+        %b.font_b 兩面盤
+      %td{:align => "right", :width => "25%"}
+        距離封盤：
+        %span#hClockTime_C 04:56
+      %td{:align => "right", :width => "25%"}
+        距離開獎：
+        %span#hClockTime_O.Font_R 06:26
+      %td{:align => "right", :width => "22%"}
+        %span#Update_Time 1&nbsp;秒
+%table{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "700"}
+  %tbody
+    %tr
+      %td.td_caption_1.F_bold{:colspan => "4"} 總和、龍虎
+    %tr
+      %td
+        = render :partial => "sum_bet", :locals => {:rules => @sum_bet_big_small_rules }
+      %td
+        = render :partial => "sum_bet", :locals => {:rules => @sum_bet_odd_even_rules }
+      %td
+        = render :partial => "sum_bet", :locals => {:rules => @sum_bet_trail_big_small_rules }
+      %td
+        = render :partial => "sum_bet", :locals => {:rules => @sum_bet_dt_rules }
+
+%table{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "700"}
+  %tbody
+    %tr
+      - @sum_balls_1.each do |sum_ball|
+        %td
+          = render :partial => "sum_ball", :locals => {:ball_title => sum_ball[:ball_name], :ball_no => sum_ball[:ball_no], :ball_rules => sum_ball[:ball_rules]}
+
+%table{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "700"}
+  %tbody
+    %tr
+      - @sum_balls_2.each do |sum_ball|
+        %td
+          = render :partial => "sum_ball", :locals => {:ball_title => sum_ball[:ball_name], :ball_no => sum_ball[:ball_no], :ball_rules => sum_ball[:ball_rules]}
+
+      %td
+        %table.Ball_List{:border => "0", :cellpadding => "0", :cellspacing => "1", :width => "175"}
+          %tbody
+            %tr
+              %td

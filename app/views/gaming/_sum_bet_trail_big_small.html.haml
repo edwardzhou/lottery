@@ -1,0 +1,17 @@
+%table.Ball_List{:border => "0", :cellpadding => "0", :cellspacing => "1", :width => "175"}
+  %tbody
+    %tr.Ball_tr_H
+      %td#jeu_n_17_285.Jut_caption_1{:width => "54"}
+        = label_tag  "input_sum_trail_big", "總和尾大"
+      %td#jeu_p_17_285{:width => "59"}
+        = label_tag "input_sum_trail_big", "1.984", class: "multiple_Red", title: "按此下註"
+      %td#jeu_m_17_285{:width => "62"}
+        = text_field_tag "input_sum_trail_big", nil, maxlength: "9", size: 6, class: "inp1"
+    %tr.Ball_tr_H
+      %td#jeu_n_17_286.Jut_caption_1
+        = label_tag  "input_sum_trail_small", "總和尾小"
+      %td#jeu_p_17_286
+        = label_tag "input_sum_trail_small", "1.984", class: "multiple_Red", title: "按此下註"
+      %td#jeu_m_17_286
+        = text_field_tag "input_sum_trail_small", nil, maxlength: "9", size: 6, class: "inp1"
+

@@ -1,0 +1,16 @@
+%table.Ball_List{:border => "0", :cellpadding => "0", :cellspacing => "1", :width => "175"}
+  %tbody
+    %tr.Ball_tr_H
+      %td#jeu_n_15_281.Jut_caption_1{:width => "54"}
+        = label_tag  'input_zhd', "總和大"
+      %td#jeu_p_15_281{:width => "59"}
+        = label_tag 'input_zhd', '1.984', :class => 'multiple_Red', :title => '按此下註'
+      %td#jeu_m_15_281{:width => "62"}
+        = text_field_tag 'input_zhd', nil, :maxlength => "9", :size => 6, :class => 'inp1'
+    %tr.Ball_tr_H
+      %td#jeu_n_15_282.Jut_caption_1
+        = label_tag 'input_zhx', "總和小"
+      %td#jeu_p_15_282
+        = label_tag 'input_zhx', '1.984', :class => 'multiple_Red', :title => '按此下註'
+      %td#jeu_m_15_282
+        = text_field_tag 'input_zhx', nil, maxlength: "9", size: 6, class: 'inp1'
