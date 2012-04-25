@@ -3,7 +3,7 @@ Lottery::Application.routes.draw do
 
   get "ten_minute/bet"
 
-  get "gaming/index"
+  resources :gaming
 
   namespace :admin do
     resources :games

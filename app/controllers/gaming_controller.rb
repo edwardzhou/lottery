@@ -1,8 +1,29 @@
 #encoding: utf-8
 
 class GamingController < ApplicationController
+  before_filter :init
 
   def index
+
+  end
+
+  def show
+    id = params[:id]
+    ball_id = 0
+    ball_regex = /^ball(\d)$/
+    if id =~ ball_regex then
+      ball_id = ball_regex.match(id)[1].to_i
+    end
+
+    if ball_id == 0
+      render :action => "index"
+    elsif ball_id
+    end
+
+  end
+
+  private
+  def init
     @sum_bet_odd_even_rules = []
     @sum_bet_odd_even_rules << Rule.new({:rule_name => "sum_odd", :rule_title => "總和單", :odds => "1.984"})
     @sum_bet_odd_even_rules << Rule.new({:rule_name => "sum_even", :rule_title => "總和雙", :odds => "1.984"})
@@ -41,6 +62,18 @@ class GamingController < ApplicationController
       @sum_balls_2 << {:ball_name => ball_name, :ball_no => ball_index, :ball_rules => @sum_ball_rules}
       ball_index = ball_index.next
     end
+
+    @ball_rules = []
+    @ball_rules << Rule.new({:rule_name => "ball_big", :rule_title => "大", :odds => "1.984"})
+    @ball_rules << Rule.new({:rule_name => "ball_small", :rule_title => "小", :odds => "1.984"})
+    @ball_rules << Rule.new({:rule_name => "ball_odd", :rule_title => "單", :odds => "1.984"})
+    @ball_rules << Rule.new({:rule_name => "ball_even", :rule_title => "雙", :odds => "1.984"})
+    @ball_rules << Rule.new({:rule_name => "ball_trail_big", :rule_title => "尾大", :odds => "1.984"})
+    @ball_rules << Rule.new({:rule_name => "ball_trail_small", :rule_title => "尾小", :odds => "1.984"})
+    @ball_rules << Rule.new({:rule_name => "ball_add_odd", :rule_title => "合數單", :odds => "1.984"})
+    @ball_rules << Rule.new({:rule_name => "ball_add_even", :rule_title => "合數雙", :odds => "1.984"})
+    @single_ball_rule = Rule.new({:rule_name => "bet", :rule_title => "", :odds => "1.96"})
   end
+
 
 end
