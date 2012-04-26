@@ -39,7 +39,7 @@ A {
   TEXT-DECORATION: underline; }
 
 .inp1, .inp1m, .btn2, .btn2m, .btn3, .btn3m {
-  BACKGROUND-IMAGE: url(images/frame1.gif);
+  BACKGROUND-IMAGE: image-url("frame1.gif");
   BACKGROUND-REPEAT: no-repeat; }
 
 .inp1, .inp1m {
@@ -128,13 +128,13 @@ A {
   BACKGROUND-COLOR: #ebf4ff; }
 
 .td_caption_1 {
-  BACKGROUND-IMAGE: url(images/bg.gif);
+  BACKGROUND-IMAGE: image-url("bg.gif");
   TEXT-ALIGN: center;
   LINE-HEIGHT: 22px;
   VERTICAL-ALIGN: 10%; }
 
 .td_caption_2 {
-  BACKGROUND-IMAGE: url(images/bg2.gif);
+  BACKGROUND-IMAGE: image-url("bg2.gif");
   TEXT-ALIGN: center;
   LINE-HEIGHT: 22px;
   VERTICAL-ALIGN: 10%; }
@@ -158,7 +158,7 @@ A {
   FONT-WEIGHT: bold; }
 
 .SI_TD {
-  BACKGROUND-IMAGE: url(images/S0.jpg);
+  BACKGROUND-IMAGE: image-url("S0.jpg");
   TEXT-ALIGN: center;
   LINE-HEIGHT: 17px;
   BACKGROUND-COLOR: #ffffff;
@@ -203,13 +203,13 @@ A {
   BORDER-RIGHT: white 0px solid; }
 
 .t_list_caption {
-  BACKGROUND-IMAGE: url(images/bg.gif);
+  BACKGROUND-IMAGE: image-url("bg.gif");
   TEXT-ALIGN: center;
   LINE-HEIGHT: 22px;
   COLOR: black; }
 
 .t_list_bottom {
-  BACKGROUND-IMAGE: url(images/bg1.jpg);
+  BACKGROUND-IMAGE: image-url("bg1.jpg");
   TEXT-ALIGN: center;
   LINE-HEIGHT: 22px;
   COLOR: black; }
@@ -246,3 +246,74 @@ A {
 .Check_NO {
   TEXT-ALIGN: center;
   BACKGROUND-COLOR: #ffffa2; }
+
+/* 由开发人员工具生成。它可能不是原始源文件的准确表示形式。*/
+
+.No_01, .No_02, .No_03, .No_04, .No_05, .No_06, .No_07, .No_08, .No_09, .No_10, .No_11, .No_12, .No_13, .No_14, .No_15, .No_16, .No_17, .No_18, .No_19, .No_20 {
+  BACKGROUND-IMAGE: image-url("ball_1.gif");
+  BACKGROUND-REPEAT: no-repeat;
+  BACKGROUND-POSITION: center center; }
+
+.No_01 {
+  BACKGROUND-POSITION: 0px 0px; }
+
+.No_02 {
+  BACKGROUND-POSITION: 0px -27px; }
+
+.No_03 {
+  BACKGROUND-POSITION: 0px -54px; }
+
+.No_04 {
+  BACKGROUND-POSITION: 0px -81px; }
+
+.No_05 {
+  BACKGROUND-POSITION: 0px -108px; }
+
+.No_06 {
+  BACKGROUND-POSITION: 0px -135px; }
+
+.No_07 {
+  BACKGROUND-POSITION: 0px -162px; }
+
+.No_08 {
+  BACKGROUND-POSITION: 0px -189px; }
+
+.No_09 {
+  BACKGROUND-POSITION: 0px -216px; }
+
+.No_10 {
+  BACKGROUND-POSITION: 0px -243px; }
+
+.No_11 {
+  BACKGROUND-POSITION: 0px -270px; }
+
+.No_12 {
+  BACKGROUND-POSITION: 0px -297px; }
+
+.No_13 {
+  BACKGROUND-POSITION: 0px -324px; }
+
+.No_14 {
+  BACKGROUND-POSITION: 0px -351px; }
+
+.No_15 {
+  BACKGROUND-POSITION: 0px -378px; }
+
+.No_16 {
+  BACKGROUND-POSITION: 0px -405px; }
+
+.No_17 {
+  BACKGROUND-POSITION: 0px -432px; }
+
+.No_18 {
+  BACKGROUND-POSITION: 0px -459px; }
+
+.No_19 {
+  BACKGROUND-POSITION: 0px -486px; }
+
+.No_20 {
+  BACKGROUND-POSITION: 0px -513px; }
+
+.cell_border {
+  border: 1px solid #117eaa;
+}

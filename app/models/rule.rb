@@ -8,6 +8,8 @@ class Rule
   field :odds, type: BigDecimal
   field :eval_expr, type: String
   field :active, type: Boolean
+  field :sort_index, type: Integer
+  field :rule_group, type: String
 
   belongs_to :game
 end

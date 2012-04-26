@@ -1,0 +1,15 @@
+%table.Ball_List{:border => "0", :cellpadding => "0", :cellspacing => "1", :width => "175"}
+  %thead
+    %tr
+      %td.td_caption_1.cell_border{:width => "28"} 號
+      %td.td_caption_1.cell_border{:width => "85"} 賠率
+      %td.td_caption_1.cell_border{:width => "62"} 金額
+  %tbody
+    - balls.each do |bet_no|
+      %tr.Ball_tr_H.cell_border
+        %td(class="No_#{'%02d' % bet_no}")
+        %td#jeu_p_2_21.cell_border
+          = label_tag "ball#{ball_no}_bet_#{bet_no}", ball_odds, :class => "multiple_Red"
+        %td#jeu_m_2_21.cell_border
+          = text_field_tag "ball#{ball_no}_bet_#{bet_no}", nil, :maxlength => 6, :size => 6, :class => "inp1"
+

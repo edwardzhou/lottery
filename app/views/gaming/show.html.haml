@@ -4,9 +4,11 @@
   %tbody
     %tr
       %td{:height => "24", :width => "28%"}
-        %b#t_LID.Font_G> 2012042547
+        %b#t_LID.Font_G>
+        = @ball.game.game_no
         期　
-        %b.font_b 第二球
+        %b.font_b
+          = @ball.ball_name
       %td{:align => "right", :width => "25%"}
         距離封盤：
         %span#hClockTime_C 01:13
@@ -19,20 +21,7 @@
 %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "700"}
   %tbody
     %tr
-      - (1...20).each do |ball_no|
-        - if (ball_no - 1) % 5 == 0
-          %td
-            %table.Ball_List{:border => "0", :cellpadding => "0", :cellspacing => "1", :width => "175"}
-              %tbody
-                %tr
-                  %td.td_caption_1{:width => "28"} 號
-                  %td.td_caption_1{:width => "85"} 賠率
-                  %td.td_caption_1{:width => "62"} 金額
+      - [(1..5), (6..10), (11..15), (16..20)].each do |balls|
+        %td
+          = render :partial => "single_ball_table", :locals => {:balls => balls, :ball_no => @ball.ball_no, :ball_odds => @ball.odds}
 
-
-        %tr.Ball_tr_H
-          %td(class="No_#{'%02d' % ball_no}")
-          %td#jeu_p_2_21
-            = label_tag "ball#{ball_no}_bet", @single_ball_rule.odds, :class => "multiple_Red"
-          %td#jeu_m_2_21
-            = text_field_tag "ball#{ball_no}_bet", nil, :maxlength => 9, :size => 6, :class => "inp1"

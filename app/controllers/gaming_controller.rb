@@ -18,6 +18,7 @@ class GamingController < ApplicationController
     if ball_id == 0
       render :action => "index"
     elsif ball_id
+      @ball = @game.balls[ball_id - 1]
     end
 
   end
@@ -73,6 +74,18 @@ class GamingController < ApplicationController
     @ball_rules << Rule.new({:rule_name => "ball_add_odd", :rule_title => "合數單", :odds => "1.984"})
     @ball_rules << Rule.new({:rule_name => "ball_add_even", :rule_title => "合數雙", :odds => "1.984"})
     @single_ball_rule = Rule.new({:rule_name => "bet", :rule_title => "", :odds => "1.96"})
+
+    @game = Game.new(:game_name => "十分精彩", :game_no => "20120426012", :active => true)
+    @game.balls.build({:ball_name => "第一球", :ball_no => 1, :odds => 19.4, :rules => @ball_rules})
+    @game.balls.build({:ball_name => "第二球", :ball_no => 2, :odds => 19.4, :rules => @ball_rules})
+    @game.balls.build({:ball_name => "第三球", :ball_no => 3, :odds => 19.4, :rules => @ball_rules})
+    @game.balls.build({:ball_name => "第四球", :ball_no => 4, :odds => 19.4, :rules => @ball_rules})
+    @game.balls.build({:ball_name => "第五球", :ball_no => 5, :odds => 19.4, :rules => @ball_rules})
+    @game.balls.build({:ball_name => "第六球", :ball_no => 6, :odds => 19.4, :rules => @ball_rules})
+    @game.balls.build({:ball_name => "第七球", :ball_no => 7, :odds => 19.4, :rules => @ball_rules})
+    #@game.balls.build({:ball_name => "第八球", :ball_no => 8, :odds => 19.4})
+    #@game.rules
+
   end
 
 
