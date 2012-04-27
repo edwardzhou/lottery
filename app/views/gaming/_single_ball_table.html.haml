@@ -8,8 +8,8 @@
     - balls.each do |bet_no|
       %tr.Ball_tr_H.cell_border
         %td(class="No_#{'%02d' % bet_no}")
-        %td#jeu_p_2_21.cell_border
-          = label_tag "ball#{ball_no}_bet_#{bet_no}", ball_odds, :class => "multiple_Red"
-        %td#jeu_m_2_21.cell_border
-          = text_field_tag "ball#{ball_no}_bet_#{bet_no}", nil, :maxlength => 6, :size => 6, :class => "inp1"
+        %td.cell_border
+          = label_tag "bet[ball_#{bet_no}]", ball_odds, :class => "multiple_Red"
+        %td.cell_border
+          = text_field_tag "bet[ball_#{bet_no}]", nil, :maxlength => 6, :size => 6, :class => "bet_input"
 

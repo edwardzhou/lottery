@@ -18,6 +18,8 @@
       %td{:align => "right", :width => "22%"}
         %span#Update_Time 62&nbsp;秒
 
+
+
 %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "700"}
   %tbody
     %tr
@@ -25,3 +27,4 @@
         %td
           = render :partial => "single_ball_table", :locals => {:balls => balls, :ball_no => @ball.ball_no, :ball_odds => @ball.odds}
 
+= render :partial => "ball_bet", :locals => {:ball =>@ball}
