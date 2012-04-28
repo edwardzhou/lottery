@@ -25,6 +25,8 @@ class GamingController < ApplicationController
 
   private
   def init
+    @odds_rules = {}
+    @odds_rules[:LEVEL_A] = { :exact => 19.6, :half => 1.984, :quarter => 3.92, :third => 2.79, :c2 => 20  }
     @sum_bet_odd_even_rules = []
     @sum_bet_odd_even_rules << Rule.new({:rule_name => "sum_odd", :rule_title => "總和單", :odds => "1.984"})
     @sum_bet_odd_even_rules << Rule.new({:rule_name => "sum_even", :rule_title => "總和雙", :odds => "1.984"})
