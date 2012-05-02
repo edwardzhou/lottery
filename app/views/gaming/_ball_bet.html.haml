@@ -7,25 +7,25 @@
             %tr.Ball_tr_H
               %td.cell_border.Jut_caption_1{:width => "54"} 大
               %td.cell_border{:width => "59"}
-                = label_tag "bet[big]", ball.odds, :class => "multiple_Red", :title => "按此下註"
+                = label_tag "bet[big]", ball_odds[:half], :class => "multiple_Red", :title => "按此下註"
               %td.cell_border{:width => "62"}
                 = text_field_tag "bet[big]", nil, :class => "bet_input", :maxlength => 6, :size => 6
             %tr.Ball_tr_H
               %td.cell_border.Jut_caption_1 小
               %td.cell_border{:width => "59"}
-                = label_tag "bet[small]", ball.odds, :class => "multiple_Red", :title => "按此下註"
+                = label_tag "bet[small]", ball_odds[:half], :class => "multiple_Red", :title => "按此下註"
               %td.cell_border{:width => "62"}
                 = text_field_tag "bet[small]", nil, :class => "bet_input", :maxlength => 6, :size => 6
             %tr.Ball_tr_H
               %td.cell_border.Jut_caption_1 東
               %td.cell_border{:width => "59"}
-                = label_tag "bet[east]", ball.odds, :class => "multiple_Red", :title => "按此下註"
+                = label_tag "bet[east]", ball_odds[:quarter], :class => "multiple_Red", :title => "按此下註"
               %td.cell_border{:width => "62"}
                 = text_field_tag "bet[east]", nil, :class => "bet_input", :maxlength => 6, :size => 6
             %tr.Ball_tr_H
               %td.cell_border.Jut_caption_1 中
               %td.cell_border{:width => "59"}
-                = label_tag "bet[middle]", ball.odds, :class => "multiple_Red", :title => "按此下註"
+                = label_tag "bet[middle]", ball_odds[:third], :class => "multiple_Red", :title => "按此下註"
               %td.cell_border{:width => "62"}
                 = text_field_tag "bet[middle]", nil, :class => "bet_input", :maxlength => 6, :size => 6
       %td
@@ -34,25 +34,25 @@
             %tr.Ball_tr_H
               %td.cell_border.Jut_caption_1{:width => "54"} 單
               %td.cell_border{:width => "59"}
-                = label_tag "bet[odd]", ball.odds, :class => "multiple_Red", :title => "按此下註"
+                = label_tag "bet[odd]", ball_odds[:half], :class => "multiple_Red", :title => "按此下註"
               %td.cell_border{:width => "62"}
                 = text_field_tag "bet[odd]", nil, :class => "bet_input", :maxlength => 6, :size => 6
             %tr.Ball_tr_H
               %td.cell_border.Jut_caption_1 雙
               %td.cell_border{:width => "59"}
-                = label_tag "bet[even]", ball.odds, :class => "multiple_Red", :title => "按此下註"
+                = label_tag "bet[even]", ball_odds[:half], :class => "multiple_Red", :title => "按此下註"
               %td.cell_border{:width => "62"}
                 = text_field_tag "bet[even]", nil, :class => "bet_input", :maxlength => 6, :size => 6
             %tr.Ball_tr_H
               %td.cell_border.Jut_caption_1 南
               %td.cell_border{:width => "59"}
-                = label_tag "bet[south]", ball.odds, :class => "multiple_Red", :title => "按此下註"
+                = label_tag "bet[south]", ball_odds[:quarter], :class => "multiple_Red", :title => "按此下註"
               %td.cell_border{:width => "62"}
                 = text_field_tag "bet[south]", nil, :class => "bet_input", :maxlength => 6, :size => 6
             %tr.Ball_tr_H
               %td.cell_border.Jut_caption_1 發
               %td.cell_border{:width => "59"}
-                = label_tag "bet[fa]", ball.odds, :class => "multiple_Red", :title => "按此下註"
+                = label_tag "bet[fa]", ball_odds[:third], :class => "multiple_Red", :title => "按此下註"
               %td.cell_border{:width => "62"}
                 = text_field_tag "bet[fa]", nil, :class => "bet_input", :maxlength => 6, :size => 6
       %td
@@ -61,25 +61,25 @@
             %tr.Ball_tr_H
               %td.cell_border.Jut_caption_1{:width => "54"} 尾大
               %td.cell_border{:width => "59"}
-                = label_tag "bet[big]", ball.odds, :class => "multiple_Red", :title => "按此下註"
+                = label_tag "bet[big]", ball_odds[:half], :class => "multiple_Red", :title => "按此下註"
               %td.cell_border{:width => "62"}
                 = text_field_tag "bet[big]", nil, :class => "bet_input", :maxlength => 6, :size => 6
             %tr.Ball_tr_H
               %td.cell_border.Jut_caption_1 尾小
               %td.cell_border{:width => "59"}
-                = label_tag "bet[small]", ball.odds, :class => "multiple_Red", :title => "按此下註"
+                = label_tag "bet[small]", ball_odds[:half], :class => "multiple_Red", :title => "按此下註"
               %td.cell_border{:width => "62"}
                 = text_field_tag "bet[small]", nil, :class => "bet_input", :maxlength => 6, :size => 6
             %tr.Ball_tr_H
               %td.cell_border.Jut_caption_1 西
               %td.cell_border{:width => "59"}
-                = label_tag "bet[west]", ball.odds, :class => "multiple_Red", :title => "按此下註"
+                = label_tag "bet[west]", ball_odds[:quarter], :class => "multiple_Red", :title => "按此下註"
               %td.cell_border{:width => "62"}
                 = text_field_tag "bet[west]", nil, :class => "bet_input", :maxlength => 6, :size => 6
             %tr.Ball_tr_H
               %td.cell_border.Jut_caption_1 白
               %td.cell_border{:width => "59"}
-                = label_tag "bet[white]", ball.odds, :class => "multiple_Red", :title => "按此下註"
+                = label_tag "bet[white]", ball_odds[:third], :class => "multiple_Red", :title => "按此下註"
               %td.cell_border{:width => "62"}
                 = text_field_tag "bet[white]", nil, :class => "bet_input", :maxlength => 6, :size => 6
       %td{:valign => "top"}
@@ -88,18 +88,18 @@
             %tr.Ball_tr_H
               %td.cell_border.Jut_caption_1{:width => "54"} 合數單
               %td.cell_border{:width => "59"}
-                = label_tag "bet[add_odd]", ball.odds, :class => "multiple_Red", :title => "按此下註"
+                = label_tag "bet[add_odd]", ball_odds[:half], :class => "multiple_Red", :title => "按此下註"
               %td.cell_border{:width => "62"}
                 = text_field_tag "bet[add_odd]", nil, :class => "bet_input", :maxlength => 6, :size => 6
             %tr.Ball_tr_H
               %td.cell_border.Jut_caption_1 合數雙
               %td.cell_border{:width => "59"}
-                = label_tag "bet[add_even]", ball.odds, :class => "multiple_Red", :title => "按此下註"
+                = label_tag "bet[add_even]", ball_odds[:half], :class => "multiple_Red", :title => "按此下註"
               %td.cell_border{:width => "62"}
                 = text_field_tag "bet[add_even]", nil, :class => "bet_input", :maxlength => 6, :size => 6
             %tr.Ball_tr_H
               %td.cell_border.Jut_caption_1 北
               %td.cell_border{:width => "59"}
-                = label_tag "bet[north]", ball.odds, :class => "multiple_Red", :title => "按此下註"
+                = label_tag "bet[north]", ball_odds[:quarter], :class => "multiple_Red", :title => "按此下註"
               %td.cell_border{:width => "62"}
                 = text_field_tag "bet[north]", nil, :class => "bet_input", :maxlength => 6, :size => 6

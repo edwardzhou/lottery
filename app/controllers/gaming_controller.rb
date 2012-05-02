@@ -26,7 +26,22 @@ class GamingController < ApplicationController
   private
   def init
     @odds_rules = {}
-    @odds_rules[:LEVEL_A] = { :exact => 19.6, :half => 1.984, :quarter => 3.92, :third => 2.79, :c2 => 20  }
+    @odds_rules[:LEVEL_A] = { :exact => 19.6, :half => 1.984, :quarter => 3.92,
+                              :third => 2.79, :c2 => 20, :p2 => 20, :c3 => 30,
+                              :p3 => 30, :c4 => 60, :p4 => 60, :c5 => 200, :p5 => 200, :return => 0.005}
+    @odds_rules[:LEVEL_B] = { :exact => 19.3, :half => 1.93, :quarter => 3.82,
+                              :third => 2.59, :c2 => 18, :p2 => 18, :c3 => 28,
+                              :p3 => 28, :c4 => 58, :p4 => 58, :c5 => 198, :p5 => 198, :return => 0.008}
+    @odds_rules[:LEVEL_C] = { :exact => 19, :half => 1.9, :quarter => 3.72,
+                              :third => 2.39, :c2 => 16, :p2 => 16, :c3 => 26,
+                              :p3 => 26, :c4 => 56, :p4 => 56, :c5 => 190, :p5 => 190, :return => 0.010}
+
+    if not params[:level].blank?
+      @level = params[:level].to_s.to_sym
+    end
+
+    @level ||= :LEVEL_B
+
     @sum_bet_odd_even_rules = []
     @sum_bet_odd_even_rules << Rule.new({:rule_name => "sum_odd", :rule_title => "總和單", :odds => "1.984"})
     @sum_bet_odd_even_rules << Rule.new({:rule_name => "sum_even", :rule_title => "總和雙", :odds => "1.984"})
