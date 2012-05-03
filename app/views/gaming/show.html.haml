@@ -25,6 +25,6 @@
     %tr
       - [(1..5), (6..10), (11..15), (16..20)].each do |balls|
         %td
-          = render :partial => "single_ball_table", :locals => {:balls => balls, :ball_no => @ball.ball_no, :ball_odds => @odds_rules[@level]}
+          = render :partial => "single_ball_table", :locals => {:balls => balls, :ball_no => @ball.ball_no, :ball_odds => @odds_level}
 
-= render :partial => "ball_bet", :locals => {:ball =>@ball, :ball_odds => @odds_rules[@level]}
+= render :partial => "ball_bet", :locals => {:ball =>@ball, :ball_odds => @odds_level}
