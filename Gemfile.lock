@@ -73,6 +73,9 @@ GEM
     ffi (1.0.11)
     gherkin (2.9.3)
       json (>= 1.4.6)
+    gon (3.0.2)
+      actionpack (>= 2.3.0)
+      json
     haml (3.1.4)
     highline (1.6.11)
     hike (1.2.1)
@@ -109,6 +112,9 @@ GEM
       net-ssh (>= 1.99.1)
     nokogiri (1.5.2)
     polyglot (0.3.3)
+    rabl (0.6.10)
+      activesupport (>= 2.3.14)
+      multi_json (~> 1.0)
     rack (1.4.1)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -195,10 +201,12 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   cucumber
   cucumber-rails
+  gon
   haml
   jquery-rails
   mongodb
   mongoid
+  rabl
   rails (= 3.2.3)
   rspec
   rspec-rails

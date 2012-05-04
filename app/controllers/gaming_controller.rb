@@ -15,21 +15,14 @@ class GamingController < ApplicationController
       ball_id = ball_regex.match(id)[1].to_i
     end
 
-    respond_to do |format|
-      format.html do
-        if ball_id == 0
-          render :action => "index"
-        elsif ball_id
-          @ball = @game.balls[ball_id - 1]
-        end
-      end
-
-      format.js do
-        @odds_level.to_json
-      end
-
-
+    if ball_id == 0
+      render :action => "index"
+    elsif ball_id
+      @ball = @game.balls[ball_id - 1]
     end
+
+
+
   end
 
 

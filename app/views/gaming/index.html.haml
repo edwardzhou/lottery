@@ -19,6 +19,7 @@
   %tbody
     %tr
       %td.td_caption_1.F_bold{:colspan => "4"} 總和、龍虎
+      = gaming_path
     %tr
       %td
         = render :partial => "sum_bet", :locals => {:rules => @sum_bet_big_small_rules }
