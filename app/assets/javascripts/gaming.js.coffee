@@ -2,8 +2,12 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
-load_odds(data) ->
-
+load_odds = (odds_level) ->
+  for rule in odds_level.rules
+    do (rule) ->
+      $("label[data-odds-rule='" + rule.rule_name + "']").text(rule.odds)
+  $(".bet_input").show();
+  $(".bet_lock").hide();
 
 jQuery ->
-  $.ajax({url: "#{gaming_path('ball7')}"}).done( function(data) {load_odds(data)} );
+  $.ajax({url: gon.ball_url}).done( (data) => load_odds(data) )

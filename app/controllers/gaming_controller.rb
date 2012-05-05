@@ -3,6 +3,8 @@
 class GamingController < ApplicationController
   before_filter :init
 
+  helper_method
+
   def index
 
   end
@@ -21,6 +23,7 @@ class GamingController < ApplicationController
       @ball = @game.balls[ball_id - 1]
     end
 
+    gon.ball_url = gaming_path(id, format: :json)
 
 
   end
@@ -123,10 +126,13 @@ class GamingController < ApplicationController
     @odds_levels = {:LEVEL_A => level_a, :LEVEL_B => level_b, :LEVEL_C => level_c}
 
     if not params[:level].blank?
-      @level = params[:level].to_s.upcase.to_sym
+      # @level = params[:level].to_s.upcase.to_sym
+      session[:level] = params[:level].to_s.upcase.to_sym
     end
 
-    @level ||= :LEVEL_B
+    session[:level] ||= :LEVEL_B
+
+    @level ||= session[:level]
 
     @odds_level = @odds_levels[@level]
 
