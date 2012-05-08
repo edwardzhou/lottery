@@ -1,11 +1,21 @@
+!!! XML
 !!!
+%html{:xmlns => "http://www.w3.org/1999/xhtml"}
 
-%html
   %head
-    %title Lottery x
+    %meta{:content => "text/html; charset=utf-8", :"http-equiv" => "Content-Type"}/
+    %title
+      = content_for?(:page_title) ? yield(:page_title) : t('label.application.title')
     = include_gon
     = stylesheet_link_tag    "application", :media => "all"
     = javascript_include_tag "application"
+    = yield(:page_include_scripts) if content_for?(:page_include_scripts)
+
     = csrf_meta_tags
+
+    = yield(:page_include_css) if content_for?(:page_include_css)
+    = yield(:page_inline_css) if content_for?(:page_inline_css)
+    = yield(:page_inline_scripts) if content_for?(:page_inline_scripts)
+
   %body
     = yield

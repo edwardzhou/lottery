@@ -1,0 +1,25 @@
+%h1 彩票定义
+
+%table(id="lottery_list")
+  %tr
+    %td
+
+#pager
+
+%table(cellpadding="2" cellspacing="2" border="1px solid" )
+  %thead
+    %tr(bgcolor="gray" )
+      %th(width="300px") 彩票
+      %th 描述
+      %th 操作
+  %tbody
+    - @lottery_defs.each do |lottery_def|
+      %tr
+        %td= lottery_def.lottery_name
+        %td= lottery_def.description
+        %td
+
+
+
+- content_for :page_include_scripts do
+  = javascript_include_tag "admin/lottery_defs"

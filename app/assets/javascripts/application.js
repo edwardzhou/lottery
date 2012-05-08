@@ -12,4 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
+// require_directory .
+//= require jquery.jqGrid.src.js
+//= require i18n/grid.locale-cn

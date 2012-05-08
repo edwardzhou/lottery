@@ -7,6 +7,7 @@ Lottery::Application.routes.draw do
 
   namespace :admin do
     resources :games
+    resources :lottery_defs
   end
 
   # The priority is based upon order of creation:

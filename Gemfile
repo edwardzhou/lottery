@@ -18,6 +18,8 @@ gem 'therubyracer'
 gem 'rabl'
 gem 'gon'
 
+gem 'bcrypt-ruby', :require => 'bcrypt'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

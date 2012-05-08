@@ -1,6 +1,6 @@
 development:
   host: localhost
-  database: lottery_development
+  database: lottery_dev
 
 test:
   host: localhost
