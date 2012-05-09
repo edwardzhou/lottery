@@ -4,4 +4,9 @@ class Admin::LotteryDefsController < ApplicationController
     @lottery_defs = LotteryDef.all
   end
 
+  def show
+    @lottery_def = LotteryDef.find(params[:id])
+
+  end
+
 end

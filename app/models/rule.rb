@@ -11,5 +11,8 @@ class Rule
   field :sort_index, type: Integer
   field :rule_group, type: String
 
+  embedded_in :odds_level
+
+
   belongs_to :game
 end

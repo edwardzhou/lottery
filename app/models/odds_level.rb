@@ -5,6 +5,7 @@ class OddsLevel
   field :return, type: BigDecimal
 
   embeds_many :rules
+  embedded_in :lottery_def
 
   def rule_by_name(rule_name)
     if @rule_hash.nil?

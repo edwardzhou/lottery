@@ -1,0 +1,18 @@
+
+%h1= @odds_level.level_name
+
+= form_for @odds_level, :url => admin_lottery_def_odds_level_path(@lottery_def, @odds_level) do |f|
+  %fieldset
+    = f.label :return
+    = f.text_field :return
+    %br/
+    %h2 赔率
+    %table
+      %tbody
+        - @odds_level.rules.each do |rule|
+          %tr
+            = fields_for :"rule_#{rule.id}", rule do |rule_field|
+              %td= rule_field.label :odds, rule.rule_title
+              %td= rule_field.text_field :odds
+
+    = f.submit
