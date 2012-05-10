@@ -1,18 +1,26 @@
 
 %h1= @odds_level.level_name
 
-= form_for @odds_level, :url => admin_lottery_def_odds_level_path(@lottery_def, @odds_level) do |f|
+= form_for @odds_level, :url => admin_lottery_def_odds_level_path(@lottery_def, @odds_level), :remote => true do |f|
   %fieldset
     = f.label :return
     = f.text_field :return
     %br/
     %h2 赔率
-    %table
+    %table(cellpadding="4" cellspacing="4" width="400" border="1px solid" )
+      %thead
+        %tr
+          %th.td_caption_1 规则
+          %th.td_caption_1 赔率
+          %th.td_caption_1 是否启用
       %tbody
         - @odds_level.rules.each do |rule|
           %tr
             = fields_for :"rule_#{rule.id}", rule do |rule_field|
-              %td= rule_field.label :odds, rule.rule_title
+              %td.Jut_caption_1= rule_field.label :odds, rule.rule_title
               %td= rule_field.text_field :odds
-
+              %td
+                = rule_field.check_box :active
+                = rule_field.label :active, '启用'
+    %br/
     = f.submit
