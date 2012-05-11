@@ -1,0 +1,266 @@
+/* 由开发人员工具生成。它可能不是原始源文件的准确表示形式。*/
+
+BODY, DIV, SPAN, P, B, TEXTAREA, INPUT, SELECT, FORM, TABLE, TR, TD {
+  Z-INDEX: auto;
+  PADDING-BOTTOM: 0px;
+  LIST-STYLE-TYPE: none;
+  MARGIN: 0px;
+  PADDING-LEFT: 0px;
+  PADDING-RIGHT: 0px;
+  FONT-FAMILY: Verdana, "宋体", Arial,Sans;
+  FONT-SIZE: 12px;
+  PADDING-TOP: 0px; }
+
+BODY {
+  BACKGROUND-IMAGE: image-url("l_backdrop.jpg");
+  MARGIN: 0px;
+  BACKGROUND-REPEAT: repeat-y; }
+
+TD {
+  CURSOR: default; }
+
+A {
+  COLOR: #1a2e7b;
+  TEXT-DECORATION: none;
+  &:hover {
+    COLOR: #ff0000;
+    TEXT-DECORATION: none; } }
+
+.a1 {
+  COLOR: #ff0000;
+  TEXT-DECORATION: none; }
+
+IMG {
+  BORDER-BOTTOM-STYLE: none;
+  BORDER-RIGHT-STYLE: none;
+  BORDER-TOP-STYLE: none;
+  BORDER-LEFT-STYLE: none; }
+
+.t_list {
+  BORDER-BOTTOM: #dde0e2 0px solid;
+  POSITION: relative;
+  BORDER-LEFT: #dde0e2 0px solid;
+  BACKGROUND-COLOR: #b5d6e6;
+  BORDER-TOP: #dde0e2 0px solid;
+  TOP: 14px;
+  BORDER-RIGHT: #dde0e2 0px solid;
+  LEFT: 10px; }
+
+.t_list_caption {
+  BACKGROUND-IMAGE: image-url("bg.gif");
+  TEXT-ALIGN: center;
+  LINE-HEIGHT: 22px;
+  COLOR: #000000;
+  FONT-WEIGHT: bold; }
+
+.t_td_but {
+  BACKGROUND-IMAGE: image-url("td_but.jpg");
+  TEXT-ALIGN: center;
+  HEIGHT: 34px; }
+
+.t_td_caption_1 {
+  TEXT-ALIGN: center;
+  LINE-HEIGHT: 17px;
+  BACKGROUND-COLOR: #ebf4ff;
+  HEIGHT: 20px; }
+
+.t_td_caption_2 {
+  TEXT-ALIGN: center;
+  LINE-HEIGHT: 17px;
+  BACKGROUND-COLOR: #e4e4ff;
+  HEIGHT: 20px; }
+
+.t_td_text {
+  LINE-HEIGHT: 17px;
+  BACKGROUND-COLOR: #ffffff;
+  TEXT-INDENT: 4px;
+  HEIGHT: 20px; }
+
+.t_td_unite_1 {
+  TEXT-ALIGN: center;
+  LINE-HEIGHT: 17px;
+  BACKGROUND-COLOR: #d8e8ff;
+  HEIGHT: 20px; }
+
+.t_td_unite_2 {
+  TEXT-ALIGN: center;
+  LINE-HEIGHT: 17px;
+  BACKGROUND-COLOR: #cfcfff;
+  HEIGHT: 20px; }
+
+.t_td_odd_1 {
+  TEXT-ALIGN: center;
+  LINE-HEIGHT: 17px;
+  BACKGROUND-COLOR: #fefff3;
+  HEIGHT: 20px; }
+
+.t_td_odd_2 {
+  TEXT-ALIGN: center;
+  LINE-HEIGHT: 17px;
+  BACKGROUND-COLOR: #f4f4fe;
+  HEIGHT: 20px; }
+
+.inp1, .inp1m, .btn2, .btn2m, .btn3, .btn3m {
+  BACKGROUND-IMAGE: image-url("frame1.gif");
+  BACKGROUND-REPEAT: no-repeat; }
+
+.inp1, .inp1m {
+  BORDER-BOTTOM: #abb2c5 1px solid;
+  BORDER-LEFT: #abb2c5 1px solid;
+  PADDING-LEFT: 2px;
+  HEIGHT: 18px;
+  COLOR: #000;
+  BORDER-TOP: #abb2c5 1px solid;
+  BORDER-RIGHT: #abb2c5 1px solid;
+  PADDING-TOP: 1px; }
+
+.inp1 {
+  BACKGROUND-POSITION: 0px 0px;
+  COLOR: black; }
+
+.inp1m {
+  BORDER-BOTTOM: #ff8800 1px solid;
+  BORDER-LEFT: #ff8800 1px solid;
+  BACKGROUND-POSITION: -476px 0px;
+  COLOR: #000;
+  BORDER-TOP: #ff8800 1px solid;
+  BORDER-RIGHT: #ff8800 1px solid; }
+
+.btn2, .btn2m {
+  BORDER-BOTTOM: 0px;
+  BORDER-LEFT: 0px;
+  PADDING-BOTTOM: 2px !important;
+  BACKGROUND-COLOR: transparent;
+  WIDTH: 66px;
+  BACKGROUND-POSITION: -943px 0px;
+  MARGIN-BOTTOM: 0px;
+  HEIGHT: 17px;
+  COLOR: #0c3e09;
+  BORDER-TOP: 0px;
+  CURSOR: hand !important;
+  BORDER-RIGHT: 0px;
+  PADDING-TOP: 3px !important; }
+
+.btn2 {
+  WIDTH: 66px;
+  BACKGROUND-POSITION: -943px 0px; }
+
+.btn2m {
+  WIDTH: 66px;
+  BACKGROUND-POSITION: -1010px 0px;
+  CURSOR: hand; }
+
+.btn3, .btn3m {
+  BORDER-BOTTOM: 0px;
+  BORDER-LEFT: 0px;
+  PADDING-BOTTOM: 2px !important;
+  BACKGROUND-COLOR: transparent;
+  WIDTH: 44px;
+  MARGIN-BOTTOM: 0px;
+  HEIGHT: 17px;
+  COLOR: #0c3e09;
+  BORDER-TOP: 0px;
+  CURSOR: hand !important;
+  BORDER-RIGHT: 0px;
+  PADDING-TOP: 3px !important; }
+
+.btn3 {
+  WIDTH: 44px;
+  BACKGROUND-POSITION: -1077px 0px; }
+
+.btn3m {
+  WIDTH: 44px;
+  BACKGROUND-POSITION: -1122px 0px;
+  CURSOR: hand; }
+
+.jeu_XZ_Type {
+  COLOR: #2836f4; }
+
+.jeu_multiple {
+  FONT-FAMILY: Arial, Helvetica, Verdana, Geneva,  sans-serif;
+  COLOR: #ff0000;
+  FONT-WEIGHT: bold; }
+
+.jeu_OpenLottery {
+  COLOR: #299a26;
+  FONT-WEIGHT: bold; }
+
+.JeuChange_Clew_G {
+  TEXT-ALIGN: center;
+  BACKGROUND-COLOR: #37aa2b;
+  HEIGHT: 17px;
+  COLOR: #ffffff;
+  VERTICAL-ALIGN: text-bottom;
+  FONT-WEIGHT: bold; }
+
+.JeuChange_Clew_R {
+  TEXT-ALIGN: center;
+  BACKGROUND-COLOR: #ff0000;
+  HEIGHT: 17px;
+  COLOR: #ffffff;
+  VERTICAL-ALIGN: text-bottom;
+  FONT-WEIGHT: bold; }
+
+.s_list {
+  BORDER-BOTTOM: #f4f9ff 1px solid;
+  BORDER-LEFT: #f4f9ff 1px solid;
+  BACKGROUND-COLOR: #c8dfff;
+  BORDER-TOP: #f4f9ff 1px solid;
+  BORDER-RIGHT: #f4f9ff 1px solid; }
+
+.s_td_0 {
+  TEXT-ALIGN: center;
+  BACKGROUND-COLOR: #ffffff;
+  HEIGHT: 15px;
+  VERTICAL-ALIGN: text-bottom;
+  FONT-WEIGHT: bold; }
+
+.s_td_1 {
+  TEXT-ALIGN: center;
+  BACKGROUND-COLOR: #ffffa2;
+  HEIGHT: 15px;
+  VERTICAL-ALIGN: text-bottom;
+  FONT-WEIGHT: bold; }
+
+.Font_R {
+  COLOR: #ff3a4a; }
+
+.Font_B {
+  COLOR: #067ece; }
+
+.Font_G {
+  COLOR: #37aa2b; }
+
+.jeu_tr_c {
+  TEXT-ALIGN: center;
+  BACKGROUND-COLOR: #e3e3e3;
+  HEIGHT: 17px;
+  VERTICAL-ALIGN: text-bottom;
+  FONT-WEIGHT: bold; }
+
+.jeu_tr {
+  TEXT-ALIGN: center;
+  BACKGROUND-COLOR: #ffffff;
+  HEIGHT: 17px;
+  VERTICAL-ALIGN: text-bottom; }
+
+.f_left {
+  TEXT-ALIGN: left;
+  TEXT-INDENT: 2px; }
+
+.f_right, .Left_X {
+  TEXT-ALIGN: right; }
+
+.Left_Place {
+  POSITION: relative;
+  TOP: -4px;
+  LEFT: -1px; }
+
+.JZRCB {
+  TEXT-ALIGN: center;
+  LINE-HEIGHT: 28px;
+  BACKGROUND-COLOR: #cc2c2c;
+  FONT-FAMILY: "宋体";
+  HEIGHT: 28px;
+  FONT-SIZE: 13px;
+  FONT-WEIGHT: bold; }

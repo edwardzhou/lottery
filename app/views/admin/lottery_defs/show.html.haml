@@ -1,41 +1,41 @@
-%h1 彩票
+#content(style="padding:20px")
+  %h1 彩票
 
-%p
-  %b 彩票名称:
-  = @lottery_def.lottery_name
-  %br/
-  %br/
-
-%p
-  %b 描述:
-  = @lottery_def.description
-  %br/
-  %br/
-
-
-%p
-  %b 开始时间:
-  = @lottery_def.start_time.strftime("%H:%M:%S")
-  %br/
-  %br/
-
-%p
-  %b 结束时间:
-  = @lottery_def.end_time.strftime("%H:%M:%S")
-  %br/
-  %br/
-
-%h1 赔率
-%table(border="1px solid #000000" )
-  %tbody
-    %tr
-      - @lottery_def.odds_levels.each do |odds_level|
-        %td(width="200px" align="center" )
-          =link_to odds_level.level_name, edit_admin_lottery_def_odds_level_path(@lottery_def, odds_level)
-
-#odds_level_detail
   %p
-  %b 盘面:
+    %b 彩票名称:
+    = @lottery_def.lottery_name
+    %br/
+    %br/
+
+  %p
+    %b 描述:
+    = @lottery_def.description
+    %br/
+    %br/
+
+
+  %p
+    %b 开始时间:
+    = @lottery_def.start_time.strftime("%H:%M:%S")
+    %br/
+    %br/
+
+  %p
+    %b 结束时间:
+    = @lottery_def.end_time.strftime("%H:%M:%S")
+    %br/
+    %br/
+
+  = form_for @lottery_def, :url => admin_lottery_def_path(@lottery_def) do
+    %h1 赔率
+    %table(border="1px solid #000000" )
+      %tbody
+        %tr
+          - @lottery_def.odds_levels.each do |odds_level|
+            %td(width="320px" align="center" )
+              = render :partial => "odds_level_form", :locals => {:odds_level => odds_level}
+              //=link_to odds_level.level_name, edit_admin_lottery_def_odds_level_path(@lottery_def, odds_level)
 
 
 
+    = submit_tag "保存"

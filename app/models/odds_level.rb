@@ -6,6 +6,7 @@ class OddsLevel
 
   embeds_many :rules
   embedded_in :lottery_def
+  embedded_in :lottery
 
   def rule_by_name(rule_name)
     if @rule_hash.nil?

@@ -18,4 +18,12 @@
     = yield(:page_inline_scripts) if content_for?(:page_inline_scripts)
 
   %body
-    = yield
+
+    #top_frame.backdrop_1
+      = render :partial => "layouts/top_frame"
+
+    #bottom_frame
+      #left_frame
+        = render :partial => "layouts/left_frame"
+      #main_frame
+        = yield

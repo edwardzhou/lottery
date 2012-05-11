@@ -31,6 +31,8 @@ class GamingController < ApplicationController
 
   private
   def init
+    @lottery = LotteryInst.where({:active => true}).first
+
     @odds_rules = {}
     @odds_rules[:LEVEL_A] = { :exact => 19.6, :half => 1.984, :quarter => 3.92,
                               :third => 2.79, :c2 => 20, :p2 => 20, :c3 => 30,
@@ -171,7 +173,7 @@ class GamingController < ApplicationController
     end
 
     @sum_balls_2 = []
-    %w(第五球 第六球 第七球).each do |ball_name|
+    %w(第五球 第六球 第七球 第八球).each do |ball_name|
       @sum_balls_2 << {:ball_name => ball_name, :ball_no => ball_index, :ball_rules => @sum_ball_rules}
       ball_index = ball_index.next
     end
