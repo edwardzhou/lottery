@@ -197,6 +197,7 @@ class GamingController < ApplicationController
     @game.balls.build({:ball_name => "第五球", :ball_no => 5, :odds => 19.4, :rules => @ball_rules})
     @game.balls.build({:ball_name => "第六球", :ball_no => 6, :odds => 19.4, :rules => @ball_rules})
     @game.balls.build({:ball_name => "第七球", :ball_no => 7, :odds => 19.4, :rules => @ball_rules})
+    @game.balls.build({:ball_name => "第八球", :ball_no => 8, :odds => 19.4, :rules => @ball_rules})
     #@game.balls.build({:ball_name => "第八球", :ball_no => 8, :odds => 19.4})
     #@game.rules
 

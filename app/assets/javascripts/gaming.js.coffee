@@ -17,3 +17,7 @@ jQuery ->
       value = ""
     $(this).val(value)
   )
+
+  $(".reset").bind("click", () ->
+    $(".bet_input").val("");
+  )

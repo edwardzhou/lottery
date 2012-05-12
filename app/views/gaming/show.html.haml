@@ -25,11 +25,21 @@
 
 
 
-%table{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "700"}
-  %tbody
-    %tr
-      - [(1..5), (6..10), (11..15), (16..20)].each do |balls|
-        %td
-          = render :partial => "single_ball_table", :locals => {:balls => balls, :ball_no => @ball.ball_no, :ball_odds => @odds_level}
+= form_tag  do |f|
+  %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "700"}
+    %tbody
+      %tr
+        - [(1..5), (6..10), (11..15), (16..20)].each do |balls|
+          %td
+            = render :partial => "single_ball_table", :locals => {:balls => balls, :ball_no => @ball.ball_no, :ball_odds => @odds_level}
 
-= render :partial => "ball_bet", :locals => {:ball =>@ball, :ball_odds => @odds_level}
+  = render :partial => "ball_bet", :locals => {:ball =>@ball, :ball_odds => @odds_level}
+
+  %br/
+  %table(width="100%" )
+    %tbody
+      %tr
+        %td(align="center")
+          %input(type="button" class="reset" value="重填")/
+          \&nbsp;
+          = submit_tag "投注",:disable_with => "投注中..."
