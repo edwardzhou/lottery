@@ -1,0 +1,287 @@
+/*************************************
+   WELCOME TO THE CUSTOM STYLESHEET
+--------------------------------------
+              style.css
+        BlueTrip CSS Framework
+    Put your custom styles in here.
+***************************************/
+@import "screen";
+
+/**************************************/
+/*           COLOR SCHEME             */
+/**************************************
+- black		#000
+- white		#fff
+-           #
+-           #
+-           #
+***************************************/
+
+/**************************************/
+/*              GLOBALS               */
+/**************************************/
+
+body {
+  background: image-url("bg.png") repeat-x scroll left top transparent; }
+
+.align_right {
+  text-align: right; }
+
+.align_left {
+  text-align: left; }
+
+.align_center {
+  text-align: center; }
+
+
+/**************************************/
+/*              HEADER                */
+/**************************************/
+
+.header {
+    -moz-box-shadow: -5px 0 5px #000000;
+    background-color: #1A1A1A;
+    border-bottom: 1px solid #999999;
+    color: #ffffff;
+}
+
+#inner-header ul{
+	margin: 0;
+	padding: 4px 0;
+}
+
+#inner-header ul li {
+	display: inline;
+}
+
+#inner-header ul li a {
+	margin-left: 10px;
+	text-decoration: none;
+	color: #aaa;
+	font-size: 13px;
+	text-shadow: 0 0 10px #336699;
+	text-shadow: 0 0 10px rgba(51,102,153,0.8);
+	text-transform: uppercase;
+	-webkit-transition: color 0.1s linear;
+	-moz-transition: color 0.1s linear;
+}
+
+#inner-header ul li a:hover {
+	color: #fff;
+}
+
+#inner-header {
+	text-align: right;
+	font-size: 2em;
+	font-weight: bold;
+	//background: url(../images/logo.png) left center no-repeat;
+	font-family: "Microsoft YaHei", Helvetica, Arial, sans-serif;
+}
+
+/**************************************/
+/*             NAVIGATION             */
+/**************************************/
+
+div#user_nav {
+  text-align: right; }
+
+/**************************************/
+/*            MAIN CONTENT            */
+/**************************************/
+
+.field_with_errors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+  width: inherit; }
+
+.error_msg {
+  color: red; }
+
+.field_label {
+    @extend .span-3;
+    @extend .align_right;
+}
+
+.field {
+    width: 100%;
+}
+
+.required_field_label {
+    @extend .field_label;
+    color: PURPLE;
+}
+
+.comments {
+    background-color:#d3d3d3;
+    border-top:1px dotted #a9a9a9;
+    border-left:1px dotted #a9a9a9;
+    border-right:1px dotted #a9a9a9;
+    display: none;
+
+}
+
+.comment {
+    border-bottom:1px solid darkgrey;
+}
+
+.delete {
+    text-decoration:line-through;
+}
+
+.box {
+    border:1px solid darkgrey;
+}
+
+#middle {
+    min-height:400px;
+    height:auto;
+}
+
+.odd {
+    background-color: #CCEECC;
+}
+
+div#menu {
+  left: 1;
+  position: absolute;
+  text-align: left;
+  top: 1;
+  width: 960px;
+  padding-bottom: 6px;
+}
+
+div#menu div.wrapper {
+  background: url("/images/shadow.png") repeat-x scroll left bottom #6293BB;
+  bottom: 1;
+  font-size: 13px;
+  left: 1;
+  padding-bottom: 6px;
+  position: absolute;
+  width: 100%;
+}
+
+div#menu ul {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+div#menu li {
+  background-image: url("/images/line_white.gif");
+  background-position: right center;
+  background-repeat: no-repeat;
+  display: inline;
+  float: left;
+  line-height: 1em;
+  list-style: none outside none;
+  margin: 0;
+  padding: 0 10px;
+}
+
+div#menu a:hover, div#menu a.selected {
+  background-color: #3671A5;
+}
+
+div#menu a, div#menu a:link, div#menu a:active, div#menu a:visited {
+  color: white;
+  display: block;
+  font-weight: bold;
+  margin: 0;
+  padding: 7px 13px;
+  text-decoration: none;
+}
+
+div.inner_box{
+    border: 1px solid #A8BACD;
+    margin-bottom: 10px;
+    overflow: hidden;
+    padding: 1px;
+    position: relative;
+    //width: 185px;
+
+    h5 {
+        background-image: url("/images/bg_box_title.png");
+        border-bottom: 1px solid #A8BACD;
+        font-size: 12px;
+        font-weight: normal;
+        margin: 0.15em 0 0.67em;
+        padding: 2px 0;
+        text-align: center;
+    }
+
+    ul {
+        margin: 0 0 1.5em;
+        padding: 0;
+
+        li {
+            display: table;
+            margin: 0 0 0.25em 30px;
+            padding: 0 10px 5px 0;
+        }
+    }
+
+
+}
+
+.recommended {
+    min-height:10px;
+}
+
+.li_star_orange {
+    list-style-image: url("/images/star_orange.gif");
+}
+
+.li_star_blue {
+  list-style-image: url("/images/star_blue.gif");
+}
+
+
+div#hot_photos{
+    //border: 1px solid #A8BACD;
+    margin-bottom: 10px;
+    overflow: hidden;
+    padding: 1px;
+    position: relative;
+    //width: 185px;
+    //height: 120px;
+
+    ul {
+        //margin: 0 0 1.5em;
+        padding: 0;
+        width: 1600px;
+
+        li {
+            display: inline;
+            //margin: 0 0 0.25em 30px;
+            padding: 5px;
+        }
+    }
+
+
+}
+
+.bold_font {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+#main {
+  padding: 2px;
+  td th {
+    padding:2px;
+  }
+}
+
+
+
+/**************************************/
+/*               FOOTER               */
+/**************************************/
+#footer {
+  background: none repeat scroll 0 0 #F1F1F1;
+  border-top: 2px solid #DDDDDD;
+  font-size: 12px;
+  margin: 25px 0 0;
+  padding: 20px 0 15px;
+}

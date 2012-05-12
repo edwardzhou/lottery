@@ -1,3 +1,5 @@
+- content_for :page_include_scripts do
+  = javascript_include_tag "gaming"
 
 = content_tag(:div , nil, :id => "info", "data-url" => gaming_path('ball7', :format => :json))
 

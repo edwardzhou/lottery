@@ -18,12 +18,12 @@
     = yield(:page_inline_scripts) if content_for?(:page_inline_scripts)
 
   %body
-    #content.container
-      #top
-        = render "home/top"
-      #middle.span-26.last
-        #left.span-6
-          = render "home/left"
-        #main.span-20.last
-          = yield
-    //= render "common/page_footer"
+
+    #top_frame.backdrop_1
+      = render :partial => "layouts/top_frame"
+
+    #bottom_frame
+      #left_frame
+        = render :partial => "layouts/left_frame"
+      #main_frame
+        = yield

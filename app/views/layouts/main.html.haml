@@ -1,0 +1,8 @@
+%html
+  %head
+    %title Welcome　
+    :javascript
+      if ( top.location != self.location ) top.location=self.location;
+        %frameset{:border => "0", :frameborder => "0", :framespacing => "0", :rows => "*,0"}
+    %frame{:name => "topFrame", :src => "user"}
+    %frame{:name => "belowFrame", :src => "index.htm"}/

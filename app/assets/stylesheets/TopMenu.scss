@@ -22,7 +22,53 @@ IMG, TABLE {
   BORDER-RIGHT: 0px; }
 
 TD {
-  CURSOR: default; }
+  CURSOR: default;
+}
+
+#top_table {
+
+  BORDER-BOTTOM: 0px;
+  BORDER-LEFT: 0px;
+  BORDER-COLLAPSE: collapse;
+  BORDER-TOP: 0px;
+  BORDER-RIGHT: 0px;
+  margin-bottom: 0;
+
+  IMG{
+    BORDER-BOTTOM: 0px;
+    BORDER-LEFT: 0px;
+    BORDER-COLLAPSE: collapse;
+    BORDER-TOP: 0px;
+    BORDER-RIGHT: 0px; }
+
+
+  TD, TH {
+    padding: 0.0em;
+    BORDER-BOTTOM: 0px;
+    BORDER-LEFT: 0px;
+    BORDER-COLLAPSE: collapse;
+    BORDER-TOP: 0px;
+    BORDER-RIGHT: 0px;
+  }
+}
+
+#left {
+  background-image: image_url("l_backdrop.jpg");
+  background-repeat: repeat-y;
+  margin: 0;
+  min-height: 700px;
+
+  th, td{
+    padding: 0.1em 2em 0.8em 0.2em;
+  }
+}
+
+
+.top_left_corner {
+  background-image: image_url("TopLogo_72.jpg");
+  width: 273px;
+}
+
 
 A {
   COLOR: #164175;
@@ -56,6 +102,12 @@ A {
   COLOR: #ffffff;
   FONT-WEIGHT: bold; }
 
+.T4 {
+  BACKGROUND-IMAGE: image-url("T2.jpg");
+  BACKGROUND-REPEAT: no-repeat;
+  COLOR: #ffffff;
+  FONT-WEIGHT: bold; }
+
 .top {
   BACKGROUND-IMAGE: image-url("m_top.jpg");
   BACKGROUND-REPEAT: repeat-x; }
@@ -81,30 +133,30 @@ A {
   BORDER-RIGHT: #ff9224 0px solid; }
 
 .but_1 {
-  WIDTH: 97px;
+  WIDTH: 104px;
   BACKGROUND-POSITION: 0px 0px; }
 
 .but_1_m {
-  WIDTH: 97px;
-  BACKGROUND-POSITION: -658px 0px;
+  WIDTH: 104px;
+  BACKGROUND-POSITION: -655px 0px;
   CURSOR: hand; }
 
 .but_2 {
   WIDTH: 104px;
-  BACKGROUND-POSITION: -97px 0px; }
+  BACKGROUND-POSITION: -100px 0px; }
 
 .but_2_m {
   WIDTH: 104px;
-  BACKGROUND-POSITION: -755px 0px;
+  BACKGROUND-POSITION: -760px 0px;
   CURSOR: hand; }
 
 .but_3 {
   WIDTH: 104px;
-  BACKGROUND-POSITION: -201px 0px; }
+  BACKGROUND-POSITION: -203px 0px; }
 
 .but_3_m {
   WIDTH: 104px;
-  BACKGROUND-POSITION: -859px 0px;
+  BACKGROUND-POSITION: -860px 0px;
   CURSOR: hand; }
 
 .but_4 {
@@ -113,7 +165,7 @@ A {
 
 .but_4_m {
   WIDTH: 103px;
-  BACKGROUND-POSITION: -963px 0px;
+  BACKGROUND-POSITION: -965px 0px;
   CURSOR: hand; }
 
 .but_5 {
@@ -122,7 +174,7 @@ A {
 
 .but_5_m {
   WIDTH: 103px;
-  BACKGROUND-POSITION: -1066px 0px;
+  BACKGROUND-POSITION: -1068px 0px;
   CURSOR: hand; }
 
 .but_6 {
@@ -131,7 +183,7 @@ A {
 
 .but_6_m {
   WIDTH: 80px;
-  BACKGROUND-POSITION: -1169px 0px;
+  BACKGROUND-POSITION: -1173px 0px;
   CURSOR: hand; }
 
 .but_7 {
