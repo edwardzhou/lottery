@@ -26,7 +26,7 @@ class User
   has_secure_password
 
   def self.sign_in(username, password)
-    user = where(username: username.downcase).and(locked: false).first
+    user = where(username: username.downcase).excludes(locked: true).first
     return nil unless user.try(:authenticate, password)
 
     user
