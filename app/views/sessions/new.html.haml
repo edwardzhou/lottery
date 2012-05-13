@@ -1,0 +1,113 @@
+!!!
+%html
+  %head
+    %title 管理员登录
+    %meta{:content => "text/html; charset=gb2312", "http-equiv" => "Content-Type"}/
+    :css
+      BODY {
+      	SCROLLBAR-ARROW-COLOR: #330000; SCROLLBAR-FACE-COLOR: #c6ebde; LINE-HEIGHT: 150%; SCROLLBAR-DARKSHADOW-COLOR: #ffffff; FONT-FAMILY: "宋体"; BACKGROUND: #ffffff; SCROLLBAR-HIGHLIGHT-COLOR: #ffffff; SCROLLBAR-SHADOW-COLOR: #39867b; FONT-SIZE: 9pt; SCROLLBAR-TRACK-COLOR: #e2f3f1; TEXT-DECORATION: none; SCROLLBAR-3DLIGHT-COLOR: #39867b
+      }
+      TD {
+      	FONT-FAMILY: "宋体"; FONT-SIZE: 9pt
+      }
+      INPUT {
+      	HEIGHT: 20px; FONT-SIZE: 9pt
+      }
+      BUTTON {
+      	HEIGHT: 20px; FONT-SIZE: 9pt
+      }
+      SELECT {
+      	HEIGHT: 20px; FONT-SIZE: 9pt
+      }
+      A {
+      	COLOR: #000000; TEXT-DECORATION: none
+      }
+      A:hover {
+      	COLOR: #428eff; TEXT-DECORATION: underline
+      }
+      .title {
+      	BACKGROUND: url(Images/topBar_bg.gif)
+      }
+      .border {
+      	BORDER-BOTTOM: #39867b 1px solid; BORDER-LEFT: #39867b 1px solid; BORDER-TOP: #39867b 1px solid; BORDER-RIGHT: #39867b 1px solid
+      }
+      .tdbg {
+      	LINE-HEIGHT: 120%; BACKGROUND: #e1f4ee
+      }
+      .topbg {
+      	BACKGROUND: url(/assets/topbg.gif); COLOR: #ffffff
+      }
+      .bgcolor {
+      	BACKGROUND-COLOR: #91bce3
+      }
+
+    %meta{:content => "text/html; charset=utf-8", :"http-equiv" => "Content-Type"}/
+
+    = javascript_include_tag "application"
+
+    = csrf_meta_tags
+
+  %body.bgcolor
+    %p &nbsp;
+    %center
+      %table{:align => "center", :border => "1", :bordercolor => "#6699cc", :cellpadding => "4", :cellspacing => "1", :style => "BORDER-COLLAPSE: collapse", :width => "450"}
+        %tbody
+          %tr{:valign => "baseline"}
+            %td{:align => "right", :background => ""}
+              %div{:align => "center"}
+                %font{:color => "#000000", :style => "FONT-SIZE: 10.5pt"} 网站管理系统管理员登录
+          %tr{:valign => "baseline"}
+            %td{:align => "middle", :bgcolor => "#eff1f3", :height => "60", :valign => "center"}
+              %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "100%"}
+                %tbody
+                  - if flash[:alert]
+                    %tr
+                      %td(colspan="3" )
+                        %font(color="#FF0000")= flash[:alert]
+                  %tr
+                    %td{:width => "20"}
+                    %td{:width => "150"}
+                      %div{:align => "center"}
+                        = image_tag "admin_p.gif", :width => "90", :border => "0", :height => "100"
+                        //%img{:border => "0", :height => "100", :src => "images/admin_p.gif", :width => "90"}/
+                    %td{:width => "280"}
+                      = form_for @user, :url => sessions_path do |f|
+                        %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "8", :width => "100%"}
+                          %tbody
+                            %tr{:align => "middle"}
+                              %td{:colspan => "2", :height => "38"}
+                                %font{:color => "#000000", :size => "3"}
+                                  %strong 会员登录
+                            %tr
+                              %td{:align => "right"}
+                                %font{:color => "#000000"} 用户名称：
+                              %td
+                                = f.text_field :username, :size => 20, :maxlength => 20
+                                //%input#UserName4{:maxlength => "20", :name => "UserName", :onfocus => "this.select(); ", :onmouseout => "this.style.background='#FFFFFF'", :onmouseover => "this.style.background='#FDE8FE';", :style => "BORDER-BOTTOM: 1px solid; BORDER-LEFT: 1px solid; PADDING-BOTTOM: 1px; PADDING-LEFT: 4px; WIDTH: 160px; PADDING-RIGHT: 4px; BORDER-TOP: 1px solid; BORDER-RIGHT: 1px solid; PADDING-TOP: 1px"}/
+                            %tr
+                              %td{:align => "right"}
+                                %font{:color => "#000000"} 用户密码：
+                              %td
+                                = f.password_field :password, :size => 20, :maxlength => 20
+                                //%input{:maxlength => "20", :name => "Password", :onfocus => "this.select(); ", :onmouseout => "this.style.background='#FFFFFF'", :onmouseover => "this.style.background='#FDE8FE';", :style => "BORDER-BOTTOM: 1px solid; BORDER-LEFT: 1px solid; PADDING-BOTTOM: 1px; PADDING-LEFT: 4px; WIDTH: 160px; PADDING-RIGHT: 4px; BORDER-TOP: 1px solid; BORDER-RIGHT: 1px solid; PADDING-TOP: 1px", :type => "password"}/
+                            %tr
+                              %td{:align => "right"}
+                                %font{:color => "#00000"} 验 证 码：
+                              %td
+                                = f.text_field :checkcode, :size => 4, :maxlength => 4
+                                //%input{:maxlength => "4", :name => "CheckCode", :onfocus => "this.select(); ", :onmouseout => "this.style.background='#FFFFFF'", :onmouseover => "this.style.background='#FDE8FE';", :size => "6", :style => "BORDER-BOTTOM: 1px solid; BORDER-LEFT: 1px solid; PADDING-BOTTOM: 1px; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; BORDER-TOP: 1px solid; BORDER-RIGHT: 1px solid; PADDING-TOP: 1px"}/
+                                %font{:color => "#ff0000"} 请在左边输入
+                                = image_tag "checkcode.bmp"
+                                //%img{:src => "images/checkcode.bmp"}/
+                            %tr
+                              %td{:colspan => "2"}
+                                %div{:align => "center"}
+                                  \&nbsp;&nbsp;&nbsp;&nbsp;
+                                  = submit_tag "登 录"
+                                  //%input{:name => "Submit", :onmouseout => "this.style.backgroundColor='#FFCCFF'", :onmouseover => "this.style.backgroundColor='#ffffff'", :style => "BORDER-BOTTOM: #336600 1px solid; BORDER-LEFT: #336600 1px solid; BACKGROUND-COLOR: #ffccff; WIDTH: 60px; HEIGHT: 19px; COLOR: #000000; FONT-SIZE: 9pt; BORDER-TOP: #336600 1px solid; BORDER-RIGHT: #336600 1px solid", :type => "submit", :value => " 确&nbsp;认 "}/
+                                  \&nbsp;
+                                  %input(type="button" class="reset" value="重填")/
+                                  //%input#reset{:name => "reset", :onmouseout => "this.style.backgroundColor='#FFCCFF'", :onmouseover => "this.style.backgroundColor='#ffffff'", :style => "BORDER-BOTTOM: #336600 1px solid; BORDER-LEFT: #336600 1px solid; BACKGROUND-COLOR: #ffccff; WIDTH: 60px; HEIGHT: 19px; COLOR: #000000; FONT-SIZE: 9pt; BORDER-TOP: #336600 1px solid; BORDER-RIGHT: #336600 1px solid", :type => "reset", :value => " 清&nbsp;除 "}/
+                                  %br/
+      %br/
+    %p{:align => "center"} &nbsp;

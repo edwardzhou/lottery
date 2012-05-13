@@ -12,14 +12,24 @@ class User
   field :last_login_ip, type: String
   field :locked, type: Boolean
   field :locked_at, type: DateTime
+  field :total_credit, type: BigDecimal
+  field :available_credit, type: BigDecimal
+  field :odds_level_name, type: String
+  field :user_rule, type: String
+
   include Mongoid::Timestamps
 
-  attr_accessible :username, :password, :password_confirmation, :true_name, :phone
+  attr_accessible :username, :password, :password_confirmation, :true_name, :phone, :checkcode
+  attr_accessor :checkcode
+  validates_presence_of :username
 
   has_secure_password
 
   def self.sign_in(username, password)
-    where(username: username.downcase).and(locked: false).first.try(:authenticate, password)
+    user = where(username: username.downcase).and(locked: false).first
+    return nil unless user.try(:authenticate, password)
+
+    user
   end
 
   def lock_account!

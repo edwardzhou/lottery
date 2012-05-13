@@ -1,4 +1,7 @@
 Lottery::Application.routes.draw do
+
+  resource :sessions
+
   get "home/user"
   get "home/index"
 
