@@ -4,6 +4,7 @@ Lottery::Application.routes.draw do
 
   get "home/user"
   get "home/index"
+  get "logout", :to => "sessions#logout"
 
   resources :home
 
