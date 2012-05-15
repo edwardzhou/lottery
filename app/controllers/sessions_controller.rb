@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
     if @sign_user.nil? then
       redirect_to({:action => "new"}, :alert => "用户名或密码错误!")
     else
-      session[:user_id] = @user.id
+      session[:user_id] = @sign_user.id
       redirect_to gaming_path("ball1")
     end
   end

@@ -7,4 +7,9 @@ class HomeController < ApplicationController
 
   def user
   end
+
+  def rule_info
+
+  end
+
 end

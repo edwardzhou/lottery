@@ -1,0 +1,505 @@
+- content_for :page_inline_css do
+  :css
+    <!--
+    .blue_words2 {
+      font-size: 12px;
+    }
+    .white_words2 {
+      font-size: 12px;
+    }
+    .words_color_blue_a {
+      font-size: 14px;
+    }
+    .STYLE10 {color: #000000}
+            ul
+      {margin-bottom:0cm;}
+     p.MsoNormal
+      {margin-bottom:.0001pt;
+      text-align:justify;
+      text-justify:inter-ideograph;
+      font-size:10.5pt;
+      font-family:"Calibri","sans-serif";
+              margin-left: 0cm;
+                margin-right: 0cm;
+                margin-top: 0cm;
+            }
+    -->
+
+
+
+#rule_content(style="padding:20px;")
+  %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "700"}
+    %tbody
+      %tr
+        %td{:align => "left", :colspan => "2", :height => "29"}
+          %strong.words_color_blue_a 重要聲明
+        %td{:width => "1"}
+      %tr
+        %td{:width => "15"}
+          \&nbsp;
+        %td{:width => "700"}
+          %ol{:style => "line-height: 5mm"}
+            %li.blue_words2 如果客戶懷疑自己的資料被盜用，應立即通知本公司，並更改詳細資料，以前的使用者名稱及密碼將全部無效。
+            %li.blue_words2 客戶有責任確保自己的帳戶及登入資料的保密性。以使用者名稱及密碼進行的任何網上投注將被視為有效。
+            %li.blue_words2 公佈賠率時出現的任何打字錯誤或非故意人為失誤，本公司保留改正錯誤和按正確賠率結算投注的權力。您居住所在地的法律有可能規定網路博奕不合法；若此情況屬實，本公司將不會批准您使用付帳卡進行交易。
+            %li.blue_words2 每次登入時客戶都應該核對自己的帳戶結餘額。如對餘額有任何疑問，請在第一時間內通知本公司。
+            %li.blue_words2 一旦投注被接受，則不得取消或修改。
+            %li.blue_words2 所有號碼賠率將不時浮動，派彩時的賠率將以確認投注時之賠率為準。
+            %li.blue_words2 每注最高投注金額按不同[場次]及[投注項目]及[會員帳號]設定浮動。如投注金額超過上述設定，本公司有權取消超過之投注金額。
+            %li.blue_words2 所有投注都必須在開獎前時間內進行否則投注無效。
+            %li.blue_words2 所有投注派彩彩金皆含本金。
+      %tr
+        %td{:align => "left", :colspan => "2", :height => "29"}
+          %strong.words_color_blue_a 广东快乐十分規則說明
+        %td
+      %tr
+        %td{:width => "15"}
+          \&nbsp;
+        %td
+          %ul{:type => "disc"}
+            %li.MsoNormal
+              %span
+                每期广东快乐十分（
+                %a.F_bold.Font_R{:href => "http://sports.sohu.com/happy10-gd/", :target => "_blank"}> 開獎网
+                ）开奖球数共八粒。每粒球除了总和玩法，其它都有单独的投注页面。广东快乐十分每天开
+              %span{:lang => "EN-US"} 84
+              %span 期，每期间隔
+              %span{:lang => "EN-US"} 10
+              %span 分钟。投注时间为
+              %span{:lang => "EN-US"} 8
+              %span 分钟，等待开奖时间为
+              %span{:lang => "EN-US"} 2
+              %span 分钟，北京时间（
+              %span{:lang => "EN-US"} GMT+8
+              %span ）每天白天从上午
+              %span{:lang => "EN-US"} 09
+              %span ：
+              %span{:lang => "EN-US"} 00
+              %span 开到晚上
+              %span{:lang => "EN-US"} 23
+              %span ：
+              %span{:lang => "EN-US"} 00
+              %span
+                。
+                %span{:lang => "EN-US"}
+                  %o:p
+            %li.MsoNormal
+              %b
+                %span 两面：
+              %span
+                指单、双；大、小、尾大、尾小。
+                %span{:lang => "EN-US"}
+                  %o:p
+          %ul{:type => "disc"}
+            %li.MsoNormal
+              %span{:lang => "EN-US"} &nbsp;
+              %span 单、双：号码为双数叫双，如
+              %span{:lang => "EN-US"} 8
+              %span 、
+              %span{:lang => "EN-US"} 16
+              %span ；号码为单数叫单，如
+              %span{:lang => "EN-US"} 19
+              %span 、
+              %span{:lang => "EN-US"} 5
+              %span
+                。
+                %span{:lang => "EN-US"}
+                  %o:p
+            %li.MsoNormal
+              %span{:lang => "EN-US"} &nbsp;
+              %span 大、小：开出之号码大于或等于
+              %span{:lang => "EN-US"} 11
+              %span 为大，小于或等于
+              %span{:lang => "EN-US"} 10
+              %span
+                为小。
+                %span{:lang => "EN-US"}
+                  %o:p
+            %li.MsoNormal
+              %span{:lang => "EN-US"} &nbsp;
+              %span 尾大、尾小：开出之尾数大于或等于
+              %span{:lang => "EN-US"} 5
+              %span 为尾大，小于或等于
+              %span{:lang => "EN-US"} 4
+              %span
+                为尾小。
+                %span{:lang => "EN-US"}
+                  %o:p
+            %li.MsoNormal
+              %span{:lang => "EN-US"} &nbsp;
+              %span
+                每一个号码为一投注组合，假如投注号码为开奖号码并在所投的球位置，视为中奖，其余情形视为不中奖。
+                %span{:lang => "EN-US"}
+                  %o:p
+          %ul{:type => "disc"}
+            %li.MsoNormal
+              %b
+                %span 中发白
+              %span
+                %span{:lang => "EN-US"}
+                  %o:p
+            %li.MsoNormal
+              %span 中：开出之号码为
+              %span{:lang => "EN-US"} 01
+              %span 、
+              %span{:lang => "EN-US"} 02
+              %span 、
+              %span{:lang => "EN-US"} 03
+              %span 、
+              %span{:lang => "EN-US"} 04
+              %span 、
+              %span{:lang => "EN-US"} 05
+              %span 、
+              %span{:lang => "EN-US"} 06
+              %span 、
+              %span{:lang => "EN-US"}
+                07
+                %o:p
+            %li.MsoNormal
+              %span 发：开出之号码为
+              %span{:lang => "EN-US"} 08
+              %span 、
+              %span{:lang => "EN-US"} 09
+              %span 、
+              %span{:lang => "EN-US"} 10
+              %span 、
+              %span{:lang => "EN-US"} 11
+              %span 、
+              %span{:lang => "EN-US"} 12
+              %span 、
+              %span{:lang => "EN-US"} 13
+              %span 、
+              %span{:lang => "EN-US"}
+                14
+                %o:p
+            %li.MsoNormal
+              %span 白：开出之号码为
+              %span{:lang => "EN-US"} 15
+              %span 、
+              %span{:lang => "EN-US"} 16
+              %span 、
+              %span{:lang => "EN-US"} 17
+              %span 、
+              %span{:lang => "EN-US"} 18
+              %span 、
+              %span{:lang => "EN-US"} 19
+              %span 、
+              %span{:lang => "EN-US"}
+                20
+                %o:p
+          %ul{:type => "disc"}
+            %li.MsoNormal
+              %b
+                %span 方位
+              %span
+                %span{:lang => "EN-US"}
+                  %o:p
+            %li.MsoNormal
+              %span 东：开出之号码为
+              %span{:lang => "EN-US"} 01
+              %span 、
+              %span{:lang => "EN-US"} 05
+              %span 、
+              %span{:lang => "EN-US"} 09
+              %span 、
+              %span{:lang => "EN-US"} 13
+              %span 、
+              %span{:lang => "EN-US"}
+                17
+                %o:p
+            %li.MsoNormal
+              %span 南：开出之号码为
+              %span{:lang => "EN-US"} 02
+              %span 、
+              %span{:lang => "EN-US"} 06
+              %span 、
+              %span{:lang => "EN-US"} 10
+              %span 、
+              %span{:lang => "EN-US"} 14
+              %span 、
+              %span{:lang => "EN-US"}
+                18
+                %o:p
+            %li.MsoNormal
+              %span 西：开出之号码为
+              %span{:lang => "EN-US"} 03
+              %span 、
+              %span{:lang => "EN-US"} 07
+              %span 、
+              %span{:lang => "EN-US"} 11
+              %span 、
+              %span{:lang => "EN-US"} 15
+              %span 、
+              %span{:lang => "EN-US"}
+                19
+                %o:p
+            %li.MsoNormal
+              %span 北：开出之号码为
+              %span{:lang => "EN-US"} 04
+              %span 、
+              %span{:lang => "EN-US"} 08
+              %span 、
+              %span{:lang => "EN-US"} 12
+              %span 、
+              %span{:lang => "EN-US"} 16
+              %span 、
+              %span{:lang => "EN-US"}
+                20
+                %o:p
+          %ul{:type => "disc"}
+            %li.MsoNormal
+              %b
+                %span 总和单双
+              %span ：所有
+              %span{:lang => "EN-US"} 8
+              %span 个开奖号码的数字总和值是单数为总和单，如数字总和值是
+              %span{:lang => "EN-US"} 31
+              %span 、
+              %span{:lang => "EN-US"} 51
+              %span ；所有
+              %span{:lang => "EN-US"} 8
+              %span 个开奖号码的数字总和值是双数为总和双，如数字总和是
+              %span{:lang => "EN-US"} 42
+              %span 、
+              %span{:lang => "EN-US"} 80
+              %span
+                ；假如投注组合符合中奖结果，视为中奖，其余情形视为不中奖。
+                %span{:lang => "EN-US"}
+                  %o:p
+            %li.MsoNormal
+              %b
+                %span 总和大小
+              %span ：所有
+              %span{:lang => "EN-US"} 8
+              %span 个开奖号码的数字总和值
+              %span{:lang => "EN-US"} 85
+              %span 到
+              %span{:lang => "EN-US"} 132
+              %span 为总大；所有
+              %span{:lang => "EN-US"} 8
+              %span 个开奖号码的数字总和值
+              %span{:lang => "EN-US"} 36
+              %span 到
+              %span{:lang => "EN-US"} 83
+              %span 为总分小；所有
+              %span{:lang => "EN-US"} 8
+              %span 个开奖号码的数字总和值为
+              %span{:lang => "EN-US"} 84
+              %span 打和；如开奖号码为
+              %span{:lang => "EN-US"} 01
+              %span 、
+              %span{:lang => "EN-US"} 20
+              %span 、
+              %span{:lang => "EN-US"} 02
+              %span 、
+              %span{:lang => "EN-US"} 08
+              %span 、
+              %span{:lang => "EN-US"} 17
+              %span 、
+              %span{:lang => "EN-US"} 09
+              %span 、
+              %span{:lang => "EN-US"} 11
+              %span ，数字总和是
+              %span{:lang => "EN-US"} 68
+              %span
+                ，则总分小。假如投注组合符合中奖结果，视为中奖，其余情形视为不中奖，打和不计算结果。
+                %span{:lang => "EN-US"}
+                  %o:p
+            %li.MsoNormal
+              %b
+                %span 总尾大小
+              %span ：所有
+              %span{:lang => "EN-US"} 8
+              %span 个开奖号码的数字总和数值的个位数大于或等于
+              %span{:lang => "EN-US"} 5
+              %span 为总尾大，小于或等于
+              %span{:lang => "EN-US"} 4
+              %span
+                为总尾小；假如投注组合符合中奖结果，视为中奖，其余情形视为不中奖。
+                %span{:lang => "EN-US"}
+                  %o:p
+            %li.MsoNormal
+              %b
+                %span 选二任选
+              %span ：指从
+              %span{:lang => "EN-US"} 01
+              %span 至
+              %span{:lang => "EN-US"} 20
+              %span 中任意选择
+              %span{:lang => "EN-US"} 2
+              %span 个号码对开奖号码中任意
+              %span{:lang => "EN-US"} 2
+              %span 个位置的投注。 投注号码与开奖号码中任意
+              %span{:lang => "EN-US"} 2
+              %span
+                个位置的号码相符，即中奖。
+                %span{:lang => "EN-US"}
+                  %o:p
+            %li.MsoNormal
+              %b
+                %span 选二连组
+              %span ：指从
+              %span{:lang => "EN-US"} 01
+              %span 至
+              %span{:lang => "EN-US"} 20
+              %span 中任意选择
+              %span{:lang => "EN-US"} 2
+              %span 个号码对开奖号码中按开奖顺序出现的
+              %span{:lang => "EN-US"} 2
+              %span 个连续位置的投注。 投注号码与开奖号码中按开奖顺序出现的
+              %span{:lang => "EN-US"} 2
+              %span
+                个连续位置的号码相符（顺序不限），即中奖。
+                %span{:lang => "EN-US"}
+                  %o:p
+            %li.MsoNormal
+              %b
+                %span 选二连直
+              %span ：指从
+              %span{:lang => "EN-US"} 01
+              %span 至
+              %span{:lang => "EN-US"} 20
+              %span 中任意选择
+              %span{:lang => "EN-US"} 2
+              %span 个号码对开奖号码中按开奖顺序出现的
+              %span{:lang => "EN-US"} 2
+              %span 个连续位置按位相符的投注。 投注号码与开奖号码中按开奖顺序出现的
+              %span{:lang => "EN-US"} 2
+              %span
+                个连续位置的号码按位相符，即中奖。
+                %span{:lang => "EN-US"}
+                  %o:p
+            %li.MsoNormal
+              %b
+                %span 选三任选
+              %span ：指从
+              %span{:lang => "EN-US"} 01
+              %span 至
+              %span{:lang => "EN-US"} 20
+              %span 中任意选择
+              %span{:lang => "EN-US"} 3
+              %span 个号码对开奖号码中任意
+              %span{:lang => "EN-US"} 3
+              %span 个位置的投注。 投注号码与开奖号码中任意
+              %span{:lang => "EN-US"} 3
+              %span
+                个位置的号码相符，即中奖。
+                %span{:lang => "EN-US"}
+                  %o:p
+            %li.MsoNormal
+              %b
+                %span 选三前组
+              %span ：指从
+              %span{:lang => "EN-US"} 01
+              %span 至
+              %span{:lang => "EN-US"} 20
+              %span 中任意选择
+              %span{:lang => "EN-US"} 3
+              %span 个号码对开奖号码中按开奖顺序出现的前
+              %span{:lang => "EN-US"} 3
+              %span 个连续位置的投注。 投注号码与开奖号码中按开奖顺序出现的前
+              %span{:lang => "EN-US"} 3
+              %span
+                个位置的号码相符（顺序不限），即中奖。
+                %span{:lang => "EN-US"}
+                  %o:p
+            %li.MsoNormal
+              %b
+                %span 选三前直
+              %span ：指从
+              %span{:lang => "EN-US"} 01
+              %span 至
+              %span{:lang => "EN-US"} 20
+              %span 中任意选择
+              %span{:lang => "EN-US"} 3
+              %span 个号码对开奖号码中按开奖顺序出现的前
+              %span{:lang => "EN-US"} 3
+              %span 个连续位置按位相符的投注。 投注号码与开奖号码中按开奖顺序出现的前
+              %span{:lang => "EN-US"} 3
+              %span
+                个位置的号码按位相符，即中奖。
+                %span{:lang => "EN-US"}
+                  %o:p
+            %li.MsoNormal
+              %b
+                %span 选四任选
+              %span ：指从
+              %span{:lang => "EN-US"} 01
+              %span 至
+              %span{:lang => "EN-US"} 20
+              %span 中任意选择
+              %span{:lang => "EN-US"} 4
+              %span 个号码，对开奖号码中任意
+              %span{:lang => "EN-US"} 4
+              %span 个位置的投注。 投注号码与开奖号码中任意
+              %span{:lang => "EN-US"} 4
+              %span
+                个位置的号码相符，即中奖。
+                %span{:lang => "EN-US"}
+                  %o:p
+            %li.MsoNormal
+              %b
+                %span 选五任选
+              %span ：指从
+              %span{:lang => "EN-US"} 01
+              %span 至
+              %span{:lang => "EN-US"} 20
+              %span 中任意选择
+              %span{:lang => "EN-US"} 5
+              %span 个号码，对开奖号码中任意
+              %span{:lang => "EN-US"} 5
+              %span 个位置的投注。 投注号码与开奖号码中任意
+              %span{:lang => "EN-US"} 5
+              %span
+                个位置的号码相符，即中奖。
+                %span{:lang => "EN-US"}
+                  %o:p
+          %p.MsoNormal{:align => "left", :style => "text-align:left;mso-pagination:widow-orphan"}
+            %span{:lang => "EN-US"}
+              ·
+              %span &nbsp;
+            %b
+              %span 龙虎
+            %span
+              以第一球的中奖号码和第八球的中奖号码做为对奖号码。
+              %span{:lang => "EN-US"}
+                %o:p
+          %ul{:type => "disc"}
+            %li.MsoNormal
+              %span 龙：开出之号码第一球的中奖号码大于第八球的中奖号码。如 第一球开出
+              %span{:lang => "EN-US"} 14
+              %span 第八球开出
+              %span{:lang => "EN-US"} 09
+              %span ；第一球开出
+              %span{:lang => "EN-US"} 17
+              %span 第八球开出
+              %span{:lang => "EN-US"} 08
+              %span ；第一球开出
+              %span{:lang => "EN-US"} 05
+              %span 第八球开出
+              %span{:lang => "EN-US"} 01...
+              %span
+                中奖为龙。
+                %span{:lang => "EN-US"}
+                  %o:p
+            %li.MsoNormal
+              %span 虎：开出之号码第一球的中奖号码小于第八球的中奖号码。如 第一球开出
+              %span{:lang => "EN-US"} 14
+              %span 第八球开出
+              %span{:lang => "EN-US"} 16
+              %span ；第一球开出
+              %span{:lang => "EN-US"} 13
+              %span 第八球开出
+              %span{:lang => "EN-US"} 18
+              %span ；第一球开出
+              %span{:lang => "EN-US"} 05
+              %span 第八球开出
+              %span{:lang => "EN-US"} 08...
+              %span
+                中奖为虎。
+                %span{:lang => "EN-US"}
+                  %o:p
+
+
+%br/
+%br/

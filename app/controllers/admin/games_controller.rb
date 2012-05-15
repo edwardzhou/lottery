@@ -1,4 +1,4 @@
-class Admin::GamesController < ApplicationController
+class Admin::GamesController < Admin::AdminBaseController
   def index
     @games = Game.all
   end

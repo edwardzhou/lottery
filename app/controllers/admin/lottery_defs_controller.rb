@@ -1,4 +1,4 @@
-class Admin::LotteryDefsController < ApplicationController
+class Admin::LotteryDefsController < Admin::AdminBaseController
 
   def index
     @lottery_defs = LotteryDef.all

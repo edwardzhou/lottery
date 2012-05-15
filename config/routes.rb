@@ -4,6 +4,7 @@ Lottery::Application.routes.draw do
 
   get "home/user"
   get "home/index"
+  get "rule_info", :to => "home#rule_info"
   get "logout", :to => "sessions#logout"
 
   resources :home
@@ -15,6 +16,7 @@ Lottery::Application.routes.draw do
   resources :gaming
 
   namespace :admin do
+    resources :users
     resources :games
     resources :lottery_defs do
       resources :odds_levels

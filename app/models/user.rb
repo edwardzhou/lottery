@@ -15,7 +15,7 @@ class User
   field :total_credit, type: BigDecimal
   field :available_credit, type: BigDecimal
   field :odds_level_name, type: String
-  field :user_rule, type: String
+  field :user_role, type: String
 
   include Mongoid::Timestamps
 
@@ -24,6 +24,10 @@ class User
   validates_presence_of :username
 
   has_secure_password
+
+  scope :active_users, excludes(locked: true)
+  scope :locked_users, where(locked: true)
+
 
   def self.sign_in(username, password)
     user = where(username: username.downcase).excludes(locked: true).first

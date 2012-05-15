@@ -1,4 +1,4 @@
-class Admin::OddsLevelsController < ApplicationController
+class Admin::OddsLevelsController < Admin::AdminBaseController
 
   def edit
     @lottery_def = LotteryDef.find(params[:lottery_def_id])
