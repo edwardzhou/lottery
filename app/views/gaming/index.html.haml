@@ -43,9 +43,3 @@
       - @sum_balls_2.each do |sum_ball|
         %td
           = render :partial => "sum_ball", :locals => {:ball_title => sum_ball[:ball_name], :ball_no => sum_ball[:ball_no], :ball_rules => sum_ball[:ball_rules]}
-
-      %td
-        %table.Ball_List{:border => "0", :cellpadding => "0", :cellspacing => "1", :width => "175"}
-          %tbody
-            %tr
-              %td
