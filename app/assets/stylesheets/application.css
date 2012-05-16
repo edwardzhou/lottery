@@ -10,4 +10,5 @@
  *
  *= require_self
  *= require_directory .
+ *= require sunny/jquery-ui-1.8.20.custom
 */

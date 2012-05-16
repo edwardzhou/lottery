@@ -1,1 +1,14 @@
 %h1 用户管理
+
+%table(id="user_list")
+  %tr
+    %td
+
+#pager
+
+
+
+
+- content_for :page_include_scripts do
+  = javascript_include_tag "admin/users"
+

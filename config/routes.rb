@@ -16,7 +16,12 @@ Lottery::Application.routes.draw do
   resources :gaming
 
   namespace :admin do
-    resources :users
+    resources :users do
+      member do
+        match 'lock' => :lock, :via => [:get, :post]
+        match 'unlock' => :unlock, :via => [:get, :post]
+      end
+    end
     resources :games
     resources :lottery_defs do
       resources :odds_levels

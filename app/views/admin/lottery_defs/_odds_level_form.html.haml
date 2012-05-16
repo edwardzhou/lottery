@@ -4,25 +4,25 @@
       %h2= odds_level.level_name
   %tr
     %td
-      %table(cellpadding="4" cellspacing="4" width="350" border="1px solid" )
+      %table(cellpadding="4" cellspacing="4" width="250" border="1px solid" )
         %thead
           %tr
-            %th.td_caption_1(nowrap="true") 规则
-            %th.td_caption_1 赔率
-            %th.td_caption_1(nowrap="true") 是否启用
+            %th.td_caption_1.cell_border(nowrap="true") 规则
+            %th.td_caption_1.cell_border 赔率
+            %th.td_caption_1.cell_border(nowrap="true") 是否启用
         %tbody
           %tr
-            %td.Jut_caption_1 退水
-            %td
+            %td.Jut_caption_1.cell_border_left 退水
+            %td.cell_border_left
               = fields_for :"odds_level_#{odds_level.id}", odds_level do |ol_field|
-                = ol_field.text_field :return
-            %td/
+                = ol_field.text_field :return , :size => 10, :maxlength => 8
+            %td.cell_border/
           - odds_level.rules.each do |rule|
             %tr
               = fields_for :"rule_#{rule.id}", rule do |rule_field|
-                %td.Jut_caption_1(nowrap="true")= rule_field.label :odds, rule.rule_title
-                %td= rule_field.text_field :odds
-                %td
+                %td.cell_border_left.Jut_caption_1(nowrap="true" )= rule_field.label :odds, rule.rule_title
+                %td.cell_border_left= rule_field.text_field :odds, :size => 10, :maxlength => 8
+                %td.cell_border_left
                   = rule_field.check_box :active
                   = rule_field.label :active, '启用'
 
