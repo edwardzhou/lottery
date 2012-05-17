@@ -18,6 +18,8 @@ gem 'therubyracer'
 gem 'rabl'
 gem 'gon'
 
+gem "will_paginate_mongoid"
+
 gem 'bcrypt-ruby', :require => 'bcrypt'
 
 # Gems used only for assets and not required
@@ -33,6 +35,10 @@ group :assets do
 end
 
 gem 'jquery-rails'
+
+gem 'client_side_validations'
+
+gem 'formtastic'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

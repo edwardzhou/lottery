@@ -11,4 +11,7 @@
  *= require_self
  *= require_directory .
  *= require sunny/jquery-ui-1.8.20.custom
+ *= require formtastic
+ *= require formtastic_ie6
+ *= require formtastic_ie7
 */

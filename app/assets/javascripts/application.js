@@ -13,5 +13,5 @@
 //= require jquery
 //= require jquery_ujs
 //= require_directory .
-//= require jquery.jqGrid.src.js
-//= require i18n/grid.locale-cn
+//= require_directory ./i18n
+//= require rails.validations

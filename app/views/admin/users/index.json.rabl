@@ -1,7 +1,7 @@
 object false
-node(:page) {1}
-node(:records) { @users.size }
-node(:total) { @users.size }
+node(:page) {@page}
+node(:records) { @total_rows }
+node(:total) { @pages }
 child @users => :rows do
   extends "admin/users/_user"
   #attributes :_id, :lottery_name

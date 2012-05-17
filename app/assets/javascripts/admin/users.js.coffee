@@ -33,6 +33,7 @@ jQuery ->
     gridview: true,
     caption: '用户',
     resizable: true,
+    height: 350,
     #id: "_id"
     #autowidth: true,
 

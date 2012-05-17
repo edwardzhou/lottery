@@ -1,0 +1,12 @@
+#user_form(style="width:450px; padding: 20px;")
+  = semantic_form_for [:admin, user] do |f|
+    = f.inputs :username
+    = f.inputs :true_name
+    = f.inputs :phone
+    = f.inputs :password
+    = f.inputs :password_confirmation
+    = f.inputs :total_credit
+    = f.inputs :available_credit
+    %br/
+    = f.actions
+

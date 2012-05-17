@@ -19,11 +19,26 @@ class User
 
   include Mongoid::Timestamps
 
-  attr_accessible :username, :password, :password_confirmation, :true_name, :phone, :checkcode
-  attr_accessor :checkcode
-  validates_presence_of :username
-
   has_secure_password
+
+
+  attr_accessible :username, :password, :password_confirmation,
+                  :true_name, :phone, :checkcode, :total_credit,
+                  :available_credit, :odds_level
+
+  attr_accessor :checkcode
+
+  validates :username,
+              :uniqueness => true,
+              :presence => true,
+              :length => {:minimum => 4, :maximum => 10}
+
+  validates :password, :presence => true, :confirmation => true, :on => :create
+  validates :password_confirmation, :presence => true, :on => :create
+  validates :true_name, :presence => true
+  validates :phone, :presence => true
+  validates :total_credit, :numericality => true
+  validates :available_credit, :numericality => true
 
   scope :active_users, excludes(locked: true)
   scope :locked_users, where(locked: true)
