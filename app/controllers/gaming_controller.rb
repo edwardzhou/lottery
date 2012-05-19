@@ -6,18 +6,25 @@ class GamingController < ApplicationController
 
   before_filter :init
 
+  BALL_NAMES = %w(none 第一球 第二球 第三球 第四球 第五球 第六球 第七球 第八球)
+  HALF_BET_ITEMS = {:big => "大", :small => "小", :even => "雙",
+                    :odd => "單", :trail_big => "尾大", :trail_small => "尾小",
+                    :sum_even => "合數雙", :sum_odd => "合數單"}
+  QUARTER_BET_ITEMS = {:east => "東", :south => "南", :west => "西", :north => "北"}
+  THIRD_BET_ITEMS = {:middle => "中", :fa => "發", :white => "白"}
+
   #helper_method
 
   def index
-
+    redirect_to :action => "show", :id => "ball9"
   end
 
   def show
-    id = params[:id]
+    @id = params[:id]
     ball_id = 0
     ball_regex = /^ball(\d\d?)$/
-    if id =~ ball_regex then
-      ball_id = ball_regex.match(id)[1].to_i
+    if @id =~ ball_regex then
+      ball_id = ball_regex.match(@id)[1].to_i
     end
 
     if ball_id == 0
@@ -26,33 +33,151 @@ class GamingController < ApplicationController
       @ball = current_lottery.balls[ball_id - 1]
     end
 
-    gon.ball_url = gaming_path(id, format: :json)
+    gon.ball_url = gaming_path(@id, format: :json)
 
     if ball_id > 8 and not request.xhr?
       render "ball9"
     end
+  end
 
+  def update
+    @id = params[:id]
+    bet_params = params[@id]
+
+    ball_id = 0
+    ball_regex = /^ball(\d\d?)$/
+    if @id =~ ball_regex then
+      ball_id = ball_regex.match(@id)[1].to_i
+    end
+
+    if not ball_id.between?(1, 11) or bet_params.nil? then
+      redirect_to :action => "show", :id => "ball9", :alert => "无效投注"
+    elsif ball_id.between?(1, 8) #1至8球
+      handle_ball_bet(ball_id, bet_params)
+    elsif ball_id == 9 #两面盘
+      handle_sum_bet(ball_id, bet_params)
+    elsif ball_id == 10 #总和、龙虎
+      handle_dl_bet(ball_id, bet_params)
+    end
+
+    redirect_to :action => "show", :id => @id
 
   end
 
 
   private
+
+  def handle_ball_bet(ball_id, bet_params)
+    today_stat = UserDailyStat.get_current_stat(@current_user)
+
+    bet_items = []
+    (1..20).each do |ball_index|
+      bet_credit = bet_params["ball_#{ball_index}"].to_i
+      if bet_credit > 0
+        bet_item = BetItem.new
+        bet_item.user = @current_user
+        bet_item.user_daily_stat = today_stat
+        bet_item.lottery_inst = current_lottery
+        bet_item.bet_rule_name = get_bet_rule_name(ball_id, ball_index)
+        bet_item.bet_rule_eval = "ball_#{ball_id}.ball_value == #{ball_index}"
+        bet_item.credit = bet_credit
+        bet_item.return = @odds_level.return
+        bet_item.total_return = (bet_item.credit * bet_item.return).to_i
+        bet_item.odds = @odds_level.rule_by_name("exact").odds
+        bet_item.possible_win_credit = (bet_item.credit * bet_item.odds).to_i
+        #bet_item.save!
+        bet_items << bet_item
+      end
+    end
+
+    HALF_BET_ITEMS.each do |item, item_name|
+      bet_credit = bet_params[item].to_i
+      if bet_credit > 0
+        bet_item = BetItem.new
+        bet_item.user = @current_user
+        bet_item.user_daily_stat = today_stat
+        bet_item.lottery_inst = current_lottery
+        bet_item.bet_rule_name = BALL_NAMES[ball_id] + " 出 " + item_name
+        bet_item.bet_rule_eval = "ball_#{ball_id}.#{item}"
+        bet_item.credit = bet_credit
+        bet_item.return = @odds_level.return
+        bet_item.total_return = (bet_item.credit * bet_item.return).to_i
+        bet_item.odds = @odds_level.rule_by_name("half").odds
+        bet_item.possible_win_credit = (bet_item.credit * bet_item.odds).to_i
+        #bet_item.save!
+        bet_items << bet_item
+      end
+    end
+
+    QUARTER_BET_ITEMS.each do |item, item_name|
+      bet_credit = bet_params[item].to_i
+      if bet_credit > 0
+        bet_item = BetItem.new
+        bet_item.user = @current_user
+        bet_item.user_daily_stat = today_stat
+        bet_item.lottery_inst = current_lottery
+        bet_item.bet_rule_name = BALL_NAMES[ball_id] + " 出 " + item_name
+        bet_item.bet_rule_eval = "ball_#{ball_id}.#{item}"
+        bet_item.credit = bet_credit
+        bet_item.return = @odds_level.return
+        bet_item.total_return = (bet_item.credit * bet_item.return).to_i
+        bet_item.odds = @odds_level.rule_by_name("quarter").odds
+        bet_item.possible_win_credit = (bet_item.credit * bet_item.odds).to_i
+        #bet_item.save!
+        bet_items << bet_item
+      end
+    end
+
+    THIRD_BET_ITEMS.each do |item, item_name|
+      bet_credit = bet_params[item].to_i
+      if bet_credit > 0
+        bet_item = BetItem.new
+        bet_item.user = @current_user
+        bet_item.user_daily_stat = today_stat
+        bet_item.lottery_inst = current_lottery
+        bet_item.bet_rule_name = BALL_NAMES[ball_id] + " 出 " + item_name
+        bet_item.bet_rule_eval = "ball_#{ball_id}.#{item}"
+        bet_item.credit = bet_credit
+        bet_item.return = @odds_level.return
+        bet_item.total_return = (bet_item.credit * bet_item.return).to_i
+        bet_item.odds = @odds_level.rule_by_name("third").odds
+        bet_item.possible_win_credit = (bet_item.credit * bet_item.odds).to_i
+        #bet_item.save!
+        bet_items << bet_item
+      end
+    end
+
+    bet_items.each {|item| item.save!}
+
+    total_bet_credit = bet_items.inject(0) { |sum, item| sum + item.credit }
+    @current_user.available_credit = @current_user.available_credit - total_bet_credit
+    @current_user.save!
+
+  end
+
+  def handle_sum_bet(ball_id, bet_params)
+
+  end
+
+  def handle_dl_bet(ball_id, bet_params)
+
+  end
+
+  def get_bet_rule_name(ball_id, ball_no)
+    BALL_NAMES[ball_id] + " 出 " + ball_no.to_s
+  end
+
+
+
+
+
   def init
-    @lottery = LotteryInst.where({:active => true}).first
+    gon.total_credit = current_user.total_credit
+    gon.available_credit = current_user.available_credit
+    @lottery = current_lottery
+    @previous_lottery = previous_lottery
 
-    @odds_rules = {}
-    @odds_rules[:LEVEL_A] = { :exact => 19.6, :half => 1.984, :quarter => 3.92,
-                              :third => 2.79, :c2 => 20, :p2 => 20, :c3 => 30,
-                              :p3 => 30, :c4 => 60, :p4 => 60, :c5 => 200, :p5 => 200, :return => 0.005}
-    @odds_rules[:LEVEL_B] = { :exact => 19.3, :half => 1.93, :quarter => 3.82,
-                              :third => 2.59, :c2 => 18, :p2 => 18, :c3 => 28,
-                              :p3 => 28, :c4 => 58, :p4 => 58, :c5 => 198, :p5 => 198, :return => 0.008}
-    @odds_rules[:LEVEL_C] = { :exact => 19, :half => 1.9, :quarter => 3.72,
-                              :third => 2.39, :c2 => 16, :p2 => 16, :c3 => 26,
-                              :p3 => 26, :c4 => 56, :p4 => 56, :c5 => 190, :p5 => 190, :return => 0.010}
-
-
-    @odds_level = current_lottery.get_odds_level(current_user.odds_level.level_id)
+    @odds_level = @lottery.get_odds_level(current_user.odds_level.level_id)
 
 
     @sum_bet_odd_even_rules = []
@@ -95,27 +220,16 @@ class GamingController < ApplicationController
     end
 
     @ball_rules = []
-    @ball_rules << Rule.new({:rule_name => "ball_big", :rule_title => "大", :odds => "1.984"})
-    @ball_rules << Rule.new({:rule_name => "ball_small", :rule_title => "小", :odds => "1.984"})
-    @ball_rules << Rule.new({:rule_name => "ball_odd", :rule_title => "單", :odds => "1.984"})
-    @ball_rules << Rule.new({:rule_name => "ball_even", :rule_title => "雙", :odds => "1.984"})
-    @ball_rules << Rule.new({:rule_name => "ball_trail_big", :rule_title => "尾大", :odds => "1.984"})
-    @ball_rules << Rule.new({:rule_name => "ball_trail_small", :rule_title => "尾小", :odds => "1.984"})
-    @ball_rules << Rule.new({:rule_name => "ball_add_odd", :rule_title => "合數單", :odds => "1.984"})
-    @ball_rules << Rule.new({:rule_name => "ball_add_even", :rule_title => "合數雙", :odds => "1.984"})
+    @ball_rules << Rule.new({:rule_name => "ball_big", :rule_title => "大"})
+    @ball_rules << Rule.new({:rule_name => "ball_small", :rule_title => "小"})
+    @ball_rules << Rule.new({:rule_name => "ball_odd", :rule_title => "單"})
+    @ball_rules << Rule.new({:rule_name => "ball_even", :rule_title => "雙"})
+    @ball_rules << Rule.new({:rule_name => "ball_trail_big", :rule_title => "尾大"})
+    @ball_rules << Rule.new({:rule_name => "ball_trail_small", :rule_title => "尾小"})
+    @ball_rules << Rule.new({:rule_name => "ball_add_odd", :rule_title => "合數單"})
+    @ball_rules << Rule.new({:rule_name => "ball_add_even", :rule_title => "合數雙"})
     @single_ball_rule = Rule.new({:rule_name => "bet", :rule_title => "", :odds => "1.96"})
 
-    @game = Game.new(:game_name => "十分精彩", :game_no => "20120426012", :active => true)
-    @game.balls.build({:ball_name => "第一球", :ball_no => 1, :odds => 19.4, :rules => @ball_rules})
-    @game.balls.build({:ball_name => "第二球", :ball_no => 2, :odds => 19.4, :rules => @ball_rules})
-    @game.balls.build({:ball_name => "第三球", :ball_no => 3, :odds => 19.4, :rules => @ball_rules})
-    @game.balls.build({:ball_name => "第四球", :ball_no => 4, :odds => 19.4, :rules => @ball_rules})
-    @game.balls.build({:ball_name => "第五球", :ball_no => 5, :odds => 19.4, :rules => @ball_rules})
-    @game.balls.build({:ball_name => "第六球", :ball_no => 6, :odds => 19.4, :rules => @ball_rules})
-    @game.balls.build({:ball_name => "第七球", :ball_no => 7, :odds => 19.4, :rules => @ball_rules})
-    @game.balls.build({:ball_name => "第八球", :ball_no => 8, :odds => 19.4, :rules => @ball_rules})
-    #@game.balls.build({:ball_name => "第八球", :ball_no => 8, :odds => 19.4})
-    #@game.rules
 
   end
 

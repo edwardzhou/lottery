@@ -28,7 +28,13 @@
         - @sum_balls_2.each do |sum_ball|
           %td
             = render :partial => "sum_ball", :locals => {:ball_title => sum_ball[:ball_name], :ball_no => sum_ball[:ball_no], :ball_rules => sum_ball[:ball_rules]}
-
+  %table(width="100%" )
+    %tbody
+      %tr
+        %td(align="center")
+          %input(type="button" class="reset" value="重填")/
+          \&nbsp;
+          = submit_tag "投注",:disable_with => "投注中..."
 
 - content_for :page_include_scripts do
   = javascript_include_tag "gaming"

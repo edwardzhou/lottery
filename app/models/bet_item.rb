@@ -5,13 +5,14 @@ class BetItem
   field :ball_no, type: Integer
   field :bet_rule_type, type: Symbol
   field :bet_rule_name, type: String
+  field :bet_rule_description, type: String
   field :bet_rule_eval, type: String
   field :credit, type: BigDecimal
   field :odds, type: BigDecimal
   field :possible_win_credit, type: BigDecimal
   field :win_credit, type:BigDecimal
   field :return, type: BigDecimal
-  field :total_return, type:bigDecimal
+  field :total_return, type: BigDecimal
   field :is_win, type: Boolean
   field :close, type: Boolean
 

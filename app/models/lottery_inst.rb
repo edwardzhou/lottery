@@ -17,6 +17,7 @@ class LotteryInst
   field :total_outcome, type: BigDecimal
   field :profit, type: BigDecimal
 
+=begin
   field :ball_1, type: Integer
   field :ball_1_trail, type: Integer #1号球尾数
   field :ball_1_add, type: Integer #1号球合数
@@ -45,7 +46,18 @@ class LotteryInst
   field :ball_9_trail, type: Integer #总和尾数
   field :ball_9_add, type: Integer #总和合数
   field :ball_10, type: Integer #龙虎 (1 龙， 2 虎)
+=end
 
+  embeds_one :ball_1, :class_name => "Ball"
+  embeds_one :ball_2, :class_name => "Ball"
+  embeds_one :ball_3, :class_name => "Ball"
+  embeds_one :ball_4, :class_name => "Ball"
+  embeds_one :ball_5, :class_name => "Ball"
+  embeds_one :ball_6, :class_name => "Ball"
+  embeds_one :ball_7, :class_name => "Ball"
+  embeds_one :ball_8, :class_name => "Ball"
+  embeds_one :ball_9, :class_name => "Ball"
+  embeds_one :ball_10, :class_name => "Ball"
 
   embeds_many :balls
   embeds_many :odds_levels

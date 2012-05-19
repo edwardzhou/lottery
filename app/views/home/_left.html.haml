@@ -19,7 +19,7 @@
               %td.t_td_text
                 #total_credit
                   //= number_to_currency(current_user.total_credit, :format => "%n", :precision => 0 )
-                  = number_with_delimiter(current_user.available_credit)
+                  = number_with_delimiter(current_user.total_credit)
             %tr
               %td.t_td_caption_1
                 可用金額
