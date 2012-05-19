@@ -19,3 +19,18 @@
               %td#BaLL_No6.No_06{:width => "25"} &nbsp;
               %td#BaLL_No7.No_13{:width => "25"} &nbsp;
               %td#BaLL_No8.No_20{:width => "25"} &nbsp;
+%table{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "700"}
+  %tbody
+    %tr
+      %td{:height => "24", :width => "28%"}
+        %b#t_LID.Font_G= current_lottery.lottery_full_id
+        期　
+        %b.font_b= @ball.ball_name
+      %td{:align => "right", :width => "25%"}
+        距離封盤：
+        %span#hClockTime_C 04:56
+      %td{:align => "right", :width => "25%"}
+        距離開獎：
+        %span#hClockTime_O.Font_R 06:26
+      %td{:align => "right", :width => "22%"}
+        %span#Update_Time 1&nbsp;秒

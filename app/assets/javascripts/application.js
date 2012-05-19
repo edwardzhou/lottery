@@ -14,4 +14,3 @@
 //= require jquery_ujs
 //= require_directory .
 //= require_directory ./i18n
-//= require rails.validations

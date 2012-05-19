@@ -36,9 +36,15 @@ end
 
 gem 'jquery-rails'
 
-gem 'client_side_validations'
+#gem 'client_side_validations'
 
 gem 'formtastic'
+gem "mongo_session_store-rails3"
+
+gem 'daemons'
+gem 'delayed_job_mongoid'
+
+
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

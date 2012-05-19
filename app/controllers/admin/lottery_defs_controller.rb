@@ -11,12 +11,15 @@ class Admin::LotteryDefsController < Admin::AdminBaseController
   def update
     @lottery_def = LotteryDef.find(params[:id])
 
+    @lottery_def.return_rate = params[:lottery_def][:return_rate].to_i
+
     @lottery_def.odds_levels.each do |odds_level|
       odds_level.return = params["odds_level_#{odds_level.id}".to_sym][:return]
       odds_level.rules.each do |rule|
         rule.odds = params["rule_#{rule.id}".to_sym][:odds]
         rule.active = params["rule_#{rule.id}".to_sym][:active]
       end
+      #odds_level.save!
     end
 
     @lottery_def.save!

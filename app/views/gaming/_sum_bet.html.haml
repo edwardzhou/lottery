@@ -5,6 +5,9 @@
         %td#jeu_n_16_283.cell_border.Jut_caption_1{:width => "54", :nowrap => true }
           = label_tag  rule.rule_name, rule.rule_title
         %td#jeu_p_16_283.cell_border{:width => "50"}
-          = label_tag  rule.rule_name, rule.odds , class: "multiple_Red", title: "按此下註"
+          = label_tag rule.rule_name, "-", :class => "multiple_Red odds_label", :title => "按此下註", :"data-odds-rule" => "half"
+          //= label_tag  rule.rule_name, rule.odds , class: "multiple_Red", title: "按此下註"
         %td#jeu_m_16_283.cell_border{:width => "62"}
-          = text_field_tag rule.rule_name, nil, :maxlength => "9", :size => 6, :class => "inp1"
+          = text_field_tag rule.rule_name, nil, :class => "bet_input hidden", :maxlength => 6, :size => 6
+          %span.bet_lock 封盤
+          //= text_field_tag rule.rule_name, nil, :maxlength => "9", :size => 6, :class => "inp1"

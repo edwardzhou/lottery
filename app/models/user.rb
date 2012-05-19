@@ -14,8 +14,12 @@ class User
   field :locked_at, type: DateTime
   field :total_credit, type: BigDecimal
   field :available_credit, type: BigDecimal
-  field :odds_level_name, type: String
-  field :user_role, type: String
+  #field :odds_level_name, type: String
+  field :user_role, type: String, default: "user"
+
+  belongs_to :odds_level
+  belongs_to :up_line, :class_name => "User"
+
 
   include Mongoid::Timestamps
 

@@ -18,6 +18,9 @@ zh-CN:
     updated_at: 上次更新时间
     confirmed_at: 激活时间
     description: 描述
+    total_credit: 信用额度
+    available_credit: 可用额度
+    phone: 电话
 
     campaign: 班次
     course: 课程

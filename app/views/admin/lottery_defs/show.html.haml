@@ -4,8 +4,6 @@
   %p
     %b 彩票名称:
     = @lottery_def.lottery_name
-    %br/
-    %br/
 
   %p
     %b 描述:
@@ -17,17 +15,16 @@
   %p
     %b 开始时间:
     = @lottery_def.start_time.strftime("%H:%M:%S")
-    %br/
-    %br/
 
   %p
     %b 结束时间:
     = @lottery_def.end_time.strftime("%H:%M:%S")
-    %br/
-    %br/
 
-  = form_for @lottery_def, :url => admin_lottery_def_path(@lottery_def) do
-    %h1 赔率
+  = form_for @lottery_def, :url => admin_lottery_def_path(@lottery_def) do |f|
+    %p
+      %b 总盘赔付比例:
+      = f.text_field :return_rate, :size => 6, :maxlength => 4
+      \%
     %table(border="1px solid #000000" )
       %tbody
         %tr

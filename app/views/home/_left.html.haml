@@ -10,17 +10,23 @@
               %td.t_td_caption_1{:width => "96"}
                 會員帳戶
               %td.t_td_text{:width => "137"}
-                b666（A盤）
+                #user_account
+                  = username_with_level(current_user)
+
             %tr
               %td.t_td_caption_1
                 信用額度
               %td.t_td_text
-                1,000
+                #total_credit
+                  //= number_to_currency(current_user.total_credit, :format => "%n", :precision => 0 )
+                  = number_with_delimiter(current_user.available_credit)
             %tr
               %td.t_td_caption_1
                 可用金額
               %td.t_td_text
-                1,000
+                #available_credit
+                  //= number_to_currency(current_user.available_credit, :format => "%n", :precision => 0 )
+                  = number_with_delimiter(current_user.available_credit)
         %br
 
         %table.t_list{:border => "0", :cellpadding => "0", :cellspacing => "1", :width => "210"}

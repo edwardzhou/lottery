@@ -1,0 +1,36 @@
+= render :partial => "header"
+
+= form_tag gaming_path("ball9") do |f|
+  %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "700"}
+    %tbody
+      %tr
+        %td.cell_border.td_caption_1.F_bold{:colspan => "4"} 總和、龍虎
+      %tr
+        %td.cell_border
+          = render :partial => "sum_bet", :locals => {:rules => @sum_bet_big_small_rules }
+        %td.cell_border
+          = render :partial => "sum_bet", :locals => {:rules => @sum_bet_odd_even_rules }
+        %td.cell_border
+          = render :partial => "sum_bet", :locals => {:rules => @sum_bet_trail_big_small_rules }
+        %td.cell_border
+          = render :partial => "sum_bet", :locals => {:rules => @sum_bet_dt_rules }
+
+  %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "700"}
+    %tbody
+      %tr
+        - @sum_balls_1.each do |sum_ball|
+          %td
+            = render :partial => "sum_ball", :locals => {:ball_title => sum_ball[:ball_name], :ball_no => sum_ball[:ball_no], :ball_rules => sum_ball[:ball_rules]}
+
+  %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "700"}
+    %tbody
+      %tr
+        - @sum_balls_2.each do |sum_ball|
+          %td
+            = render :partial => "sum_ball", :locals => {:ball_title => sum_ball[:ball_name], :ball_no => sum_ball[:ball_no], :ball_rules => sum_ball[:ball_rules]}
+
+
+- content_for :page_include_scripts do
+  = javascript_include_tag "gaming"
+
+= content_tag(:div , nil, :id => "info", "data-url" => gaming_path('ball7', :format => :json))

@@ -6,12 +6,12 @@ class LotteryDef
   field :end_time, type: Time
   field :period, type: Integer
   field :active, type: Boolean
-  field :total_bonus, type: Integer
+  field :return_rate, type: Integer
   field :description, type: String
   include Mongoid::Timestamps
 
   embeds_many :balls
-  embeds_many :rules
-  embeds_many :odds_levels
+  has_many :odds_levels, :autosave => true
+  has_one :lottery_config
 
 end
