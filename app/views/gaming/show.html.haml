@@ -5,7 +5,7 @@
 
 = render :partial => "header"
 
-= form_for @current_user, :url => gaming_path(@id)  do |f|
+= form_tag nil, :method => :put  do |f|
   %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "700"}
     %tbody
       %tr

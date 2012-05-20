@@ -6,10 +6,11 @@ class GamingController < ApplicationController
 
   before_filter :init
 
-  BALL_NAMES = %w(none 第一球 第二球 第三球 第四球 第五球 第六球 第七球 第八球)
+  BALL_NAMES = %w(none 第一球 第二球 第三球 第四球 第五球 第六球 第七球 第八球 兩面盤 總和、龍虎 連碼)
   HALF_BET_ITEMS = {:big => "大", :small => "小", :even => "雙",
                     :odd => "單", :trail_big => "尾大", :trail_small => "尾小",
-                    :sum_even => "合數雙", :sum_odd => "合數單"}
+                    :add_even => "合數雙", :add_odd => "合數單", :dragon => "龍",
+                    :tiger => "虎"}
   QUARTER_BET_ITEMS = {:east => "東", :south => "南", :west => "西", :north => "北"}
   THIRD_BET_ITEMS = {:middle => "中", :fa => "發", :white => "白"}
 
@@ -126,6 +127,52 @@ class GamingController < ApplicationController
 
   end
 
+  def handle_sum_bet(ball_id, bet_params)
+    today_stat = UserDailyStat.get_current_stat(@current_user)
+    bet_items = []
+
+    sum_params = bet_params[:sum]
+
+    HALF_BET_ITEMS.each do |item, item_name|
+      bet_credit = sum_params[item].to_i
+      if bet_credit > 0
+        rule_name = BALL_NAMES[ball_id] + " 開 總和" + item_name
+        rule_eval = "ball_#{ball_id}.#{item}"
+        bet_item = new_bar_item(ball_id, bet_credit, today_stat, "half", rule_name, rule_eval)
+        #bet_item.save!
+        bet_items << bet_item
+      end
+    end
+
+    (1..8).each do |ball_index|
+      ball_params = bet_params["ball_#{ball_index}"]
+      HALF_BET_ITEMS.each do |item, item_name|
+        bet_credit = ball_params[item].to_i
+        if bet_credit > 0
+          rule_name = BALL_NAMES[ball_id] + " - " + BALL_NAMES[ball_index] + " 開 " + item_name
+          rule_eval = "ball_#{ball_index}.#{item}"
+          bet_item = new_bar_item(ball_index, bet_credit, today_stat, "half", rule_name, rule_eval)
+          #bet_item.save!
+          bet_items << bet_item
+        end
+      end
+    end
+
+    bet_items.each {|item| item.save!}
+
+    total_bet_credit = bet_items.inject(0) { |sum, item| sum + item.credit }
+    @current_user.available_credit = @current_user.available_credit - total_bet_credit
+    @current_user.save!
+
+    current_lottery.total_income = current_lottery.total_income + total_bet_credit
+    current_lottery.save!
+  end
+
+  def handle_dl_bet(ball_id, bet_params)
+
+  end
+
+
   def new_bar_item(ball_id, bet_credit, today_stat, odds_rule, rule_name, rule_eval)
     bet_item = BetItem.new
     bet_item.ball_no = ball_id
@@ -143,20 +190,6 @@ class GamingController < ApplicationController
     bet_item.possible_win_credit = (bet_item.credit * bet_item.odds)
     bet_item
   end
-
-  def handle_sum_bet(ball_id, bet_params)
-
-  end
-
-  def handle_dl_bet(ball_id, bet_params)
-
-  end
-
-  def get_bet_rule_name(ball_id, ball_no)
-    BALL_NAMES[ball_id] + " 出 " + ball_no.to_s
-  end
-
-
 
 
 

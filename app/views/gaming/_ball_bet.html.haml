@@ -70,7 +70,7 @@
             %tr.Ball_tr_H
               %td.cell_border.Jut_caption_1{:width => "54"} 尾大
               %td.cell_border{:width => "59"}
-                = label_tag "#{@id}[big]", "-", :class => "multiple_Red odds_label", :title => "按此下註", :"data-odds-rule" => "half"
+                = label_tag "#{@id}[trail_big]", "-", :class => "multiple_Red odds_label", :title => "按此下註", :"data-odds-rule" => "half"
               %td.cell_border{:width => "62"}
                 = text_field_tag "#{@id}[trail_big]", nil, :class => "bet_input hidden", :maxlength => 6, :size => 6
                 %span.bet_lock 封盤
@@ -79,7 +79,7 @@
               %td.cell_border{:width => "59"}
                 = label_tag "#{@id}[trail_small]", "-", :class => "multiple_Red odds_label", :title => "按此下註", :"data-odds-rule" => "half"
               %td.cell_border{:width => "62"}
-                = text_field_tag "#{@id}[small]", nil, :class => "bet_input hidden", :maxlength => 6, :size => 6
+                = text_field_tag "#{@id}[trail_small]", nil, :class => "bet_input hidden", :maxlength => 6, :size => 6
                 %span.bet_lock 封盤
             %tr.Ball_tr_H
               %td.cell_border.Jut_caption_1 西
