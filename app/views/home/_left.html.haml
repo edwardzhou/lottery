@@ -27,7 +27,16 @@
                 #available_credit
                   //= number_to_currency(current_user.available_credit, :format => "%n", :precision => 0 )
                   = number_with_delimiter(current_user.available_credit)
-        %br
+        %br/
+
+        - if current_user.is_admin?
+          %table.t_list{:border => "0", :cellpadding => "0", :cellspacing => "1", :width => "210"}
+            %tbody
+              %tr
+                %td
+                  = link_to "進入後台管理", admin_users_path
+
+        %br/
 
         %table.t_list{:border => "0", :cellpadding => "0", :cellspacing => "1", :width => "210"}
           %tbody

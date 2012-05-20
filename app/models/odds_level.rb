@@ -23,5 +23,8 @@ class OddsLevel
     @rule_hash[rule_name.to_sym]
   end
 
+  def to_s
+    level_name
+  end
 
 end

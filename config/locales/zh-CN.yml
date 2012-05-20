@@ -2,3 +2,8 @@ zh-CN:
   label:
     application:
       title: "快乐10分钟"
+
+
+    user_role:
+      admin: "管理员"
+      user: "一般用户"

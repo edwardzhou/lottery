@@ -1,5 +1,7 @@
 class Admin::UsersController < Admin::AdminBaseController
 
+  before_filter :init
+
   def index
     filter = params[:filter]
     filter = Regexp.new(filter, true) if filter
@@ -54,6 +56,11 @@ class Admin::UsersController < Admin::AdminBaseController
     @user = User.find(params[:id])
     @user.unlock_account!
     redirect_to :action => "index"
+  end
+
+  private
+  def init
+    @odds_levels = OddsLevel.all
   end
 
 end

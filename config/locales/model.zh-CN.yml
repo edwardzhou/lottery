@@ -21,6 +21,7 @@ zh-CN:
     total_credit: 信用额度
     available_credit: 可用额度
     phone: 电话
+    odds_level: 盘级
 
     campaign: 班次
     course: 课程
@@ -30,6 +31,10 @@ zh-CN:
     location: 上课地点
     feedback: 反馈
 
+  mongoid:
+    models:
+      user: 用户
+      odds_level: 盘级
 
   activerecord:
     models:

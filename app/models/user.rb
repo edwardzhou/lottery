@@ -1,7 +1,10 @@
 class User
 
+
   include Mongoid::Document
   include ActiveModel::SecurePassword
+
+  before_save :update_level_name
 
   field :username, type: String
   field :password_digest, type: String
@@ -14,7 +17,7 @@ class User
   field :locked_at, type: DateTime
   field :total_credit, type: BigDecimal
   field :available_credit, type: BigDecimal
-  #field :odds_level_name, type: String
+  field :odds_level_name, type: String
   field :user_role, type: String, default: "user"
 
   belongs_to :odds_level
@@ -28,7 +31,7 @@ class User
 
   attr_accessible :username, :password, :password_confirmation,
                   :true_name, :phone, :checkcode, :total_credit,
-                  :available_credit, :odds_level
+                  :available_credit, :odds_level, :odds_level_id
 
   attr_accessor :checkcode
 
@@ -43,6 +46,9 @@ class User
   validates :phone, :presence => true
   validates :total_credit, :numericality => true
   validates :available_credit, :numericality => true
+
+  validates :odds_level, :presence => true
+
 
   scope :active_users, excludes(locked: true)
   scope :locked_users, where(locked: true)
@@ -71,6 +77,15 @@ class User
       save!
     end
     self
+  end
+
+  def is_admin?
+    "admin".eql?(self.user_role)
+  end
+
+  private
+  def update_level_name
+    self.odds_level_name = self.odds_level.level_name unless self.odds_level.nil?
   end
 
 

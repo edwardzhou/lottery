@@ -11,6 +11,8 @@ jQuery ->
       {name: 'username', index: 'username', label: "用户名", width: 100}
       {name: 'true_name', index: 'true_name', label: "姓名", width: 100}
       {name: 'phone', index: 'true_name', label: "电话", width: 100}
+      {name: 'user_role', index: 'user_role', label: "身份", width: 60}
+      {name: 'odds_level_name', index: 'odds_level_name', label: "盘级", width: 40}
       {name: 'total_credit', index: 'total_credit', label: "信用额度", width: 100}
       {name: 'available_credit', index: 'available_credit', label: "可用额度", width: 100}
       {name: 'locked', index: 'locked', label: "状态", width: 100}

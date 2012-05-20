@@ -7,7 +7,9 @@ Lottery::Application.routes.draw do
   get "rule_info", :to => "home#rule_info"
   get "logout", :to => "sessions#logout"
 
-  resources :home
+  resources :home do
+    get "bet_list", :on => :collection
+  end
 
   get "ten_minute/index"
 
@@ -16,6 +18,7 @@ Lottery::Application.routes.draw do
   resources :gaming
 
   namespace :admin do
+    root :to => "users#index"
     resources :users do
       member do
         match 'lock' => :lock, :via => [:get, :post]

@@ -1,6 +1,10 @@
 object :user
 attributes :_id, :username, :true_name, :phone, :total_credit, :available_credit, :odds_level_name, :user_role, :locked_at
 
+node(:user_role) do |user|
+  t("label.user_role.#{user.user_role || 'user'}")
+end
+
 node(:locked) do |user|
   user.locked? ? "锁定" : "正常"
 end

@@ -209,3 +209,13 @@ zh-CN:
       create: "新增%{model}"
       update: "更新%{model}"
       submit: "储存%{model}"
+
+  formtastic:
+    :yes: '是'
+    :no: '否'
+    :create: '新建 %{model}'
+    :update: '修改 %{model}'
+    :submit: '提交 %{model}'
+    :cancel: '取消 %{model}'
+    :reset: '重新填写 %{model}'
+    :required: '必需的'
