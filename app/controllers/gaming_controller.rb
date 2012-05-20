@@ -149,7 +149,7 @@ class GamingController < ApplicationController
       HALF_BET_ITEMS.each do |item, item_name|
         bet_credit = ball_params[item].to_i
         if bet_credit > 0
-          rule_name = BALL_NAMES[ball_id] + " - " + BALL_NAMES[ball_index] + " 開 " + item_name
+          rule_name = BALL_NAMES[ball_index] + " 開 " + item_name
           rule_eval = "ball_#{ball_index}.#{item}"
           bet_item = new_bar_item(ball_index, bet_credit, today_stat, "half", rule_name, rule_eval)
           #bet_item.save!
