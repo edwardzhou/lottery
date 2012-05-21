@@ -1,0 +1,15 @@
+%h1 用户管理
+
+= link_to "新开户", new_agent_user_path
+%table(id="user_list")
+  %tr
+    %td
+
+#pager
+
+
+
+
+- content_for :page_include_scripts do
+  = javascript_include_tag "agent/users"
+

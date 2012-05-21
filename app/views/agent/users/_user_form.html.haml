@@ -1,0 +1,17 @@
+#user_form(style="width:450px; padding: 20px;")
+  %p
+    %b 用户名与密码将由系统自动分配
+  %br/
+  #inner(style="width: 300px" )
+    = semantic_form_for [:admin, user] do |f|
+      = f.inputs :odds_level, :as => :select
+      = f.inputs :return
+      = f.inputs :true_name
+      = f.inputs :phone
+      = f.inputs :total_credit
+      %br/
+      = f.actions
+
+  %br/
+  %br/
+  #odds_level_detail

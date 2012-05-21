@@ -18,10 +18,12 @@ class User
   field :total_credit, type: BigDecimal
   field :available_credit, type: BigDecimal
   field :odds_level_name, type: String
+  field :return, type: BigDecimal
   field :user_role, type: String, default: "user"
 
   belongs_to :odds_level
-  belongs_to :up_line, :class_name => "User"
+  belongs_to :agent, :class_name => "User"
+  belongs_to :top_user, :class_name => "User"
 
 
   include Mongoid::Timestamps
@@ -81,6 +83,10 @@ class User
 
   def is_admin?
     "admin".eql?(self.user_role)
+  end
+
+  def is_agent?
+    "agent".eql?(self.user_role)
   end
 
   private

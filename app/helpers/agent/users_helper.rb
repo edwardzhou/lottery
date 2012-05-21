@@ -1,0 +1,2 @@
+module Agent::UsersHelper
+end

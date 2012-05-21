@@ -31,6 +31,11 @@ Lottery::Application.routes.draw do
     end
   end
 
+  namespace :agent do
+    root :to => "users#index"
+    resources :users
+  end
+
   root :to => "sessions#new"
 
   # The priority is based upon order of creation:
