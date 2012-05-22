@@ -37,6 +37,8 @@ class User
 
   attr_accessor :checkcode
 
+  attr_reader :odds_level_return
+
   validates :username,
               :uniqueness => true,
               :presence => true,
@@ -87,6 +89,10 @@ class User
 
   def is_agent?
     "agent".eql?(self.user_role)
+  end
+
+  def odds_level_return
+    odds_level.try(:return)
   end
 
   private

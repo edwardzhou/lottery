@@ -2,15 +2,16 @@
   %p
     %b 用户名与密码将由系统自动分配
   %br/
-  #inner(style="width: 300px" )
-    = semantic_form_for [:admin, user] do |f|
-      = f.inputs :odds_level, :as => :select
-      = f.inputs :return
-      = f.inputs :true_name
-      = f.inputs :phone
-      = f.inputs :total_credit
-      %br/
-      = f.actions
+  = semantic_form_for [:agent, user], :html => {:id => "new_user_form"} do |f|
+    = f.input :odds_level, :as => :select, :input_html => {:class => "odds_level required"}
+    = f.semantic_fields_for current_user.odds_level do |me|
+      = me.input :return, :label => "本人退水", :wrapper_html => { :class => "notice-input" }, :input_html => { :style => "background-color: #cccccc", :readonly => true, :size => 6, :maxlength => 6}
+    = f.input :return, :input_html => {:size => 6, :maxlength => 6, :class => "required ", :min => 0,  :max => current_user.odds_level.return }
+    = f.input :true_name, :input_html => {:class => "required", :size => 20, :maxlength => 20}
+    = f.input :phone, :input_html => {:class => "required", :size => 20, :maxlength => 20}
+    = f.input :total_credit, :input_html => {:class => "required digits", :size => 6, :maxlength => 6, :min => 0, :max => current_user.available_credit }
+    %br/
+    = f.actions
 
   %br/
   %br/

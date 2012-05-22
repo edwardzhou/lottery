@@ -33,7 +33,9 @@ Lottery::Application.routes.draw do
 
   namespace :agent do
     root :to => "users#index"
-    resources :users
+    resources :users do
+      get :odds_level_info, :on => :collection
+    end
   end
 
   root :to => "sessions#new"
