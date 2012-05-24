@@ -7,7 +7,7 @@ class Agent::UsersController < Agent::AgentBaseController
   end
 
   def new
-    gon.ol_page_url = odds_level_info_agent_users_path
+    gon.ol_page_url = agent_odds_levels_path
     @user = User.new
     @user.agent = current_user
 

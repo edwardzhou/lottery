@@ -1,0 +1,2 @@
+$("#odds_level_detail").html("<%= escape_javascript( render(:partial => "odds_level", :locals => {:odds_level => @odds_level})) %>");
+$(".user_return").attr("max", <%= @odds_level.return %>);

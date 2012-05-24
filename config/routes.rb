@@ -36,6 +36,7 @@ Lottery::Application.routes.draw do
     resources :users do
       get :odds_level_info, :on => :collection
     end
+    resources :odds_levels
   end
 
   root :to => "sessions#new"

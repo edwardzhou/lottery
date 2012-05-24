@@ -91,6 +91,10 @@ class User
     "agent".eql?(self.user_role)
   end
 
+  def is_user?
+    "user".eql?(self.user_role)
+  end
+
   def odds_level_return
     odds_level.try(:return)
   end

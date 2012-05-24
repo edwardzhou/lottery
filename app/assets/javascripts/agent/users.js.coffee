@@ -12,6 +12,6 @@ jQuery ->
     select_box = $(event.currentTarget)
     form = $(event.currentTarget.form)
     odds_level_id = select_box.val();
+    the_url = gon.ol_page_url + '/' + odds_level_id
     if odds_level_id.length > 0
-      $.getScript( {url: gon.ol_page_url, data: { id: odds_level_id }
-      } )
+      $.ajax( {url: the_url, data: { id: odds_level_id }, format: "js" })
