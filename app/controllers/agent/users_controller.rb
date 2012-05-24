@@ -17,10 +17,4 @@ class Agent::UsersController < Agent::AgentBaseController
 
   end
 
-  def odds_level_info
-    odds_level_id = params[:id]
-    @odds_level = OddsLevel.find(odds_level_id)
-  end
-
-
 end
