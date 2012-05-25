@@ -4,6 +4,7 @@ class OddsLevel
   field :level_name, type: String
   field :level_description, type: String
   field :return, type: BigDecimal
+  field :level_code, type: String
   #field :lottery_def_id, type: Object
   include Mongoid::Timestamps
 

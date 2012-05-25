@@ -10,18 +10,18 @@ node(:locked) do |user|
 end
 
 node(:show_url) do |user|
-  link_to "详细", admin_user_path(user)
+  link_to "详细", agent_user_path(user)
 end
 
 node(:edit_url) do |user|
-  link_to "修改", edit_admin_user_path(user)
+  link_to "修改", edit_agent_user_path(user)
 end
 
 node(:lock_account_url) do |user|
   if user.locked?
-    link_to "解锁", unlock_admin_user_path(user)
+    link_to "解锁", unlock_agent_user_path(user)
   else
-    link_to "锁定", lock_admin_user_path(user)
+    link_to "锁定", lock_agent_user_path(user)
   end
 end
 

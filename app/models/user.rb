@@ -1,5 +1,8 @@
 class User
 
+  USER = "user"
+  ADMIN = "admin"
+  AGENT = "agent"
 
   include Mongoid::Document
   include ActiveModel::SecurePassword
@@ -24,6 +27,8 @@ class User
   belongs_to :odds_level
   belongs_to :agent, :class_name => "User"
   belongs_to :top_user, :class_name => "User"
+
+  has_many :users, :class_name => "User", :foreign_key => "agent_id"
 
 
   include Mongoid::Timestamps
@@ -84,15 +89,15 @@ class User
   end
 
   def is_admin?
-    "admin".eql?(self.user_role)
+    ADMIN.eql?(self.user_role)
   end
 
   def is_agent?
-    "agent".eql?(self.user_role)
+    AGENT.eql?(self.user_role)
   end
 
   def is_user?
-    "user".eql?(self.user_role)
+    USER.eql?(self.user_role)
   end
 
   def odds_level_return

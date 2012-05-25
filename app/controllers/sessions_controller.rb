@@ -16,7 +16,14 @@ class SessionsController < ApplicationController
       redirect_to({:action => "new"}, :alert => "用户名或密码错误!")
     else
       session[:user_id] = @sign_user.id
-      redirect_to gaming_path("ball1")
+      if @sign_user.is_admin?
+        redirect_to admin_users_path
+      elsif @sign_user.is_agent?
+        redirect_to agent_users_path
+      else
+        redirect_to gaming_path("ball9")
+      end
+      #redirect_to gaming_path("ball1")
     end
   end
 

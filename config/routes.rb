@@ -34,7 +34,10 @@ Lottery::Application.routes.draw do
   namespace :agent do
     root :to => "users#index"
     resources :users do
-      get :odds_level_info, :on => :collection
+      member do
+        match 'lock' => :lock, :via => [:get, :post]
+        match 'unlock' => :unlock, :via => [:get, :post]
+      end
     end
     resources :odds_levels
   end

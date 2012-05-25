@@ -1,0 +1,17 @@
+
+= render "common/show_msg"
+
+%p
+  用户名: #{@user.username}
+
+%p
+  姓名: #{@user.true_name}
+
+%p
+  电话: #{@user.phone}
+
+
+%p
+  = link_to "返回" , agent_users_path
+  |
+  = link_to "修改" , edit_agent_user_path(@user)
