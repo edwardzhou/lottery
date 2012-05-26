@@ -25,11 +25,12 @@
         #left.span-6
           = render "home/left"
         #main.span-20.last
-          #admin_menu
+          #admin_menu.padding-10
             - if current_user.is_admin?
               = render :partial => "admin/common/admin_menu"
             - elsif current_user.is_agent?
               = render :partial => "agent/common/admin_menu"
 
-          = yield
+          #main_content.padding-10
+            = yield
     //= render "common/page_footer"

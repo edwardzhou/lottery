@@ -1,13 +1,20 @@
-#user_form(style="width:450px; padding: 20px;")
-  = semantic_form_for [:admin, user] do |f|
-    = f.inputs :username
-    = f.inputs :true_name
-    = f.inputs :phone
-    = f.inputs :password
-    = f.inputs :password_confirmation
-    = f.inputs :total_credit
-    = f.inputs :available_credit
-    = f.inputs :odds_level, :as => :select, :member_label => :level_name
-    %br/
-    = f.actions
-
+#user_form(style="padding: 20px;")
+  %table
+    %tbody
+      %tr
+        %td(width="350" )
+          %p
+            %b #{t("message.new_agent")}
+          %br/
+          = semantic_form_for [:agent, user], :html => {:id => "new_user_form"} do |f|
+            // = f.input :odds_level, :as => :select, :input_html => {:class => "odds_level required"}
+            // = f.input :return, :input_html => {:size => 6, :maxlength => 6, :class => "required user_return", :min => 0}
+            = f.input :true_name, :input_html => {:class => "required", :size => 20, :maxlength => 20}
+            = f.input :phone, :input_html => {:class => "required", :size => 20, :maxlength => 20}
+            = f.input :total_credit, :input_html => {:class => "required digits", :size => 6, :maxlength => 6, :min => 0 }
+            %br/
+            = f.actions do
+              = f.action :submit
+              = link_to "取消操作", agent_users_path
+        %td
+          #odds_level_detail

@@ -1,17 +1,51 @@
 
 = render "common/show_msg"
 
-%p
-  用户名: #{@user.username}
+%h1 用戶信息
 
-%p
-  姓名: #{@user.true_name}
+%ul.as_inline_block
+  %li
+    .li_header #{User.human_attribute_name(:username)}
+    .li_value #{@user.username}
+  %li
+    .li_header #{User.human_attribute_name(:true_name)}
+    .li_value #{@user.true_name}
+  %li
+    .li_header #{User.human_attribute_name(:phone)}
+    .li_value #{@user.phone}
+  %li
+    .li_header #{User.human_attribute_name(:odds_level_name)}
+    .li_value #{@user.odds_level_name}
+  %li
+    .li_header #{User.human_attribute_name(:odds_level_return)}
+    .li_value #{@user.odds_level_return}
+  %li
+    .li_header #{User.human_attribute_name(:return)}
+    .li_value #{@user.return}
+  %li
+    .li_header #{User.human_attribute_name(:total_credit)}
+    .li_value #{@user.total_credit}
+  %li
+    .li_header #{User.human_attribute_name(:available_credit)}
+    .li_value #{@user.available_credit}
+  %li
+    .li_header #{User.human_attribute_name(:account_status)}
+    .li_value #{t("status.account." + @user.status)}
+  %li
+    .li_header 當前輸贏：
+    .li_value.emphasize  0
 
-%p
-  电话: #{@user.phone}
-
+%br/
 
 %p
   = link_to "返回" , agent_users_path
   |
   = link_to "修改" , edit_agent_user_path(@user)
+
+%h2 结算信息
+
+%table(id="bet_list")
+  %tr
+    %td
+
+#pager

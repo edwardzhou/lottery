@@ -100,6 +100,10 @@ class User
     USER.eql?(self.user_role)
   end
 
+  def status
+    self.locked? ? "locked" : "normal"
+  end
+
   def odds_level_return
     odds_level.try(:return)
   end

@@ -314,19 +314,33 @@ A {
 .No_20 {
   BACKGROUND-POSITION: 0px -513px; }
 
-.cell_border {
-  border: 1px solid #117eaa;
-  text-align: center;
-}
-
-.cell_border_left {
-  border: 1px solid #117eaa;
-  text-align: left;
-}
 .visible {
   display: block;
 }
 
 .hidden {
   display: none;
+}
+
+.li_header {
+  @extend .td_caption_1;
+  //@extend cell_border_left;
+  width: 80px;
+  float: left;
+  border-right: 1px solid #117EAA;
+  color: DarkGreen;
+}
+
+.li_value {
+  VERTICAL-ALIGN: 10%;
+  text-align: left;
+  width: 120px;
+  float: left;
+  padding-left: 4px;
+  line-height: 22px;
+}
+
+.emphasize {
+  font-weight: bold;
+  color: red;
 }

@@ -62,7 +62,7 @@ class Agent::UsersController < Agent::AgentBaseController
       user.save!
       agent_user.save!
 
-      redirect_to [:agent, user], :notice => "创建用户成功, 初始密码为 666888"
+      redirect_to [:agent, user], :notice => t("message.user_created")
 
     else
       render :action => "new"
@@ -72,6 +72,31 @@ class Agent::UsersController < Agent::AgentBaseController
 
   def show
     @user = User.find(params[:id])
+    gon.page_json_url = bet_list_agent_user_path(@user, :format => "json")
+  end
+
+  def bet_list
+    @user = User.find(params[:id])
+    @bet_items = BetItem.get_bet_items(@user, nil)
+    @total_rows = @bet_items.count
+    rows_per_page = params[:rows] || 20
+    @page = params[:page].to_i
+    @pages = (@total_rows / rows_per_page.to_f).ceil
+
+    @page = @pages if @page > @pages
+
+    if request.xhr?
+      @bet_items = @bet_items.order_by(params[:sidx].to_sym => params[:sord]).paginate(:page => params[:page], :per_page => rows_per_page)
+    end
+    @user_data = {bet_rule_name: "合計", credit: 0.0, possible_win_credit: 0.0, total_return: 0.0 }
+    @bet_items.each do |item|
+      @user_data[:credit] = @user_data[:credit] + item.credit
+      @user_data[:possible_win_credit] = @user_data[:possible_win_credit] + item.possible_win_credit
+      @user_data[:total_return] = @user_data[:total_return] + item.total_return
+    end
+
+    render "home/bet_list"
+
   end
 
 

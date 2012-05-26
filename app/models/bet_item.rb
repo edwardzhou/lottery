@@ -23,7 +23,9 @@ class BetItem
   belongs_to :user_daily_stat
 
   def self.get_bet_items(user, lottery_inst)
-    where(user_id: user.id, lottery_inst_id: lottery_inst.id).order_by(:bet_time => "desc")
+    query = where(user_id: user.id)
+    query = query.and(lottery_inst_id: lottery_inst.id) unless lottery_inst.nil?
+    query.order_by(:bet_time => "desc")
   end
 
 

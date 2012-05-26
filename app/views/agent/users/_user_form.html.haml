@@ -4,11 +4,11 @@
       %tr
         %td(width="350" )
           %p
-            %b 用户名与密码将由系统自动分配
+            %b #{t("message.new_user")}
           %br/
           = semantic_form_for [:agent, user], :html => {:id => "new_user_form"} do |f|
             = f.input :odds_level, :as => :select, :input_html => {:class => "odds_level required"}
-            = f.input :return, :label => "用户退水", :input_html => {:size => 6, :maxlength => 6, :class => "required user_return", :min => 0, :max => 0}
+            = f.input :return, :input_html => {:size => 6, :maxlength => 6, :class => "required user_return", :min => 0, :max => 0}
             = f.input :true_name, :input_html => {:class => "required", :size => 20, :maxlength => 20}
             = f.input :phone, :input_html => {:class => "required", :size => 20, :maxlength => 20}
             = f.input :total_credit, :input_html => {:class => "required digits", :size => 6, :maxlength => 6, :min => 0, :max => current_user.available_credit }

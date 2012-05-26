@@ -1022,10 +1022,68 @@ a.negative:active, button.negative:active {
   padding: 10px;
 }
 
+
+.cell_border {
+  border: 1px solid #117eaa;
+  text-align: center;
+}
+
+.cell_border_left {
+  border: 1px solid #117eaa;
+  text-align: left;
+}
+
+
+
+.as_table {
+  li{
+    display: table;
+    margin-left: -5px;
+  }
+}
+
+.as_col {
+  li{
+    display: table-column;
+  }
+}
+
+.as_cell {
+  li{
+    display: table-cell;
+  }
+}
+
+.as_inline {
+  li{
+    display: inline;
+  }
+}
+
+.as_inline_table {
+  li{
+    display: inline-table;
+    margin-left: -5px;
+  }
+}
+
+.as_inline_block {
+  li{
+    @extend .cell_border_left;
+    display: inline-block;
+    margin-left: -6px;
+    margin-bottom: -6px;
+  }
+}
+
 .notice-input {
   background-color: #9999cc;
 }
 
 .disabled-input {
   background-color: #b33c33;
+}
+
+.title {
+  background: #b33c33;
 }

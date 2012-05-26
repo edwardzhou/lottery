@@ -1,136 +1,37 @@
 zh-CN:
   attributes:
-    id: 编号
-    login: 用户名或邮箱
-    email: 邮箱
-    password: 密码
-    gender: 性别
-    password_confirmation: 密码确认
-    remember_me: 记住我
-    nick_name: 昵称
-    username: 用户名
-    true_name: 真实姓名
-    contact_phone: 联系电话
-    price: 价格
-    discount_price: 优惠价
-    status: 状态
-    created_at: 创建时间
-    updated_at: 上次更新时间
-    confirmed_at: 激活时间
+    id: 編號
+    login: 用戶名或郵箱
+    email: 郵箱
+    password: 密碼
+    gender: 性別
+    password_confirmation: 密碼確認
+    remember_me: 記住我
+    nick_name: 昵稱
+    username: 用戶名
+    true_name: 姓名
+    contact_phone: 聯系電話
+    status: 狀態
+    account_status: 帳戶狀態
+    created_at: 創建時間
+    updated_at: 上次更新時間
+    confirmed_at: 激活時間
     description: 描述
-    total_credit: 信用额度
-    available_credit: 可用额度
-    phone: 电话
-    odds_level: 盘级
-    return: 退水
-
-    campaign: 班次
-    course: 课程
-    name: 名称
-    user: 用户
-    coupon: 优惠卷
-    location: 上课地点
-    feedback: 反馈
+    total_credit: 信用額度
+    available_credit: 可用金額
+    phone: 電話
+    odds_level: 盤級
+    odds_level_return: 盘级退水
+    return: 用戶退水
+    odds_level_name: 盘级
 
   mongoid:
     models:
-      user: 用户
+      user: 用戶
       odds_level: 盘级
-
-  activerecord:
-    models:
-      user:     用户
-      catalog:  目录
-      course:   课程
-      location: 上课地点
-      campaign: 班次
-      order:    订单
-      invitation: 邀请
-      coupon:   优惠卷
-      feedback: 反馈
-      album:    相册
-      photo:    相片
-
-    attributes:
-      user_detail: &ud_attrs
-        birthday: 生日
-        id_card: 身份证号
-        address: 地址
-        zip: 邮编
-        company: 公司
-        title: 职位
-        company_size: 公司规模
-
-      user:
-        user_detail:
-          <<: *ud_attrs
-
-      catalog:
-        name: 名称
-
-      course: &course_attrs
-        course_name: 课程名称
-        price: 价格
-        discount_price: 优惠价
-        short_description: 简短描述
-        long_description: 详细描述
-        avatar: 图片
-        remove_avatar: 删除图片
-
-      campaign:
-        name: 班级名称
-        start_date: 课程开始时间
-        start_date_date: 课程开始时间
-        end_date: 课程结束时间
-        end_date_date: 课程结束时间
-        register_due_date: 报名截止时间
-        register_due_date_date: 报名截止时间
-        trainer: 讲师
-        training_room: 上课地点
-        register_count: 报名人数
-        course: 课程
-
-      invitation:
-        friend_email: 朋友邮件地址
-        friend_name: 朋友名称
-
-      coupon:
-        coupon_code: 邀请码
-        coupon_name: 名称
-        qty: 数量
-        discount_rate: 折扣率
-        due_date: 到期时间
-        due_date_date: 到期时间
-        disabled: 失效
-        course: 使用课程
-        campaign: 使用班次
-
-      location:
-        city: 城市
-        address: 地址
-        zip: 邮编
-        map_url: 电子地图
-
-      feedback:
-        useful_rating: 实用评分
-        content_rating: 内容评分
-        interact_rating: 互动评分
-        gain_from_lesson: 学习收获
-        interesting_feature: 最吸引人的部分
-        advice: 建议或意见
 
 
   status:
-    order:
-      pending_payment:  待付款
-      pending_refund:   待退款
-      paid:             已付款
-      refunded:         已退款
-      cancelled:        已取消
-      finished:         已完成
-      absent:           缺席
-
-    campaign: &campaign
-      open:             开班
-      closed:           已关闭
-      finished:         已结束
+    account:
+      normal: 正常
+      locked: 已鎖定
