@@ -23,6 +23,7 @@ Lottery::Application.routes.draw do
       member do
         match 'lock' => :lock, :via => [:get, :post]
         match 'unlock' => :unlock, :via => [:get, :post]
+        match 'bet_list' => :bet_list, :via => :get
       end
     end
     resources :games

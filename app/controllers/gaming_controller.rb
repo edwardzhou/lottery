@@ -1,6 +1,6 @@
 #encoding: utf-8
 
-class GamingController < ApplicationController
+class GamingController < UserBaseController
 
   include ApplicationHelper
 
@@ -177,6 +177,8 @@ class GamingController < ApplicationController
     bet_item = BetItem.new
     bet_item.ball_no = ball_id
     bet_item.user = @current_user
+    bet_item.agent = @current_user.agent
+    bet_item.top_user = @current_user.top_user
     bet_item.user_daily_stat = today_stat
     bet_item.lottery_inst = current_lottery
     bet_item.bet_time = Time.now

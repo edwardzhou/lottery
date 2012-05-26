@@ -1,14 +1,11 @@
-%h1 用户管理
+%h1 用戶管理
 
-= link_to "新开户", new_admin_user_path
+= link_to "新代理", new_admin_user_path
 %table(id="user_list")
   %tr
     %td
 
 #pager
-
-
-
 
 - content_for :page_include_scripts do
   = javascript_include_tag "admin/users"

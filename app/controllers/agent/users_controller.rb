@@ -35,7 +35,7 @@ class Agent::UsersController < Agent::AgentBaseController
 
     agent_user = current_user
 
-    user_count = User.count
+    user_count = Sequence.next!("user_seq")
     logger.debug "user_count => " + user_count.to_s
     user_count = user_count + 100 if user_count < 100
     odds_level = OddsLevel.find(user_params[:odds_level_id])
@@ -62,7 +62,7 @@ class Agent::UsersController < Agent::AgentBaseController
       user.save!
       agent_user.save!
 
-      redirect_to [:agent, user], :notice => t("message.user_created")
+      redirect_to [:agent, user], :notice => t("message.user_created", :username => user.username)
 
     else
       render :action => "new"
@@ -77,7 +77,7 @@ class Agent::UsersController < Agent::AgentBaseController
 
   def bet_list
     @user = User.find(params[:id])
-    @bet_items = BetItem.get_bet_items(@user, nil)
+    @bet_items = BetItem.bet_items_by_user(@user, nil)
     @total_rows = @bet_items.count
     rows_per_page = params[:rows] || 20
     @page = params[:page].to_i

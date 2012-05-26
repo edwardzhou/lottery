@@ -1,6 +1,6 @@
 class Agent::OddsLevelsController < Agent::AgentBaseController
 
-  def index
+  def show
     @odds_level = OddsLevel.find(params[:id])
   end
 end

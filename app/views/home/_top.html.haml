@@ -14,28 +14,29 @@
     %tr
       %td.T2{:height => "20", :valign => "top"}
         %marquee{:onmouseout => "this.start()", :onmouseover => "this.stop()", :scrollamount => "4", :scrolldelay => "100"}
-          %font#Affiche.NewS_Fone{:style => "POSITION: relative; TOP: 7px"} 通知：因重慶時時彩官方20120509018期停止銷售，所有注單一律注銷，如有不便，敬請諒解
+          %font#Affiche.NewS_Fone{:style => "POSITION: relative; TOP: 2px"} 通知：因重慶時時彩官方20120509018期停止銷售，所有注單一律注銷，如有不便，敬請諒解
     %tr(style="margin-top: -5px;")
       %td#TypeBackdrop.T3{:height => "25", :valign => "top"}
         %span#Type_List{:style => "POSITION: relative; TOP: 5px; LEFT: 13px"}
-          = link_to "兩面盤", gaming_path("ball9")
-          \&nbsp;|&nbsp;
-          = link_to "第一球", gaming_path("ball1")
-          \&nbsp;|&nbsp;
-          = link_to "第二球", gaming_path("ball2")
-          \&nbsp;|&nbsp;
-          = link_to "第三球", gaming_path("ball3")
-          \&nbsp;|&nbsp;
-          = link_to "第四球", gaming_path("ball4")
-          \&nbsp;|&nbsp;
-          = link_to "第五球", gaming_path("ball5")
-          \&nbsp;|&nbsp;
-          = link_to "第六球", gaming_path("ball6")
-          \&nbsp;|&nbsp;
-          = link_to "第七球", gaming_path("ball7")
-          \&nbsp;|&nbsp;
-          = link_to "第八球", gaming_path("ball8")
-          \&nbsp;|&nbsp;
-          = link_to "總和、龍虎", gaming_path("ball10")
-          \&nbsp;|&nbsp;
-          = link_to "連碼", gaming_path("ball11")
+          - if current_user.is_user?
+            = link_to "兩面盤", gaming_path("ball9")
+            \&nbsp;|&nbsp;
+            = link_to "第一球", gaming_path("ball1")
+            \&nbsp;|&nbsp;
+            = link_to "第二球", gaming_path("ball2")
+            \&nbsp;|&nbsp;
+            = link_to "第三球", gaming_path("ball3")
+            \&nbsp;|&nbsp;
+            = link_to "第四球", gaming_path("ball4")
+            \&nbsp;|&nbsp;
+            = link_to "第五球", gaming_path("ball5")
+            \&nbsp;|&nbsp;
+            = link_to "第六球", gaming_path("ball6")
+            \&nbsp;|&nbsp;
+            = link_to "第七球", gaming_path("ball7")
+            \&nbsp;|&nbsp;
+            = link_to "第八球", gaming_path("ball8")
+            \&nbsp;|&nbsp;
+            = link_to "總和、龍虎", gaming_path("ball10")
+            \&nbsp;|&nbsp;
+            = link_to "連碼", gaming_path("ball11")

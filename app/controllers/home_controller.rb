@@ -17,7 +17,7 @@ class HomeController < ApplicationController
   end
 
   def bet_list
-    @bet_items = BetItem.get_bet_items(current_user, current_lottery)
+    @bet_items = BetItem.bet_items_by_user(current_user, current_lottery)
     @total_rows = @bet_items.count
     rows_per_page = params[:rows] || 20
     @page = params[:page].to_i

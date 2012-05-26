@@ -24,6 +24,7 @@ zh-CN:
     odds_level_return: 盘级退水
     return: 用戶退水
     odds_level_name: 盘级
+    user_role: 用戶類別
 
   mongoid:
     models:

@@ -27,11 +27,11 @@
     .li_header #{User.human_attribute_name(:available_credit)}
     .li_value #{@user.available_credit}
   %li
-    .li_header #{User.human_attribute_name(:account_status)}
-    .li_value #{t("status.account." + @user.status)}
-  %li
     .li_header #{User.human_attribute_name(:user_role)}
     .li_value #{t("label.user_role." + @user.user_role)}
+  %li
+    .li_header #{User.human_attribute_name(:account_status)}
+    .li_value #{t("status.account." + @user.status)}
   %li
     .li_header 當前輸贏：
     .li_value.emphasize  0
@@ -39,9 +39,9 @@
 %br/
 
 %p
-  = link_to "返回" , agent_users_path
+  = link_to "返回" , admin_users_path
   |
-  = link_to "修改" , edit_agent_user_path(@user)
+  = link_to "修改" , edit_admin_user_path(@user)
 
 %h2 结算信息
 

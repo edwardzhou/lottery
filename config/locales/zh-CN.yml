@@ -6,9 +6,10 @@ zh-CN:
     user_role:
       admin: "管理員"
       user: "一般用戶"
+      agent: "代理"
 
   message:
     new_user: "用戶名將由系統自動分配, 密碼缺省爲 666666"
     new_agent: "代理用戶名將由系統自動分配, 密碼缺省爲 888888"
-    user_created: "創建用戶成功, 初始密碼爲 666666, 請通知用戶更改密碼！"
-    agent_created: "創建代理成功, 初始密碼爲 888888, 請通知代理更改密碼！"
+    user_created: "創建用戶 %{username} 成功, 初始密碼爲 666666, 請通知用戶更改密碼！"
+    agent_created: "創建代理 %{username} 成功, 初始密碼爲 888888, 請通知代理更改密碼！"

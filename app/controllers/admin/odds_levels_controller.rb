@@ -1,5 +1,9 @@
 class Admin::OddsLevelsController < Admin::AdminBaseController
 
+  def show
+    @odds_level = OddsLevel.find(params[:id])
+  end
+
   def edit
     @lottery_def = LotteryDef.find(params[:lottery_def_id])
     @odds_level = @lottery_def.odds_levels.find(params[:id])

@@ -1,4 +1,4 @@
-class Agent::AgentBaseController < ApplicationController
+class UserBaseController < ApplicationController
   before_filter :user_required
 
   private

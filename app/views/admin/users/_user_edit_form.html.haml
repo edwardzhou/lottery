@@ -4,7 +4,11 @@
       %tr
         %td(width="350" )
           %p
-            %b #{t("message.new_agent")}
+            %b 用戶名: &nbsp;
+            = user.username
+          %p
+            %b 用戶類型: &nbsp;
+            = t("label.user_role." + user.user_role)
           %br/
           = semantic_form_for [:admin, user], :html => {:id => "new_user_form"} do |f|
             // = f.input :odds_level, :as => :select, :input_html => {:class => "odds_level required"}

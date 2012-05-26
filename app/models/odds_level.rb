@@ -12,6 +12,7 @@ class OddsLevel
   belongs_to :lottery_def
   #embedded_in :lottery_inst
 
+  validates :level_id, :uniqueness => true, :presence => true
   validates :level_name, :presence => true
   validates :return, :numericality => true
 
@@ -22,6 +23,10 @@ class OddsLevel
     end
 
     @rule_hash[rule_name.to_sym]
+  end
+
+  def self.find_by_level_id(level_id)
+    where(level_id: level_id).first
   end
 
   def to_s
