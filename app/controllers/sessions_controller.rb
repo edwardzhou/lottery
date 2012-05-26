@@ -15,6 +15,9 @@ class SessionsController < ApplicationController
     if @sign_user.nil? then
       redirect_to({:action => "new"}, :alert => "用户名或密码错误!")
     else
+      @sign_user.last_login_at = Time.now
+      @sign_user.last_login_ip = self.request.remote_ip
+      @sign_user.save!
       session[:user_id] = @sign_user.id
       if @sign_user.is_admin?
         redirect_to admin_users_path
