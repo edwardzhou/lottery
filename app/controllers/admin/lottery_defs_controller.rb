@@ -1,11 +1,18 @@
 class Admin::LotteryDefsController < Admin::AdminBaseController
 
+  include ApplicationHelper
+
   def index
     @lottery_defs = LotteryDef.all
   end
 
   def show
     @lottery_def = LotteryDef.find(params[:id])
+  end
+
+  def current_lottery
+    @lottery_inst = current_lottery
+
   end
 
   def update

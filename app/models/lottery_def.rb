@@ -11,6 +11,7 @@ class LotteryDef
   include Mongoid::Timestamps
 
   embeds_many :balls
+  embeds_many :bet_rules
   has_many :odds_levels, :autosave => true
   has_one :lottery_config
 
