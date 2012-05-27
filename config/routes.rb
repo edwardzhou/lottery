@@ -34,6 +34,7 @@ Lottery::Application.routes.draw do
     resources :lottery_defs do
       resources :odds_levels
     end
+    resources :bet_rules
   end
 
   namespace :agent do

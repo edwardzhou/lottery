@@ -1,0 +1,27 @@
+ball_names = %w(aa 第一球 第二球 第三球 第四球 第五球 第六球 第七球 第八球)
+
+(1..8).each do |ball_id|
+   (1..20).each do |bet_ball_id|
+	ld.bet_rules.build({rule_id: "ball_#{ball_id}_#{bet_ball_id}", rule_name: "#{ball_names[ball_id]} 開 #{format('%02d', bet_ball_id)}", odds_type: :exact, sort_index: si})
+	si = si.next
+   end
+   
+ld.bet_rules.build({rule_id: "ball_#{ball_id}_east", rule_name: "#{ball_names[ball_id]} 開 東", odds_type: :quarter, sort_index: si})
+si = si.next
+ld.bet_rules.build({rule_id: "ball_#{ball_id}_south", rule_name: "#{ball_names[ball_id]} 開 南", odds_type: :quarter, sort_index: si})
+si = si.next
+ld.bet_rules.build({rule_id: "ball_#{ball_id}_west", rule_name: "#{ball_names[ball_id]} 開 西", odds_type: :quarter, sort_index: si})
+si = si.next
+ld.bet_rules.build({rule_id: "ball_#{ball_id}_north", rule_name: "#{ball_names[ball_id]} 開 北", odds_type: :quarter, sort_index: si})
+si = si.next
+ld.bet_rules.build({rule_id: "ball_#{ball_id}_middle", rule_name: "#{ball_names[ball_id]} 開 中", odds_type: :third, sort_index: si})
+si = si.next
+ld.bet_rules.build({rule_id: "ball_#{ball_id}_fa", rule_name: "#{ball_names[ball_id]} 開 發", odds_type: :third, sort_index: si})
+si = si.next
+ld.bet_rules.build({rule_id: "ball_#{ball_id}_white", rule_name: "#{ball_names[ball_id]} 開 白", odds_type: :third, sort_index: si})
+si = si.next
+
+end
+
+
+

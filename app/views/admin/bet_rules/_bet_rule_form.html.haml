@@ -1,0 +1,8 @@
+
+= semantic_form_for [:admin, bet_rule], :remote => true do |f|
+  = f.input :rule_id
+  = f.input :rule_name
+  = f.input :odds_type , :collection => [:exact, :half, :third, :quarter]
+  = f.input :sort_index, :as => :number
+
+  = f.actions

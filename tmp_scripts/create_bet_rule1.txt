@@ -1,0 +1,17 @@
+ld.bet_rules.build({rule_id: "ball_#{index+1}_big", rule_name: "#{ball_name} 大", odds_type: :half, sort_index: si})
+si = si.next
+ld.bet_rules.build({rule_id: "ball_#{index+1}_small", rule_name: "#{ball_name} 小", odds_type: :half, sort_index: si})
+si = si.next
+ld.bet_rules.build({rule_id: "ball_#{index+1}_odd", rule_name: "#{ball_name} 單", odds_type: :half, sort_index: si})
+si = si.next
+ld.bet_rules.build({rule_id: "ball_#{index+1}_even", rule_name: "#{ball_name} 雙", odds_type: :half, sort_index: si})
+si = si.next
+ld.bet_rules.build({rule_id: "ball_#{index+1}_trail_big", rule_name: "#{ball_name} 尾大", odds_type: :half, sort_index: si})
+si = si.next
+ld.bet_rules.build({rule_id: "ball_#{index+1}_trail_small", rule_name: "#{ball_name} 尾小", odds_type: :half, sort_index: si})
+si = si.next
+ld.bet_rules.build({rule_id: "ball_#{index+1}_add_odd", rule_name: "#{ball_name} 合數單", odds_type: :half, sort_index: si})
+si = si.next
+ld.bet_rules.build({rule_id: "ball_#{index+1}_add_even", rule_name: "#{ball_name} 合數雙", odds_type: :half, sort_index: si})
+si = si.next
+

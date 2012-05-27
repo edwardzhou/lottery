@@ -60,6 +60,7 @@ class LotteryInst
   embeds_one :ball_10, :class_name => "Ball"
 
   embeds_many :bet_rules
+  embeds_many :balls
 
   embeds_many :odds_levels
   embeds_many :prize_balls, :class_name => "Ball"

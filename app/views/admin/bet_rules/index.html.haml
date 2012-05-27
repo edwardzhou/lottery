@@ -1,0 +1,22 @@
+%h1 投注规则管理
+
+//= link_to "新规则", "javascript:void(0);", :"data-url" => new_admin_bet_rule_path , :class => "remote_invoke"
+= link_to "新规则", new_admin_bet_rule_path , :remote => true
+%br/
+%br/
+%p/
+
+#rule_form(style="width: 400px;" )
+
+
+%table(id="bet_rules_list")
+  %tr
+    %td
+
+#pager
+
+
+
+- content_for :page_include_scripts do
+  = javascript_include_tag "admin/bet_rules"
+
