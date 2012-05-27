@@ -12,7 +12,7 @@ class OddsLevel
   belongs_to :lottery_def
   #embedded_in :lottery_inst
 
-  validates :level_id, :uniqueness => true, :presence => true
+  validates :level_id, :presence => true
   validates :level_name, :presence => true
   validates :return, :numericality => true
 
