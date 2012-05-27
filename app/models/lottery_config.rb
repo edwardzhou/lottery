@@ -1,3 +1,5 @@
+#encoding: utf-8
+
 class LotteryConfig
   include Mongoid::Document
 
@@ -40,15 +42,23 @@ class LotteryConfig
     lottery.total_outcome = 0
     lottery.profit = 0
 
+    # 复制各盘赔率
     self.lottery_def.odds_levels.each do |ol|
       level = ol.dup
       level.lottery_def = nil
       lottery.odds_levels << level
     end
 
+    # 复制球
     self.lottery_def.balls.each do |ball|
       new_ball = ball.dup
       lottery.balls << new_ball
+    end
+
+    # 复制投注项规则
+    self.lottery_def.bet_rules.each do |rule|
+      new_rule = rule.dup
+      lottery.bet_rules << rule
     end
 
     lottery.save!

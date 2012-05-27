@@ -76,5 +76,9 @@ class LotteryInst
     @odds_level_map[level_id]
   end
 
+  def bet_rule(rule_id)
+    rule_id = rule_id.to_sym unless rule_id.kind_of?(Symbol)
+    @bet_rules.where(rule_id: rule_id).first
+  end
 
 end
