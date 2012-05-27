@@ -16,6 +16,38 @@ class HomeController < ApplicationController
 
   end
 
+  def change_password
+
+  end
+
+  def update_password
+
+    @user = current_user
+    user_params = params[:user]
+    old_pwd, new_pwd, new_pwd_cfm = user_params[:old_pwd], user_params[:new_pwd], user_params[:new_pwd_cfm]
+    alert = nil
+    if not @user.authenticate(old_pwd)
+      alert = "原密碼不匹配,請輸入正確的原密碼！"
+    elsif (new_pwd.length < 6)
+      alert = "新密码必须长度6位以上!"
+    elsif not new_pwd.eql?(new_pwd_cfm)
+      alert = "新密码与确认密码不一致!"
+    elsif old_pwd.eql?(new_pwd)
+      alert = "新密码与原密码不能相同!"
+    end
+
+    if not alert.nil?
+      redirect_to({:action => :change_password}, :alert => "原密碼不匹配,請輸入正確的原密碼！")
+    else
+      @user.password = @user.password_confirmation = new_pwd
+      @user.save!
+      reset_session
+      render "update_password", :layout => nil
+    end
+
+
+  end
+
   def bet_list
     @bet_items = BetItem.bet_items_by_user(current_user, current_lottery)
     @total_rows = @bet_items.count

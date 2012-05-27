@@ -3,6 +3,7 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 
+
 jQuery ->
   if $("#bet_list")
     $("#bet_list").jqGrid( {
@@ -44,3 +45,20 @@ jQuery ->
       }
 
     );
+
+#  password_validate = (value, element) ->
+#    result = this.optional(element) || value.length >= 6 && /\d/.test(value) && /[a-z]/i.test(value);
+#    if !result
+#      element.value = ""
+#      validator = this
+#      setTimeout( ()=>
+#        validator.blockFocusCleanup = true
+#        element.focus()
+#        validator.blockFocusCleanup = false
+#      ,1)
+#    return result
+#
+#  jQuery.validator.addMethod("password", password_validate, "Your password must be at least 6 characters long and contain at least one number and one character.")
+#
+  if $("#change_password_form")
+    $("#change_password_form").validate()

@@ -25,5 +25,7 @@
         #left.span-6
           = render "home/left"
         #main.span-20.last
-          = yield
+          #main_content.padding-10
+            = render "common/show_msg"
+            = yield
     //= render "common/page_footer"

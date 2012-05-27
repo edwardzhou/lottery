@@ -8,7 +8,11 @@ Lottery::Application.routes.draw do
   get "logout", :to => "sessions#logout"
 
   resources :home do
-    get "bet_list", :on => :collection
+    collection do
+      get "bet_list"
+      get "change_password"
+      post "update_password"
+    end
   end
 
   get "ten_minute/index"
