@@ -78,7 +78,45 @@ class LotteryInst
 
   def bet_rule(rule_id)
     rule_id = rule_id.to_sym unless rule_id.kind_of?(Symbol)
-    @bet_rules.where(rule_id: rule_id).first
+    self.bet_rules.where(rule_id: rule_id).first
   end
+
+  def set_ball_values(balls_values)
+    if self.ball_1.nil?
+      self.ball_1 = Ball.new
+    end
+    if self.ball_2.nil?
+      self.ball_2 = Ball.new
+    end
+    if self.ball_3.nil?
+      self.ball_3 = Ball.new
+    end
+    if self.ball_4.nil?
+      self.ball_4 = Ball.new
+    end
+    if self.ball_5.nil?
+      self.ball_5 = Ball.new
+    end
+    if self.ball_6.nil?
+      self.ball_6 = Ball.new
+    end
+    if self.ball_7.nil?
+      self.ball_7 = Ball.new
+    end
+    if self.ball_8.nil?
+      self.ball_8 = Ball.new
+    end
+
+    self.ball_1.set_value(balls_values[:ball_1])
+    self.ball_2.set_value(balls_values[:ball_2])
+    self.ball_3.set_value(balls_values[:ball_3])
+    self.ball_4.set_value(balls_values[:ball_4])
+    self.ball_5.set_value(balls_values[:ball_5])
+    self.ball_6.set_value(balls_values[:ball_6])
+    self.ball_7.set_value(balls_values[:ball_7])
+    self.ball_8.set_value(balls_values[:ball_8])
+
+  end
+
 
 end

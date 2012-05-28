@@ -1,0 +1,9 @@
+
+%h1 投注信息
+
+%ul.as_inline_block
+  - @bet_rules.each do |rule|
+    %li
+      .li_header #{rule.rule_name}
+      .li_income_value #{rule.total_income}
+      .li_outcome_value #{rule.total_outcome}

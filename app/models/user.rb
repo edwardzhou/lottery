@@ -64,9 +64,8 @@ class User
 
 
   def self.sign_in(username, password)
-    user = where(username: username.downcase).excludes(locked: true).first
+    user = where(username: username.downcase).first
     return nil unless user.try(:authenticate, password)
-
     user
   end
 

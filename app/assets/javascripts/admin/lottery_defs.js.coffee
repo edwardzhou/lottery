@@ -11,7 +11,8 @@ jQuery ->
         {name: '_id', index: '_id', label: "ID", width: 200},
         {name: 'lottery_name', index: 'lottery_name', label: "彩票", width: 200}
         {name: 'description', index: 'description', label: "描述", width: 200}
-        {name: 'link', index: '', label: "操作", width: 200, sortable: false}
+        {name: 'link', index: '', label: "操作", width: 50, sortable: false}
+        {name: 'current', index: '', label: "", width: 50, sortable: false}
       ],
       jsonReader : {
         root:"rows",

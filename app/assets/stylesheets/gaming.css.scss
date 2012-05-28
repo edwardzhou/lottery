@@ -340,6 +340,21 @@ A {
   line-height: 22px;
 }
 
+.li_income_value {
+  @extend .li_value;
+  background: lightgray;
+  color: darkblue;
+  font-size: 13px;
+}
+
+.li_outcome_value {
+  @extend .li_value;
+  background: darkgray;
+  color: darkred;
+  font-size: 13px;
+}
+
+
 .emphasize {
   font-weight: bold;
   color: red;

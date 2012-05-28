@@ -14,6 +14,12 @@ zh-CN:
     user_created: "創建用戶 %{username} 成功, 初始密碼爲 666666, 請通知用戶更改密碼！"
     agent_created: "創建代理 %{username} 成功, 初始密碼爲 888888, 請通知代理更改密碼！"
 
+    login:
+      account_wrong: "用戶名或密碼錯誤!"
+      account_locked: "很抱歉，您的帳號被鎖定，暫時不能登陸，請代理聯系!"
+      account_agent_locked: "很抱歉，由于您的代理被鎖定，暫時不能登陸，請代理聯系!"
+
+
   mongoid:
     errors:
       messages:

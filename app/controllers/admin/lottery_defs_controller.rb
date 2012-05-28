@@ -10,10 +10,10 @@ class Admin::LotteryDefsController < Admin::AdminBaseController
     @lottery_def = LotteryDef.find(params[:id])
   end
 
-  def current_lottery
-    @lottery_inst = current_lottery
-
+  def betting
+    @bet_rules = current_lottery.bet_rules
   end
+
 
   def update
     @lottery_def = LotteryDef.find(params[:id])
@@ -33,5 +33,6 @@ class Admin::LotteryDefsController < Admin::AdminBaseController
 
     redirect_to :action => "show"
   end
+
 
 end

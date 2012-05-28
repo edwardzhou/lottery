@@ -5,5 +5,9 @@ node(:url) do |m|
 end
 
 node(:link) do |m|
-  link_to "show", admin_lottery_def_path(m)
+  link_to "查看", admin_lottery_def_path(m)
+end
+
+node(:current) do |m|
+  link_to "投注情况", betting_admin_lottery_def_path(m)
 end

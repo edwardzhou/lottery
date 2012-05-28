@@ -12,9 +12,17 @@ class SessionsController < ApplicationController
   def create
     @user = User.new(params[:user])
     @sign_user = User.sign_in(@user.username, @user.password)
+
+    alert = nil
     if @sign_user.nil? then
-      redirect_to({:action => "new"}, :alert => "用户名或密码错误!")
-    else
+      alert = t("message.login.account_wrong")
+    elsif @sign_user.locked?
+      alert = t("message.login.account_locked")
+    elsif @sign_user.is_user? and @sign_user.agent.locked?
+      alert = t("message.login.account_agent_locked")
+    end
+
+    if alert.nil?
       @sign_user.last_login_at = Time.now
       @sign_user.last_login_ip = self.request.remote_ip
       @sign_user.save!
@@ -26,12 +34,13 @@ class SessionsController < ApplicationController
       else
         redirect_to gaming_path("ball9")
       end
-      #redirect_to gaming_path("ball1")
+    else
+      redirect_to({:action => "new"}, :alert => alert)
     end
   end
 
   def logout
-    session.clear
+    reset_session
     redirect_to :action => :new
   end
 end

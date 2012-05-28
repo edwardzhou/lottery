@@ -32,6 +32,10 @@ Lottery::Application.routes.draw do
     end
     resources :games
     resources :lottery_defs do
+      member do
+        get "betting"
+      end
+
       resources :odds_levels
     end
     resources :bet_rules
