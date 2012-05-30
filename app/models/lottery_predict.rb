@@ -1,4 +1,4 @@
-class LotteryInst
+class LotteryPredict
 
   include Mongoid::Document
 
@@ -17,36 +17,6 @@ class LotteryInst
   field :total_outcome, type: BigDecimal
   field :profit, type: BigDecimal
 
-=begin
-  field :ball_1, type: Integer
-  field :ball_1_trail, type: Integer #1号球尾数
-  field :ball_1_add, type: Integer #1号球合数
-  field :ball_2, type: Integer
-  field :ball_2_trail, type: Integer #2号球尾数
-  field :ball_2_add, type: Integer #2号球合数
-  field :ball_3, type: Integer
-  field :ball_3_trail, type: Integer #3号球尾数
-  field :ball_3_add, type: Integer #3号球合数
-  field :ball_4, type: Integer
-  field :ball_4_trail, type: Integer #4号球尾数
-  field :ball_4_add, type: Integer #4号球合数
-  field :ball_5, type: Integer
-  field :ball_5_trail, type: Integer #5号球尾数
-  field :ball_5_add, type: Integer #5号球合数
-  field :ball_6, type: Integer
-  field :ball_6_trail, type: Integer #6号球尾数
-  field :ball_6_add, type: Integer #6号球合数
-  field :ball_7, type: Integer
-  field :ball_7_trail, type: Integer #7号球尾数
-  field :ball_7_add, type: Integer #7号球合数
-  field :ball_8, type: Integer
-  field :ball_8_trail, type: Integer #8号球尾数
-  field :ball_8_add, type: Integer #8号球合数
-  field :ball_9, type: Integer #总和
-  field :ball_9_trail, type: Integer #总和尾数
-  field :ball_9_add, type: Integer #总和合数
-  field :ball_10, type: Integer #龙虎 (1 龙， 2 虎)
-=end
 
   embeds_one :ball_1, :class_name => "Ball"
   embeds_one :ball_2, :class_name => "Ball"
@@ -138,14 +108,17 @@ class LotteryInst
       ball_sum = balls_values.inject(0) {|sum, ball| sum = sum + ball}
     end
 
-    self.ball_9.set_value(ball_sum)
-
-    self.ball_10.dragon = self.ball_1.ball_value < self.ball_8.ball_value
-    self.ball_10.tiger = !self.ball_10.dragon
+    self.ball_9.set_value(ball_sum, true)
 
 
+    self.ball_9.dragon = self.ball_1.ball_value < self.ball_8.ball_value
+    self.ball_9.tiger = !self.ball_9.dragon
 
   end
 
+  def balls_to_a
+    [ball_1.ball_value, ball_2.ball_value, ball_3.ball_value, ball_4.ball_value,
+     ball_5.ball_value, ball_6.ball_value, ball_7.ball_value, ball_8.ball_value]
+  end
 
 end

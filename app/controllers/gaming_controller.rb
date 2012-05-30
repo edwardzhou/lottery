@@ -75,9 +75,10 @@ class GamingController < UserBaseController
     (1..20).each do |ball_index|
       bet_credit = bet_params["ball_#{ball_index}"].to_i
       if bet_credit > 0
+        rule_id = "ball_#{ball_id}_#{ball_index}"
         rule_name = BALL_NAMES[ball_id] + " 開 " + format("%02d", ball_index)
         rule_eval = "ball_#{ball_id}.ball_value == #{ball_index}"
-        bet_item = new_bet_item(ball_id, bet_credit, today_stat, "exact", rule_name, rule_eval)
+        bet_item = new_bet_item(ball_id, bet_credit, today_stat, "exact", rule_id, rule_name, rule_eval)
         bet_rule = @lottery.bet_rule("ball_#{ball_index}_#{ball_index}")
         bet_rule.bet_count = bet_rule.bet_count + 1
         bet_rule.total_income = bet_rule.total_income.to_f + bet_credit
@@ -90,9 +91,10 @@ class GamingController < UserBaseController
     HALF_BET_ITEMS.each do |item, item_name|
       bet_credit = bet_params[item].to_i
       if bet_credit > 0
+        rule_id = "ball_#{ball_id}_#{item}"
         rule_name = BALL_NAMES[ball_id] + " 開 " + item_name
         rule_eval = "ball_#{ball_id}.#{item}"
-        bet_item = new_bet_item(ball_id, bet_credit, today_stat, "half", rule_name, rule_eval)
+        bet_item = new_bet_item(ball_id, bet_credit, today_stat, "half", rule_id, rule_name, rule_eval)
         bet_rule = @lottery.bet_rule("ball_#{ball_index}_#{item}")
         bet_rule.bet_count = bet_rule.bet_count + 1
         bet_rule.total_income = bet_rule.total_income.to_f + bet_credit
@@ -105,9 +107,10 @@ class GamingController < UserBaseController
     QUARTER_BET_ITEMS.each do |item, item_name|
       bet_credit = bet_params[item].to_i
       if bet_credit > 0
+        rule_id = "ball_#{ball_id}_#{item}"
         rule_name = BALL_NAMES[ball_id] + " 開 " + item_name
         rule_eval = "ball_#{ball_id}.#{item}"
-        bet_item = new_bet_item(ball_id, bet_credit, today_stat, "quarter", rule_name, rule_eval)
+        bet_item = new_bet_item(ball_id, bet_credit, today_stat, "quarter", rule_id, rule_name, rule_eval)
         bet_rule = @lottery.bet_rule("ball_#{ball_index}_#{item}")
         bet_rule.bet_count = bet_rule.bet_count + 1
         bet_rule.total_income = bet_rule.total_income.to_f + bet_credit
@@ -120,9 +123,10 @@ class GamingController < UserBaseController
     THIRD_BET_ITEMS.each do |item, item_name|
       bet_credit = bet_params[item].to_i
       if bet_credit > 0
+        rule_id = "ball_#{ball_id}_#{item}"
         rule_name = BALL_NAMES[ball_id] + " 開 " + item_name
         rule_eval = "ball_#{ball_id}.#{item}"
-        bet_item = new_bet_item(ball_id, bet_credit, today_stat, "third", rule_name, rule_eval)
+        bet_item = new_bet_item(ball_id, bet_credit, today_stat, "third", rule_id, rule_name, rule_eval)
         bet_rule = @lottery.bet_rule("ball_#{ball_index}_#{item}")
         bet_rule.bet_count = bet_rule.bet_count + 1
         bet_rule.total_income = bet_rule.total_income.to_f + bet_credit
@@ -152,9 +156,10 @@ class GamingController < UserBaseController
     HALF_BET_ITEMS.each do |item, item_name|
       bet_credit = sum_params[item].to_i
       if bet_credit > 0
+        rule_id = "sum_#{item}"
         rule_name = BALL_NAMES[ball_id] + " 開 總和" + item_name
         rule_eval = "ball_#{ball_id}.#{item}"
-        bet_item = new_bet_item(ball_id, bet_credit, today_stat, "half", rule_name, rule_eval)
+        bet_item = new_bet_item(ball_id, bet_credit, today_stat, "half", rule_id, rule_name, rule_eval)
         bet_rule = @lottery.bet_rule("sum_#{item}")
         bet_rule.bet_count = bet_rule.bet_count + 1
         bet_rule.total_income = bet_rule.total_income.to_f + bet_credit
@@ -169,9 +174,10 @@ class GamingController < UserBaseController
       HALF_BET_ITEMS.each do |item, item_name|
         bet_credit = ball_params[item].to_i
         if bet_credit > 0
+          rule_id = "ball_#{ball_index}_#{item}"
           rule_name = BALL_NAMES[ball_index] + " 開 " + item_name
           rule_eval = "ball_#{ball_index}.#{item}"
-          bet_item = new_bet_item(ball_index, bet_credit, today_stat, "half", rule_name, rule_eval)
+          bet_item = new_bet_item(ball_index, bet_credit, today_stat, "half", rule_id, rule_name, rule_eval)
           bet_rule.bet_count = bet_rule.bet_count + 1
           bet_rule = @lottery.bet_rule("ball_#{ball_index}_#{item}")
           bet_rule.total_income = bet_rule.total_income.to_f + bet_credit
@@ -197,7 +203,7 @@ class GamingController < UserBaseController
   end
 
 
-  def new_bet_item(ball_id, bet_credit, today_stat, odds_rule, rule_name, rule_eval)
+  def new_bet_item(ball_id, bet_credit, today_stat, odds_rule, rule_id, rule_name, rule_eval)
     bet_item = BetItem.new
     bet_item.ball_no = ball_id
     bet_item.user = @current_user
@@ -207,6 +213,7 @@ class GamingController < UserBaseController
     bet_item.lottery_inst = current_lottery
     bet_item.bet_time = Time.now
     bet_item.lottery_full_id = bet_item.lottery_inst.lottery_full_id
+    bet_item.bet_rule_id = rule_id
     bet_item.bet_rule_name = rule_name
     bet_item.bet_rule_eval = rule_eval
     bet_item.credit = bet_credit

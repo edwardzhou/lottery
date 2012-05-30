@@ -9,8 +9,8 @@ class Ball
   field :small, type: Boolean
   field :even, type: Boolean
   field :odd, type: Boolean
-  field :sum_even, type: Boolean
-  field :sum_odd, type: Boolean
+  field :add_even, type: Boolean
+  field :add_odd, type: Boolean
   field :trail_big, type: Boolean
   field :trail_small, type: Boolean
   field :dragon, type: Boolean
@@ -28,14 +28,15 @@ class Ball
   embedded_in :lottery_inst
   include Mongoid::Timestamps
 
-  def set_value(value)
+  def set_value(value, sum_ball = false)
     self.ball_value = value
     self.big = value >= 11
+    self.big = value > 83 if sum_ball
     self.small = !self.big
     self.even = value.even?
     self.odd = !self.even
-    self.sum_even = (value/10 + value%10).even?
-    self.sum_odd = !self.sum_even
+    self.add_even = (value/10 + value%10).even?
+    self.add_odd = !self.add_even
     self.trail_big = (value%10) >=5
     self.trail_small = !self.trail_big
     self.east = ![1, 5, 9, 13, 17].index(value).nil?
