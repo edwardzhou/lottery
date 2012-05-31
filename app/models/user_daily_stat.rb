@@ -6,7 +6,7 @@ class UserDailyStat
   field :total_return, type: BigDecimal, default: 0
 
   belongs_to :user
-  has_many :bet_item
+  has_many :bet_items
 
   def self.get_current_stat(user, the_date = Date.today)
     the_date = the_date.to_time.beginning_of_day

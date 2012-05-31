@@ -60,11 +60,13 @@ class HomeController < ApplicationController
     if request.xhr?
       @bet_items = @bet_items.order_by(params[:sidx].to_sym => params[:sord]).paginate(:page => params[:page], :per_page => rows_per_page)
     end
-    @user_data = {bet_rule_name: "合計", credit: 0.0, possible_win_credit: 0.0, total_return: 0.0 }
+    @user_data = {bet_rule_name: "合計", credit: 0.0, possible_win_credit: 0.0, user_return: 0.0, result: 0.0 }
     @bet_items.each do |item|
       @user_data[:credit] = @user_data[:credit] + item.credit
       @user_data[:possible_win_credit] = @user_data[:possible_win_credit] + item.possible_win_credit
-      @user_data[:total_return] = @user_data[:total_return] + item.total_return
+      @user_data[:user_return] = @user_data[:user_return] + item.total_return
+      @user_data[:result] = @user_data[:result] + item.result
+      @user_data[:result] = @user_data[:result] - item.credit if (item.is_win)
     end
 
   end

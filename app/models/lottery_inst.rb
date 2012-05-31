@@ -1,3 +1,5 @@
+require "lottery_members"
+
 class LotteryInst
 
   include Mongoid::Document
@@ -34,6 +36,7 @@ class LotteryInst
 
   embeds_many :odds_levels
   embeds_many :prize_balls, :class_name => "Ball"
+  has_many :bet_items, :autosave => true
 
   include Mongoid::Timestamps
 

@@ -19,7 +19,8 @@ jQuery ->
         {name: 'credit', index: 'credit', label: "投注金額", width: 70}
         {name: 'odds', index: 'odds', label: "賠率", width: 70}
         {name: 'possible_win_credit', index: 'possible_win_credit', label: "可贏金額", width: 80}
-        {name: 'total_return', index: 'total_return', label: "退水", width: 70}
+        {name: 'user_return', index: 'user_return', label: "退水", width: 70}
+        {name: 'result', index: 'result', label: "输赢", width: 70}
       ],
       jsonReader : {
       root:"rows",

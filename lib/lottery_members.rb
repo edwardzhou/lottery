@@ -1,6 +1,4 @@
 module LotteryMembers
-  include ActiveSupport::Concern
-
   module InstanceMethods
     def get_odds_level(level_id)
       if @odds_level_map.nil?
@@ -89,4 +87,8 @@ module LotteryMembers
     end
 
   end
+
+  extend ActiveSupport::Concern
+
+
 end

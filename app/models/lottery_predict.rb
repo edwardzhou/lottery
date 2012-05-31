@@ -1,3 +1,5 @@
+require "lottery_members"
+
 class LotteryPredict
 
   include Mongoid::Document

@@ -7,14 +7,17 @@ class BetItem
   field :bet_rule_name, type: String
   field :bet_rule_description, type: String
   field :bet_rule_eval, type: String
-  field :credit, type: BigDecimal
-  field :odds, type: BigDecimal
-  field :possible_win_credit, type: BigDecimal
-  field :win_credit, type:BigDecimal
-  field :return, type: BigDecimal
-  field :total_return, type: BigDecimal
-  field :result, type:BigDecimal
-  field :is_win, type: Boolean
+  field :credit, type: BigDecimal, default: 0
+  field :odds, type: BigDecimal, default: 0
+  field :possible_win_credit, type: BigDecimal, default: 0
+  field :win_credit, type:BigDecimal, default: 0
+  field :user_return_rate, type: BigDecimal, default: 0
+  field :agent_return_rate, type: BigDecimal, default: 0
+  field :user_return, type: BigDecimal, default: 0
+  field :agent_return, type: BigDecimal, default: 0
+  field :total_return, type: BigDecimal, default: 0
+  field :result, type:BigDecimal, default: 0
+  field :is_win, type: Boolean, default: false
   field :close, type: Boolean
 
   include Mongoid::Timestamps
