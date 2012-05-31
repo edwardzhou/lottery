@@ -17,24 +17,25 @@ class Calculation
     total_agent_return = 0.0
     lottery_inst.bet_items.each do |item|
       Rails.logger.debug("checking item[bet_rule_type: #{item.bet_rule_type}, bet_rule_eval: #{item.bet_rule_eval}, bet_rule_name: #{item.bet_rule_name}")
+      user = item.user
+      total_agent_return = total_agent_return + item.agent_return
       if lottery_inst.send(:eval, item.bet_rule_eval)
-        user = item.user
         item.is_win = true
         item.result = item.possible_win_credit + item.user_return
+        total = total + item.result + item.agent_return
         Rails.logger.info("user[username: #{user.username}] win -> #{item.possible_win_credit.to_f}")
-        total = total + item.possible_win_credit
       else
-        user = item.user
         item.is_win = false
         item.result = - (item.credit - item.user_return)
+        total = total + item.total_return
         Rails.logger.info("user[username: #{user.username}] lose -> #{item.credit.to_f}")
       end
-      item.result = item.result.round(2)
-      total_agent_return = (total_agent_return + item.agent_return).round(2)
+      item.result = item.result.round(4)
+      total_agent_return = (total_agent_return + item.agent_return).round(4)
     end
 
-    lottery_inst.total_outcome = (total - total_agent_return).round(2)
-    lottery_inst.profit = (lottery_inst.total_income - lottery_inst.total_outcome - total_agent_return).round(2)
+    lottery_inst.total_outcome = (total).round(4)
+    lottery_inst.profit = (lottery_inst.total_income - lottery_inst.total_outcome).round(4)
 
     lottery_inst.save!
 
@@ -58,7 +59,7 @@ class Calculation
     end
 
     user_data.each do |user, total|
-      user.available_credit = (user.available_credit + total.round(2))
+      user.available_credit = (user.available_credit + total.round(4))
       user.save! if want_save
     end
   end
@@ -76,7 +77,7 @@ class Calculation
     end
 
     user_data.each do |user, total|
-      user.available_credit = (user.available_credit - total.round(2))
+      user.available_credit = (user.available_credit - total.round(4))
       user.save! if want_save
     end
   end
@@ -87,13 +88,20 @@ class Calculation
     user_daily_stats.each do |uds|
       total_win = 0.0
       total_return = 0.0
+      total_agent_return = 0.0
       uds.bet_items.each do |item|
         total_win = total_win + item.result
+        total_win = total_win - item.credit if item.is_win
         total_return = total_return + item.user_return
+        total_agent_return = total_agent_return + item.agent_return
+
       end
-      uds.total_win = total_win.round(2)
-      uds.total_return = total_return.round(2)
+      uds.total_win = total_win.round(4)
+      uds.total_return = total_return.round(4)
+      uds.agent = uds.bet_items.first.user.agent if (uds.agent.nil? and not uds.bet_items.first.nil?)
+      uds.total_agent_return = total_agent_return.round(4)
       uds.save!
+
     end
   end
 

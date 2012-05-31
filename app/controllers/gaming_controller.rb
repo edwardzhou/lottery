@@ -226,11 +226,11 @@ class GamingController < UserBaseController
     # 如果用户的退水多于盘面退水，则用盘面退水
     bet_item.user_return_rate = [@current_user.return, @odds_level.return].min
     bet_item.agent_return_rate = @odds_level.return
-    bet_item.user_return = (bet_item.credit * bet_item.user_return_rate).round(2)
-    bet_item.agent_return = (bet_item.credit * (bet_item.agent_return - bet_item.user_return_rate)).round(2)
-    bet_item.total_return = (bet_item.credit * bet_item.agent_return_rate).round(2)
+    bet_item.user_return = (bet_item.credit * bet_item.user_return_rate).round(4)
+    bet_item.agent_return = (bet_item.credit * (bet_item.agent_return_rate - bet_item.user_return_rate)).round(4)
+    bet_item.total_return = (bet_item.credit * bet_item.agent_return_rate).round(4)
     bet_item.odds = @odds_level.rule_by_name(odds_rule).odds
-    bet_item.possible_win_credit = (bet_item.credit * bet_item.odds).round(2)
+    bet_item.possible_win_credit = (bet_item.credit * bet_item.odds).round(4)
     bet_item
   end
 

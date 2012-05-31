@@ -4,8 +4,10 @@ class UserDailyStat
   field :stat_date, type: Time
   field :total_win, type: BigDecimal, default: 0
   field :total_return, type: BigDecimal, default: 0
+  field :total_agent_return, type: BigDecimal, default: 0
 
   belongs_to :user
+  belongs_to :agent, :class_name => "User", :foreign_key => "agent_id"
   has_many :bet_items
 
   def self.get_current_stat(user, the_date = Date.today)
