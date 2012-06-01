@@ -1,15 +1,46 @@
 class Calculation
   def self.compute(lottery_inst, lottery_pred)
     outcome = lottery_inst.bet_items.inject(0) do |total, item|
-      Rails.logger.debug("checking item[bet_rule_type: #{item.bet_rule_type}, bet_rule_eval: #{item.bet_rule_eval}, bet_rule_name: #{item.bet_rule_name}")
+      #Rails.logger.debug("checking item[bet_rule_type: #{item.bet_rule_type}, bet_rule_eval: #{item.bet_rule_eval}, bet_rule_name: #{item.bet_rule_name}")
       if lottery_pred.send(:eval, item.bet_rule_eval)
-        Rails.logger.info("win -> #{item.possible_win_credit.to_f}")
+        #Rails.logger.info("win -> #{item.possible_win_credit.to_f}")
         total = total + item.possible_win_credit
       end
       total
     end
-
+    lottery_pred.total_outcome = outcome
     outcome
+  end
+
+  def self.predict_lottery(lottery_inst)
+    max_rand = LotteryPredict.count
+    total_start_time = Time.now
+    predict_seeds = 500.times.collect do
+      lp = LotteryPredict.all.offset(rand(max_rand)).limit(5).to_a.last
+      lp.shuffle_balls!
+    end
+
+    max_outcome = (lottery_inst.total_income * (lottery_inst.return_rate - 3) / 100.0).round(4)
+    max_predicts = {}
+
+    predict_start_time = Time.now
+    2.times do |index|
+      Rails.logger.info("[#{Time.now}] predict round \##{index} start")
+      start_time = Time.now
+      predicts = predict_seeds.select{|seed| self.compute(lottery_inst, seed) < max_outcome}
+      max_predict = predicts.max{|a,b| a.total_outcome <=> b.total_outcome}
+      max_predicts[max_predict.balls_to_a] = max_predict.total_outcome
+      end_time = Time.now
+      predict_seeds.each(&:shuffle_balls!)
+      shuffle_time = Time.now
+      Rails.logger.info("[#{Time.now}] predict round \##{index} end. predict[#{end_time-start_time}], shuffle[#{shuffle_time - end_time}]")
+    end
+    total_end_time = Time.now
+    Rails.logger.info("total time: #{total_end_time - total_start_time} , seed prepare time:#{(predict_start_time-total_start_time).seconds} ; total predict time: #{(total_end_time-predict_start_time).seconds}")
+
+
+    #final_result = max_predicts.max{|a, b| a[1] <=> b[1]}
+    max_predicts
   end
 
   def self.balance_lottery(lottery_inst)

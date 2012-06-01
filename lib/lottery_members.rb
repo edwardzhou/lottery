@@ -86,6 +86,11 @@ module LotteryMembers
        ball_5.ball_value, ball_6.ball_value, ball_7.ball_value, ball_8.ball_value]
     end
 
+    def shuffle_balls!
+      set_ball_values(balls_to_a.shuffle)
+      self
+    end
+
   end
 
   extend ActiveSupport::Concern
