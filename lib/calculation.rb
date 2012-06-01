@@ -16,7 +16,7 @@ class Calculation
     max_rand = LotteryPredict.count
     total_start_time = Time.now
     predict_seeds = 500.times.collect do
-      lp = LotteryPredict.all.offset(rand(max_rand)).limit(5).to_a.last
+      lp = LotteryPredict.all.order_by(:total_income => :asc).offset(rand(max_rand)).limit(5).to_a.last
       lp.shuffle_balls!
     end
 
@@ -24,12 +24,16 @@ class Calculation
     max_predicts = {}
 
     predict_start_time = Time.now
-    2.times do |index|
+    5.times do |index|
       Rails.logger.info("[#{Time.now}] predict round \##{index} start")
       start_time = Time.now
       predicts = predict_seeds.select{|seed| self.compute(lottery_inst, seed) < max_outcome}
-      max_predict = predicts.max{|a,b| a.total_outcome <=> b.total_outcome}
-      max_predicts[max_predict.balls_to_a] = max_predict.total_outcome
+      3.times() do
+        max_predict = predicts.max{|a,b| a.total_outcome <=> b.total_outcome}
+        break if max_predict.nil?
+        max_predicts[max_predict.balls_to_a] = max_predict.total_outcome
+        predicts.delete(max_predict)
+      end
       end_time = Time.now
       predict_seeds.each(&:shuffle_balls!)
       shuffle_time = Time.now
@@ -38,9 +42,15 @@ class Calculation
     total_end_time = Time.now
     Rails.logger.info("total time: #{total_end_time - total_start_time} , seed prepare time:#{(predict_start_time-total_start_time).seconds} ; total predict time: #{(total_end_time-predict_start_time).seconds}")
 
+    p max_predicts
+    if max_predicts.size > 0
+      key = max_predicts.keys.shuffle.shuffle.first
+      final_result = [key, max_predicts[key]]
+    else
+      final_result = nil
+    end
 
-    #final_result = max_predicts.max{|a, b| a[1] <=> b[1]}
-    max_predicts
+    final_result
   end
 
   def self.balance_lottery(lottery_inst)
@@ -52,12 +62,14 @@ class Calculation
       total_agent_return = total_agent_return + item.agent_return
       if lottery_inst.send(:eval, item.bet_rule_eval)
         item.is_win = true
-        item.result = item.possible_win_credit + item.user_return
-        total = total + item.result + item.agent_return
+        item.result = item.possible_win_credit
+        item.result_after_return = item.possible_win_credit + item.user_return
+        total = total + item.result_after_return + item.agent_return
         Rails.logger.info("user[username: #{user.username}] win -> #{item.possible_win_credit.to_f}")
       else
         item.is_win = false
-        item.result = - (item.credit - item.user_return)
+        item.result = - (item.credit)
+        item.result_after_return = - (item.credit - item.user_return)
         total = total + item.total_return
         Rails.logger.info("user[username: #{user.username}] lose -> #{item.credit.to_f}")
       end
@@ -79,7 +91,7 @@ class Calculation
       Rails.logger.debug("user_dta[#{item.user.id}] => #{total.to_f}")
       if item.is_win
         # 加上总赢数
-        total = total + item.result
+        total = total + item.result_after_return
         Rails.logger.debug("item.result => #{item.result.to_f}, user_dta[#{item.user.id}] => #{total.to_f}")
       else
         # 没中的，加上退水
@@ -100,7 +112,7 @@ class Calculation
     lottery_inst.bet_items.each do |item|
       total = user_data[item.user] || 0.0
       if item.is_win
-        total = total + item.result
+        total = total + item.result_after_return
       else
         total = total + item.user_return
       end
@@ -120,20 +132,42 @@ class Calculation
       total_win = 0.0
       total_return = 0.0
       total_agent_return = 0.0
+      total_bet_credit = 0.0
+      total_win_after_return = 0.0
       uds.bet_items.each do |item|
         total_win = total_win + item.result
         total_win = total_win - item.credit if item.is_win
+        total_win_after_return = total_win_after_return + item.result_after_return
+        total_win_after_return = total_win_after_return - item.credit if item.is_win
         total_return = total_return + item.user_return
         total_agent_return = total_agent_return + item.agent_return
-
+        total_bet_credit = total_bet_credit + item.credit
       end
       uds.total_win = total_win.round(4)
       uds.total_return = total_return.round(4)
       uds.agent = uds.bet_items.first.user.agent if (uds.agent.nil? and not uds.bet_items.first.nil?)
       uds.total_agent_return = total_agent_return.round(4)
+      uds.total_bet_credit = total_bet_credit.round(4)
+      uds.total_win_after_return = total_win_after_return.round(4)
       uds.save!
-
     end
+  end
+
+  def self.close_lottery(lottery_inst)
+    predict_result = nil
+    Rails.logger.info("predicting lottery balls.")
+    predict_result = predict_lottery(lottery_inst) while predict_result.nil?
+    Rails.logger.info("predicted balls #{predict_result[0]}, total_win: #{predict_result[1]}")
+
+    lottery_inst.set_ball_values(predict_result[0])
+
+    Rails.logger.info("balance lottery")
+    balance_lottery(lottery_inst)
+    Rails.logger.info("balance users")
+    balance_user(lottery_inst)
+    Rails.logger.info("update daily stat")
+    update_daily_stat(lottery_inst)
+
   end
 
 end

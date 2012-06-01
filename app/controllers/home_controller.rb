@@ -71,4 +71,13 @@ class HomeController < ApplicationController
 
   end
 
+  def bet_stat
+    if request.xhr?
+      @user_daily_stats = UserDailyStat.recent(current_user)
+      @total_rows = @user_daily_stats.count
+      @page = 1
+      @pages = 1
+    end
+  end
+
 end

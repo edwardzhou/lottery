@@ -27,6 +27,9 @@ class LotteryConfig
   end
 
   def start_new_lottery
+
+    Calculation.close_lottery(self.lottery_inst)
+
     lottery = LotteryInst.new
     lottery.lottery_name = self.lottery_def.lottery_name
     lottery.lottery_date = self.lottery_date

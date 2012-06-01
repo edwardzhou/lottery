@@ -47,7 +47,45 @@ jQuery ->
 
     );
 
-#  password_validate = (value, element) ->
+  if $("#uds_list")
+    $("#uds_list").jqGrid( {
+      url: gon.page_json_url
+      datatype: 'json',
+      mtype: 'GET',
+      colModel: [
+        {name: 'stat_date', index: 'stat_date', label: "日期", width: 130}
+        {name: 'total_bet_credit', index: 'total_bet_credit', label: "投注额", width: 70}
+        {name: 'total_win', index: 'total_win', label: "输赢", width: 100}
+        {name: 'total_return', index: 'total_return', label: "退水", width: 70}
+        {name: 'total_win_after_return', index: 'total_win_after_return', label: "退水后结果", width: 100}
+      ],
+      jsonReader : {
+      root:"rows",
+      repeatitems: false,
+      id: "_id"
+      },
+      pager: '#pager',
+      rowNum: 40,
+      #rowList:[40],
+      sortname: 'stat_time',
+      sortorder: 'asc',
+      viewrecords: true,
+      gridview: true,
+      caption: '结算历史',
+      resizable: true,
+      height: 350,
+      width: 500,
+      id: "_id"
+      #autowidth: true,
+      #footerrow : true,
+      #userDataOnFooter : true,
+      #altRows : true
+      }
+
+    );
+
+
+  #  password_validate = (value, element) ->
 #    result = this.optional(element) || value.length >= 6 && /\d/.test(value) && /[a-z]/i.test(value);
 #    if !result
 #      element.value = ""

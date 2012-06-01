@@ -17,6 +17,7 @@ class BetItem
   field :agent_return, type: BigDecimal, default: 0
   field :total_return, type: BigDecimal, default: 0
   field :result, type:BigDecimal, default: 0
+  field :result_after_return, type:BigDecimal, default: 0
   field :is_win, type: Boolean, default: false
   field :close, type: Boolean
 

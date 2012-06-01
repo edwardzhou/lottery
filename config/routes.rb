@@ -10,6 +10,7 @@ Lottery::Application.routes.draw do
   resources :home do
     collection do
       get "bet_list"
+      get "bet_stat"
       get "change_password"
       post "update_password"
     end
