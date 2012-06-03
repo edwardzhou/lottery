@@ -19,6 +19,11 @@ class LotteryInst
   field :total_income, type: BigDecimal
   field :total_outcome, type: BigDecimal
   field :profit, type: BigDecimal
+  field :closed, type: Boolean, default: false
+  field :balanced, type: Boolean, default: false
+  field :is_first, type: Boolean, default: false
+  field :is_first_started, type: Boolean, default: false
+  field :is_last, type: Boolean, default: false
 
   embeds_one :ball_1, :class_name => "Ball"
   embeds_one :ball_2, :class_name => "Ball"

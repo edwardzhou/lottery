@@ -23,11 +23,12 @@ on_load_odds = (odds_level) ->
 
 load_odds = ->
   $.ajax({url: gon.ball_url+'?_time=' + (new Date()).getTime().toString()}).done( (data) => on_load_odds(data) )
-  window.setTimeout(load_odds, 20 * 1000)
+  window.setTimeout(load_odds, 10 * 1000)
 
 jQuery ->
   if gon and gon.ball_url
-    window.setTimeout(load_odds, 3 * 1000)
+    load_odds();
+    #window.setTimeout(load_odds, 1 * 1000)
     #$.ajax({url: gon.ball_url}).done( (data) => on_load_odds(data) )
     $(".bet_input").bind("blur", () ->
       value = parseInt($(this).val())

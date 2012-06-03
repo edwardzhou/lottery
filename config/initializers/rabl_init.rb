@@ -16,3 +16,5 @@ Rabl.configure do |config|
   # config.enable_json_callbacks = false
   # config.xml_options = { :dasherize  => true, :skip_types => false }
 end
+
+#LotteryTask.new.delay.lottery_process

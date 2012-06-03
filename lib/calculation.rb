@@ -1,4 +1,11 @@
 class Calculation
+
+  @@all_predicts_seed = nil
+
+  def self.load_predict_lottery()
+    @@all_predicts_seed = LotteryPredict.all.order_by(:total_income => :asc).to_a if @@all_predicts_seed.nil?
+  end
+
   def self.compute(lottery_inst, lottery_pred)
     outcome = lottery_inst.bet_items.inject(0) do |total, item|
       #Rails.logger.debug("checking item[bet_rule_type: #{item.bet_rule_type}, bet_rule_eval: #{item.bet_rule_eval}, bet_rule_name: #{item.bet_rule_name}")
@@ -13,10 +20,13 @@ class Calculation
   end
 
   def self.predict_lottery(lottery_inst)
-    max_rand = LotteryPredict.count
+
+    load_predict_lottery
+
+    max_rand = @@all_predicts_seed.size + 1
     total_start_time = Time.now
     predict_seeds = 500.times.collect do
-      lp = LotteryPredict.all.order_by(:total_income => :asc).offset(rand(max_rand)).limit(5).to_a.last
+      lp = @@all_predicts_seed[rand(max_rand)]
       lp.shuffle_balls!
     end
 
@@ -27,7 +37,7 @@ class Calculation
     5.times do |index|
       Rails.logger.info("[#{Time.now}] predict round \##{index} start")
       start_time = Time.now
-      predicts = predict_seeds.select{|seed| self.compute(lottery_inst, seed) < max_outcome}
+      predicts = predict_seeds.select{|seed| self.compute(lottery_inst, seed) <= max_outcome}
       3.times() do
         max_predict = predicts.max{|a,b| a.total_outcome <=> b.total_outcome}
         break if max_predict.nil?
@@ -79,7 +89,8 @@ class Calculation
 
     lottery_inst.total_outcome = (total).round(4)
     lottery_inst.profit = (lottery_inst.total_income - lottery_inst.total_outcome).round(4)
-
+    lottery_inst.active = false
+    lottery_inst.balanced = true
     lottery_inst.save!
 
   end
@@ -154,20 +165,41 @@ class Calculation
   end
 
   def self.close_lottery(lottery_inst)
+    if lottery_inst.balanced
+      Rails.logger.debug("lottery_inst.balanced => #{lottery_inst.balanced}")
+      return
+    end
+
     predict_result = nil
     Rails.logger.info("predicting lottery balls.")
     predict_result = predict_lottery(lottery_inst) while predict_result.nil?
     Rails.logger.info("predicted balls #{predict_result[0]}, total_win: #{predict_result[1]}")
 
     lottery_inst.set_ball_values(predict_result[0])
+    lottery_inst.closed = true
+    lottery_inst.save!
 
+    #Rails.logger.info("balance lottery")
+    #balance_lottery(lottery_inst)
+    #Rails.logger.info("balance users")
+    #balance_user(lottery_inst)
+    #Rails.logger.info("update daily stat")
+    #update_daily_stat(lottery_inst)
+    #lottery_inst.balanced = true
+    #lottery_inst.save!
+    lottery_inst
+  end
+
+  def self.balance_all(lottery_inst)
     Rails.logger.info("balance lottery")
     balance_lottery(lottery_inst)
     Rails.logger.info("balance users")
     balance_user(lottery_inst)
     Rails.logger.info("update daily stat")
     update_daily_stat(lottery_inst)
-
+    lottery_inst.balanced = true
+    lottery_inst.save!
+    lottery_inst
   end
 
 end

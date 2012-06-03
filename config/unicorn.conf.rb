@@ -10,7 +10,7 @@
 
 # Use at least one worker per core if you're on a dedicated server,
 # more will usually help for _short_ waits on databases/caches.
-worker_processes 10
+worker_processes 2
 
 # Since Unicorn is never exposed to outside clients, it does not need to
 # run on the standard HTTP port (80), there is no reason to start Unicorn
@@ -50,8 +50,8 @@ GC.respond_to?(:copy_on_write_friendly=) and
 before_fork do |server, worker|
   # the following is highly recomended for Rails + "preload_app true"
   # as there's no need for the master process to hold a connection
-  #defined?(ActiveRecord::Base) and
-  #  ActiveRecord::Base.connection.disconnect!
+  defined?(ActiveRecord::Base) and
+    ActiveRecord::Base.connection.disconnect!
 
   # The following is only recommended for memory/DB-constrained
   # installations.  It is not needed if your system can house
@@ -84,8 +84,13 @@ after_fork do |server, worker|
   # server.listen(addr, :tries => -1, :delay => 5, :tcp_nopush => true)
 
   # the following is *required* for Rails + "preload_app true",
-  #defined?(ActiveRecord::Base) and
-  #  ActiveRecord::Base.establish_connection
+  defined?(ActiveRecord::Base) and
+    ActiveRecord::Base.establish_connection
+
+  require "calculation"
+  require "lottery_task"
+  Calculation.load_predict_lottery
+  LotteryTask.new.delay.lottery_process
 
   # if preload_app is true, then you may also want to check and
   # restart any other shared sockets/descriptors such as Memcached,

@@ -1,5 +1,7 @@
 #encoding: utf-8
 
+require "lottery_task"
+
 class HomeController < ApplicationController
 
   include ApplicationHelper
@@ -8,6 +10,10 @@ class HomeController < ApplicationController
 
   end
 
+  def test
+    seconds = params[:s]
+    LotteryTask.do_job(seconds.to_i) unless seconds.nil?
+  end
 
   def user
   end

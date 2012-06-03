@@ -45,23 +45,27 @@ class GamingController < UserBaseController
     @id = params[:id]
     bet_params = params[@id]
 
-    ball_id = 0
-    ball_regex = /^ball(\d\d?)$/
-    if @id =~ ball_regex then
-      ball_id = ball_regex.match(@id)[1].to_i
-    end
+    if @lottery.accept_betting
+      ball_id = 0
+      ball_regex = /^ball(\d\d?)$/
+      if @id =~ ball_regex then
+        ball_id = ball_regex.match(@id)[1].to_i
+      end
 
-    if not ball_id.between?(1, 11) or bet_params.nil? then
-      redirect_to :action => "show", :id => "ball9", :alert => "无效投注"
-    elsif ball_id.between?(1, 8) #1至8球
-      handle_ball_bet(ball_id, bet_params)
-    elsif ball_id == 9 #两面盘
-      handle_sum_bet(ball_id, bet_params)
-    elsif ball_id == 10 #总和、龙虎
-      handle_dl_bet(ball_id, bet_params)
-    end
+      if not ball_id.between?(1, 11) or bet_params.nil? then
+        redirect_to :action => "show", :id => "ball9", :alert => "无效投注"
+      elsif ball_id.between?(1, 8) #1至8球
+        handle_ball_bet(ball_id, bet_params)
+      elsif ball_id == 9 #两面盘
+        handle_sum_bet(ball_id, bet_params)
+      elsif ball_id == 10 #总和、龙虎
+        handle_dl_bet(ball_id, bet_params)
+      end
 
-    redirect_to :action => "show", :id => @id
+      redirect_to :action => "show", :id => @id
+    else
+      redirect_to :action => "show", :id => @id, :alert => "投注失败，已关闭投注！"
+    end
 
   end
 
