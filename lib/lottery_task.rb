@@ -1,3 +1,8 @@
+require "lock_object"
+require "lottery_config"
+require "lottery_def"
+require "lottery_inst"
+require "lottery_predict"
 
 class LotteryTask
   @@semaphore = Mutex.new
@@ -9,6 +14,7 @@ class LotteryTask
   end
 
   def lottery_process
+    p "OK"
 
     Rails.logger.debug("lottery_process")
     while true
