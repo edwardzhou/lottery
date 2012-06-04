@@ -23,7 +23,7 @@ class Calculation
 
     load_predict_lottery
 
-    max_rand = @@all_predicts_seed.size + 1
+    max_rand = @@all_predicts_seed.size
     total_start_time = Time.now
     predict_seeds = 500.times.collect do
       lp = @@all_predicts_seed[rand(max_rand)]

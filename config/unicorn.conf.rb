@@ -89,8 +89,8 @@ after_fork do |server, worker|
 
   require "calculation"
   require "lottery_task"
-  Calculation.load_predict_lottery
-  LotteryTask.new.delay.lottery_process
+  #Calculation.load_predict_lottery
+  #LotteryTask.new.delay.lottery_process
 
   # if preload_app is true, then you may also want to check and
   # restart any other shared sockets/descriptors such as Memcached,
