@@ -47,7 +47,7 @@ class LotteryConfig
     #end
 
     if self.next_seq_no > 84
-      reset_seq_no(Time.now.to_date.next.to_time)
+      reset_seq_no(self.next_start_time.to_date.next.to_time)
     end
 
     lottery = LotteryInst.new
