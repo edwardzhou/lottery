@@ -39,6 +39,7 @@ class Ball
     self.add_odd = !self.add_even
     self.trail_big = (value%10) >=5
     self.trail_small = !self.trail_big
+
     self.east = ![1, 5, 9, 13, 17].index(value).nil?
     self.south = ![2, 6, 10, 14, 18].index(value).nil?
     self.west = ![3, 7, 11, 15, 19].index(value).nil?

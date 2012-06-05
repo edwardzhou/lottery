@@ -25,7 +25,7 @@ class Calculation
 
     max_rand = @@all_predicts_seed.size
     total_start_time = Time.now
-    predict_seeds = 500.times.collect do
+    predict_seeds = 2000.times.collect do
       lp = @@all_predicts_seed[rand(max_rand)]
       lp.shuffle_balls!
     end
@@ -34,11 +34,11 @@ class Calculation
     max_predicts = {}
 
     predict_start_time = Time.now
-    5.times do |index|
+    1.times do |index|
       Rails.logger.info("[#{Time.now}] predict round \##{index} start")
       start_time = Time.now
       predicts = predict_seeds.select{|seed| self.compute(lottery_inst, seed) <= max_outcome}
-      p predicts
+      #p predicts
       3.times() do
         max_predict = predicts.max{|a,b| a.total_outcome <=> b.total_outcome}
         break if max_predict.nil?

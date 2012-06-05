@@ -71,12 +71,12 @@ module LotteryMembers
         ball_sum = balls_values.inject(0) {|sum, ball| sum = sum + ball}
       end
 
-      self.ball_9.set_value(ball_sum)
+      self.ball_9.set_value(ball_sum, true)
 
-      self.ball_10.dragon = self.ball_1.ball_value < self.ball_8.ball_value
-      self.ball_10.tiger = !self.ball_10.dragon
+      self.ball_9.dragon = self.ball_1.ball_value > self.ball_8.ball_value
+      self.ball_9.tiger = !self.ball_9.dragon
 
-
+      self
 
     end
 
