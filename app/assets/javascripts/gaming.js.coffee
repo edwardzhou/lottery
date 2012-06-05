@@ -6,6 +6,20 @@ bet_input_enabled = false
 timer_setted = false
 
 on_load_odds = (odds_level) ->
+  prev_id = $('.previous_lottery_id').data("id")
+  if prev_id != odds_level.previous_lottery.lottery_full_id
+    $("#ball_no1").attr("class", "No_" + odds_level.previous_lottery.ball_1)
+    $("#ball_no2").attr("class", "No_" + odds_level.previous_lottery.ball_2)
+    $("#ball_no3").attr("class", "No_" + odds_level.previous_lottery.ball_3)
+    $("#ball_no4").attr("class", "No_" + odds_level.previous_lottery.ball_4)
+    $("#ball_no5").attr("class", "No_" + odds_level.previous_lottery.ball_5)
+    $("#ball_no6").attr("class", "No_" + odds_level.previous_lottery.ball_6)
+    $("#ball_no7").attr("class", "No_" + odds_level.previous_lottery.ball_7)
+    $("#ball_no8").attr("class", "No_" + odds_level.previous_lottery.ball_8)
+    $('.previous_lottery_id').data("id", odds_level.previous_lottery.lottery_full_id)
+    $('.previous_lottery_id').text(odds_level.previous_lottery.lottery_full_id)
+    $(".current_lottery_id").text(odds_level.current_lottery.lottery_full_id)
+
   if odds_level.can_bet
     if !bet_input_enabled
       bet_input_enabled = true
