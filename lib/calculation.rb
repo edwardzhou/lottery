@@ -38,6 +38,7 @@ class Calculation
       Rails.logger.info("[#{Time.now}] predict round \##{index} start")
       start_time = Time.now
       predicts = predict_seeds.select{|seed| self.compute(lottery_inst, seed) <= max_outcome}
+      p predicts
       3.times() do
         max_predict = predicts.max{|a,b| a.total_outcome <=> b.total_outcome}
         break if max_predict.nil?
