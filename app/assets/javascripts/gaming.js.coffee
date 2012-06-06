@@ -16,12 +16,14 @@ update_time = ->
     close_min = Math.floor(close_seconds / 60)
     close_sec = Math.floor(close_seconds % 60)
 
+    end_str = ""
     end_str = "0" if end_min < 10
     end_str = end_str + end_min + ":"
     end_str = end_str + "0" if end_sec < 10
     end_str = end_str + end_sec
     endstr = end_str + end_sec
 
+    close_str = ""
     close_str = "0" if close_min < 10
     close_str = close_str + close_min + ":"
     close_str = close_str + "0" if close_sec < 10
