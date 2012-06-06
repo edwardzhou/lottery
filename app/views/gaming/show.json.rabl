@@ -7,7 +7,10 @@ end
 
 child(@lottery => :current_lottery) do
   attributes :lottery_full_id, :start_time, :end_time, :close_at
+end
 
+child(current_user => :user) do
+  attributes :total_credit, :available_credit
 end
 
 child(@previous_lottery => :previous_lottery) do

@@ -4,9 +4,38 @@
 
 bet_input_enabled = false
 timer_setted = false
+end_time = null
+close_time = null
+
+update_time = ->
+  if end_time != null
+    end_seconds = (end_time.getTime() - (new Date()).getTime()) / 1000
+    close_seconds = (close_time.getTime() - (new Date()).getTime()) / 1000
+    end_min = Math.floor(end_seconds / 60)
+    end_sec = Math.floor(end_seconds % 60)
+    close_min = Math.floor(close_seconds / 60)
+    close_sec = Math.floor(close_seconds % 60)
+
+    end_str = "0" if end_min < 10
+    end_str = end_str + end_min + ":"
+    end_str = end_str + "0" if end_sec < 10
+    end_str = end_str + end_sec
+    endstr = end_str + end_sec
+
+    close_str = "0" if close_min < 10
+    close_str = close_str + close_min + ":"
+    close_str = close_str + "0" if close_sec < 10
+    close_str = close_str + close_sec
+
+    $("#close_time").text(close_str)
+    $("#end_time").text(end_str)
+
+
 
 on_load_odds = (odds_level) ->
   $("#UserResult").text(odds_level.stat.total_win_after_return)
+  end_time = new Date(odds_level.current_lottery.end_time)
+  close_time = new Date(odds_level.current_lottery.close_at)
   prev_id = $('.previous_lottery_id').data("id")
   if prev_id != odds_level.previous_lottery.lottery_full_id
     $("#ball_no1").attr("class", "No_" + odds_level.previous_lottery.ball_1)
@@ -43,6 +72,7 @@ load_odds = ->
 jQuery ->
   if gon and gon.ball_url
     load_odds();
+    window.setInterval(update_time, 1 * 1000)
     #window.setTimeout(load_odds, 1 * 1000)
     #$.ajax({url: gon.ball_url}).done( (data) => on_load_odds(data) )
     $(".bet_input").bind("blur", () ->
@@ -54,7 +84,6 @@ jQuery ->
         value = $(this).attr("max")
 
       $(this).val(value)
-
     )
 
   $(".reset").bind("click", () ->
