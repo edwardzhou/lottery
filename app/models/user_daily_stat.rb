@@ -13,11 +13,13 @@ class UserDailyStat
   has_many :bet_items
 
   scope :recent, lambda {|user| where(:user_id => user.id).and(:stat_date.gte => 30.days.ago.beginning_of_day).order_by(:stat_date => :asc) }
+  scope :latest, lambda {|user| where(:user_id => user.id).order_by(:stat_date => :desc).limit(1) }
 
   def self.get_current_stat(user, the_date = Date.today)
     the_date = the_date.to_time.beginning_of_day
     user_stat = self.find_or_create_by({user_id: user.id, stat_date: the_date})
   end
+
 
   def formatted_start_date
     I18n.l(self.stat_date, :format => "%m-%d %A")

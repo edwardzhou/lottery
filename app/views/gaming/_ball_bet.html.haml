@@ -9,28 +9,28 @@
               %td.cell_border{:width => "59"}
                 = label_tag "#{@id}[big]", "-", :class => "multiple_Red odds_label", :title => "按此下註", :"data-odds-rule" => "half"
               %td.cell_border{:width => "62"}
-                = text_field_tag "#{@id}[big]", nil, :class => "bet_input hidden", :maxlength => 6, :size => 6
+                = text_field_tag "#{@id}[big]", nil, :class => "bet_input hidden", :maxlength => 6, :size => 6, :max => 50000
                 %span.bet_lock 封盤
             %tr.Ball_tr_H
               %td.cell_border.Jut_caption_1 小
               %td.cell_border{:width => "59"}
                 = label_tag "#{@id}[small]", "-", :class => "multiple_Red odds_label", :title => "按此下註", :"data-odds-rule" => "half"
               %td.cell_border{:width => "62"}
-                = text_field_tag "#{@id}[small]", nil, :class => "bet_input hidden", :maxlength => 6, :size => 6
+                = text_field_tag "#{@id}[small]", nil, :class => "bet_input hidden", :maxlength => 6, :size => 6, :max => 50000
                 %span.bet_lock 封盤
             %tr.Ball_tr_H
               %td.cell_border.Jut_caption_1 東
               %td.cell_border{:width => "59"}
                 = label_tag "#{@id}[east]", "-", :class => "multiple_Red odds_label", :title => "按此下註", :"data-odds-rule" => "quarter"
               %td.cell_border{:width => "62"}
-                = text_field_tag "#{@id}[east]", nil, :class => "bet_input hidden", :maxlength => 6, :size => 6
+                = text_field_tag "#{@id}[east]", nil, :class => "bet_input hidden", :maxlength => 6, :size => 6, :max => 20000
                 %span.bet_lock 封盤
             %tr.Ball_tr_H
               %td.cell_border.Jut_caption_1 中
               %td.cell_border{:width => "59"}
                 = label_tag "#{@id}[middle]", "-", :class => "multiple_Red odds_label", :title => "按此下註", :"data-odds-rule" => "third"
               %td.cell_border{:width => "62"}
-                = text_field_tag "#{@id}[middle]", nil, :class => "bet_input hidden", :maxlength => 6, :size => 6
+                = text_field_tag "#{@id}[middle]", nil, :class => "bet_input hidden", :maxlength => 6, :size => 6, :max => 20000
                 %span.bet_lock 封盤
       %td
         %table.Ball_List{:border => "0", :cellpadding => "0", :cellspacing => "1", :width => "175"}
@@ -40,7 +40,7 @@
               %td.cell_border{:width => "59"}
                 = label_tag "#{@id}[odd]", "-", :class => "multiple_Red odds_label", :title => "按此下註", :"data-odds-rule" => "half"
               %td.cell_border{:width => "62"}
-                = text_field_tag "#{@id}[odd]", nil, :class => "bet_input hidden", :maxlength => 6, :size => 6
+                = text_field_tag "#{@id}[odd]", nil, :class => "bet_input hidden", :maxlength => 6, :size => 6, :max => 50000
                 %span.bet_lock 封盤
                 
             %tr.Ball_tr_H
@@ -48,21 +48,21 @@
               %td.cell_border{:width => "59"}
                 = label_tag "#{@id}[even]", "-", :class => "multiple_Red odds_label", :title => "按此下註", :"data-odds-rule" => "half"
               %td.cell_border{:width => "62"}
-                = text_field_tag "#{@id}[even]", nil, :class => "bet_input hidden", :maxlength => 6, :size => 6
+                = text_field_tag "#{@id}[even]", nil, :class => "bet_input hidden", :maxlength => 6, :size => 6, :max => 50000
                 %span.bet_lock 封盤
             %tr.Ball_tr_H
               %td.cell_border.Jut_caption_1 南
               %td.cell_border{:width => "59"}
                 = label_tag "#{@id}[south]", "-", :class => "multiple_Red odds_label", :title => "按此下註", :"data-odds-rule" => "quarter"
               %td.cell_border{:width => "62"}
-                = text_field_tag "#{@id}[south]", nil, :class => "bet_input hidden", :maxlength => 6, :size => 6
+                = text_field_tag "#{@id}[south]", nil, :class => "bet_input hidden", :maxlength => 6, :size => 6, :max => 20000
                 %span.bet_lock 封盤
             %tr.Ball_tr_H
               %td.cell_border.Jut_caption_1 發
               %td.cell_border{:width => "59"}
                 = label_tag "#{@id}[fa]", "-", :class => "multiple_Red odds_label", :title => "按此下註", :"data-odds-rule" => "third"
               %td.cell_border{:width => "62"}
-                = text_field_tag "#{@id}[fa]", nil, :class => "bet_input hidden", :maxlength => 6, :size => 6
+                = text_field_tag "#{@id}[fa]", nil, :class => "bet_input hidden", :maxlength => 6, :size => 6, :max => 20000
                 %span.bet_lock 封盤
       %td
         %table.Ball_List{:border => "0", :cellpadding => "0", :cellspacing => "1", :width => "175"}
@@ -72,28 +72,28 @@
               %td.cell_border{:width => "59"}
                 = label_tag "#{@id}[trail_big]", "-", :class => "multiple_Red odds_label", :title => "按此下註", :"data-odds-rule" => "half"
               %td.cell_border{:width => "62"}
-                = text_field_tag "#{@id}[trail_big]", nil, :class => "bet_input hidden", :maxlength => 6, :size => 6
+                = text_field_tag "#{@id}[trail_big]", nil, :class => "bet_input hidden", :maxlength => 6, :size => 6, :max => 50000
                 %span.bet_lock 封盤
             %tr.Ball_tr_H
               %td.cell_border.Jut_caption_1 尾小
               %td.cell_border{:width => "59"}
                 = label_tag "#{@id}[trail_small]", "-", :class => "multiple_Red odds_label", :title => "按此下註", :"data-odds-rule" => "half"
               %td.cell_border{:width => "62"}
-                = text_field_tag "#{@id}[trail_small]", nil, :class => "bet_input hidden", :maxlength => 6, :size => 6
+                = text_field_tag "#{@id}[trail_small]", nil, :class => "bet_input hidden", :maxlength => 6, :size => 6, :max => 50000
                 %span.bet_lock 封盤
             %tr.Ball_tr_H
               %td.cell_border.Jut_caption_1 西
               %td.cell_border{:width => "59"}
                 = label_tag "#{@id}[west]", "-", :class => "multiple_Red odds_label", :title => "按此下註", :"data-odds-rule" => "quarter"
               %td.cell_border{:width => "62"}
-                = text_field_tag "#{@id}[west]", nil, :class => "bet_input hidden", :maxlength => 6, :size => 6
+                = text_field_tag "#{@id}[west]", nil, :class => "bet_input hidden", :maxlength => 6, :size => 6, :max => 20000
                 %span.bet_lock 封盤
             %tr.Ball_tr_H
               %td.cell_border.Jut_caption_1 白
               %td.cell_border{:width => "59"}
                 = label_tag "#{@id}[white]", "-", :class => "multiple_Red odds_label", :title => "按此下註", :"data-odds-rule" => "third"
               %td.cell_border{:width => "62"}
-                = text_field_tag "#{@id}[white]", nil, :class => "bet_input hidden", :maxlength => 6, :size => 6
+                = text_field_tag "#{@id}[white]", nil, :class => "bet_input hidden", :maxlength => 6, :size => 6, :max => 20000
                 %span.bet_lock 封盤
       %td{:valign => "top"}
         %table.Ball_List{:border => "0", :cellpadding => "0", :cellspacing => "1", :width => "175"}
@@ -103,21 +103,21 @@
               %td.cell_border{:width => "59"}
                 = label_tag "#{@id}[add_odd]", "-", :class => "multiple_Red odds_label", :title => "按此下註", :"data-odds-rule" => "half"
               %td.cell_border{:width => "62"}
-                = text_field_tag "#{@id}[add_odd]", nil, :class => "bet_input hidden", :maxlength => 6, :size => 6
+                = text_field_tag "#{@id}[add_odd]", nil, :class => "bet_input hidden", :maxlength => 6, :size => 6, :max => 50000
                 %span.bet_lock 封盤
             %tr.Ball_tr_H
               %td.cell_border.Jut_caption_1 合數雙
               %td.cell_border{:width => "59"}
                 = label_tag "#{@id}[add_even]", "-", :class => "multiple_Red odds_label", :title => "按此下註", :"data-odds-rule" => "half"
               %td.cell_border{:width => "62"}
-                = text_field_tag "#{@id}[add_even]", nil, :class => "bet_input hidden", :maxlength => 6, :size => 6
+                = text_field_tag "#{@id}[add_even]", nil, :class => "bet_input hidden", :maxlength => 6, :size => 6, :max => 50000
                 %span.bet_lock 封盤
             %tr.Ball_tr_H
               %td.cell_border.Jut_caption_1 北
               %td.cell_border{:width => "59"}
                 = label_tag "#{@id}[north]", "-", :class => "multiple_Red odds_label", :title => "按此下註", :"data-odds-rule" => "quarter"
               %td.cell_border{:width => "62"}
-                = text_field_tag "#{@id}[north]", nil, :class => "bet_input hidden", :maxlength => 6, :size => 6
+                = text_field_tag "#{@id}[north]", nil, :class => "bet_input hidden", :maxlength => 6, :size => 6, :max => 20000
                 %span.bet_lock 封盤
             %tr.Ball_tr_H
               %td.cell_border.Jut_caption_1 -

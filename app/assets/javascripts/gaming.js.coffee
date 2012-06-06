@@ -6,6 +6,7 @@ bet_input_enabled = false
 timer_setted = false
 
 on_load_odds = (odds_level) ->
+  $("#UserResult").text(odds_level.stat.total_win_after_return)
   prev_id = $('.previous_lottery_id').data("id")
   if prev_id != odds_level.previous_lottery.lottery_full_id
     $("#ball_no1").attr("class", "No_" + odds_level.previous_lottery.ball_1)
@@ -16,8 +17,8 @@ on_load_odds = (odds_level) ->
     $("#ball_no6").attr("class", "No_" + odds_level.previous_lottery.ball_6)
     $("#ball_no7").attr("class", "No_" + odds_level.previous_lottery.ball_7)
     $("#ball_no8").attr("class", "No_" + odds_level.previous_lottery.ball_8)
-    $('.previous_lottery_id').data("id", odds_level.previous_lottery.lottery_full_id)
-    $('.previous_lottery_id').text(odds_level.previous_lottery.lottery_full_id)
+    $(".previous_lottery_id").data("id", odds_level.previous_lottery.lottery_full_id)
+    $(".previous_lottery_id").text(odds_level.previous_lottery.lottery_full_id)
     $(".current_lottery_id").text(odds_level.current_lottery.lottery_full_id)
 
   if odds_level.can_bet
@@ -48,7 +49,12 @@ jQuery ->
       value = parseInt($(this).val())
       if isNaN(value) or value <= 0
         value = ""
+      else if value > parseInt($(this).attr("max"))
+        alert "本注最大投注额度为 " + $(this).attr("max")
+        value = $(this).attr("max")
+
       $(this).val(value)
+
     )
 
   $(".reset").bind("click", () ->

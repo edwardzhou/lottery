@@ -23,6 +23,10 @@ child(@previous_lottery => :previous_lottery) do
   node(:ball_8) {|p| format("%02d", p.ball_8.ball_value)}
 end
 
+child(@current_daily_stat => :stat) do
+  attributes :total_win_after_return
+end
+
 
 child :rules do
   attributes :rule_name, :rule_title, :rule_description, :odds

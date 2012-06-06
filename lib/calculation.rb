@@ -114,7 +114,7 @@ class Calculation
     end
 
     user_data.each do |user, total|
-      user.available_credit = (user.available_credit + total.round(4))
+      user.available_credit = (user.available_credit + total.round).round(4)
       user.save! if want_save
     end
   end

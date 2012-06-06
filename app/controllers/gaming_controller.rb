@@ -147,7 +147,8 @@ class GamingController < UserBaseController
     bet_items.each {|item| item.save!}
 
     total_bet_credit = bet_items.inject(0) { |sum, item| sum + item.credit }
-    @current_user.available_credit = @current_user.available_credit - total_bet_credit
+    #@current_user.available_credit = @current_user.available_credit - total_bet_credit
+    @current_user.available_credit = (@current_user.available_credit - total_bet_credit).round(4)
     @current_user.save!
 
     current_lottery.total_income = current_lottery.total_income + total_bet_credit
@@ -201,7 +202,7 @@ class GamingController < UserBaseController
     bet_items.each {|item| item.save!}
 
     total_bet_credit = bet_items.inject(0) { |sum, item| sum + item.credit }
-    @current_user.available_credit = @current_user.available_credit - total_bet_credit
+    @current_user.available_credit = (@current_user.available_credit - total_bet_credit).round(4)
     @current_user.save!
 
     current_lottery.total_income = current_lottery.total_income + total_bet_credit
@@ -245,6 +246,7 @@ class GamingController < UserBaseController
     gon.available_credit = current_user.available_credit
     @lottery = current_lottery
     @previous_lottery = previous_lottery
+    @current_daily_stat = UserDailyStat.get_current_stat(current_user)
 
     @odds_level = @lottery.get_odds_level(current_user.odds_level.level_id)
 
