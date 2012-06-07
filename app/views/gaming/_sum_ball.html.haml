@@ -10,5 +10,5 @@
         %td#jeu_p_9_161.cell_border{:width => "59"}
           = label_tag "ball9[ball_#{ball_no}[#{ball_rule.rule_name}]]", "-", :class => "multiple_Red odds_label", :title => "按此下註", :"data-odds-rule" => "half"
         %td#jeu_m_9_161.cell_border{:width => "62"}
-          = text_field_tag "ball9[ball_#{ball_no}[#{ball_rule.rule_name}]]", nil, :maxlength => 9, :size => 6, :class => "bet_input hidden", :max => 50000
+          = text_field_tag "ball9[ball_#{ball_no}[#{ball_rule.rule_name}]]", nil, :maxlength => 9, :size => 6, :class => "bet_input hidden", :max => 50000, :"data-odds-rule" => "half"
           %span.bet_lock 封盤

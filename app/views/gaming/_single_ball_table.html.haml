@@ -11,6 +11,6 @@
         %td.cell_border
           = label_tag "#{@id}[ball_#{bet_no}]", "-" , :class => "multiple_Red odds_label", :"data-odds-rule" => "exact"
         %td.cell_border
-          = text_field_tag "#{@id}[ball_#{bet_no}]", nil, :maxlength => 6, :size => 8, :class => "bet_input hidden" , :max => "10000"
+          = text_field_tag "#{@id}[ball_#{bet_no}]", nil, :maxlength => 6, :size => 8, :class => "bet_input hidden" , :max => "10000", :"data-odds-rule" => "exact"
           %span.bet_lock 封盤
 

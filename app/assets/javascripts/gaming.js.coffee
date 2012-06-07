@@ -12,10 +12,10 @@ update_time = ->
   if end_time != null
     end_seconds = (end_time.getTime() - (new Date()).getTime()) / 1000
     close_seconds = (close_time.getTime() - (new Date()).getTime()) / 1000
-    end_min = Math.floor(end_seconds / 60)
+    end_min = Math.floor(end_seconds % 3600 / 60)
     end_sec = Math.floor(end_seconds % 60)
     end_hour = Math.floor(end_seconds / 3600)
-    close_min = Math.floor(close_seconds / 60)
+    close_min = Math.floor(close_seconds % 3600 / 60)
     close_sec = Math.floor(close_seconds % 60)
     close_hour = Math.floor(close_seconds / 3600)
 
@@ -89,6 +89,8 @@ on_load_odds = (odds_level) ->
       for rule in odds_level.rules
         do (rule) ->
           $("label[data-odds-rule='" + rule.rule_name + "']").text(rule.odds)
+          $("input[data-odds-rule='" + rule.rule_name + "']").data("odds", rule.odds)
+
       $(".bet_input").show();
       $(".bet_lock").hide();
   else
@@ -121,14 +123,21 @@ jQuery ->
 
     $("#bet_form").bind "submit", =>
       total = 0.0
+      total_possible_win = 0.0
+      total_items = 0
       $(".bet_input").each (index)->
         value = parseInt($(this).val())
         unless isNaN(value)
           total = total + value
+          total_items = total_items + 1
+          total_possible_win = total_possible_win + value * parseFloat($(this).data("odds"))
 
       if total > gon.available_credit
         alert "不能投注: 總投注金額 " + total + " 大于可用金額 " + gon.available_credit
         return false
+      else
+        s = total_items + " 注, 總投注金額 " + total + ", 可赢金額 " + total_possible_win
+        return confirm(s)
 
   $(".reset").bind("click", () ->
     $(".bet_input").val("");
