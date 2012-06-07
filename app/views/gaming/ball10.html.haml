@@ -15,19 +15,6 @@
         %td.cell_border
           = render :partial => "sum_bet", :locals => {:ball_id => @ball_id, :rules => @sum_bet_dt_rules }
 
-  %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "700"}
-    %tbody
-      %tr
-        - @sum_balls_1.each do |sum_ball|
-          %td
-            = render :partial => "sum_ball", :locals => {:ball_title => sum_ball[:ball_name], :ball_no => sum_ball[:ball_no], :ball_rules => sum_ball[:ball_rules]}
-
-  %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "700"}
-    %tbody
-      %tr
-        - @sum_balls_2.each do |sum_ball|
-          %td
-            = render :partial => "sum_ball", :locals => {:ball_title => sum_ball[:ball_name], :ball_no => sum_ball[:ball_no], :ball_rules => sum_ball[:ball_rules]}
   %table(width="100%" )
     %tbody
       %tr

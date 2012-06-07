@@ -22,22 +22,22 @@ class GamingController < UserBaseController
 
   def show
     @id = params[:id]
-    ball_id = 0
+    @ball_id = 0
     ball_regex = /^ball(\d\d?)$/
     if @id =~ ball_regex then
-      ball_id = ball_regex.match(@id)[1].to_i
+      @ball_id = ball_regex.match(@id)[1].to_i
     end
 
-    if ball_id == 0
+    if @ball_id == 0
       render :action => "index"
-    elsif ball_id
-      @ball = current_lottery.balls[ball_id - 1]
+    elsif @ball_id
+      @ball = current_lottery.balls[@ball_id - 1]
     end
 
     gon.ball_url = gaming_path(@id, format: :json)
 
-    if ball_id > 8 and not request.xhr?
-      render "ball9"
+    if @ball_id > 8 and not request.xhr?
+      render "ball#{@ball_id}"
     end
   end
 
@@ -45,21 +45,24 @@ class GamingController < UserBaseController
     @id = params[:id]
     bet_params = params[@id]
 
-    if @lottery.accept_betting
-      ball_id = 0
-      ball_regex = /^ball(\d\d?)$/
-      if @id =~ ball_regex then
-        ball_id = ball_regex.match(@id)[1].to_i
-      end
+    @ball_id = 0
+    ball_regex = /^ball(\d\d?)$/
+    if @id =~ ball_regex then
+      @ball_id = ball_regex.match(@id)[1].to_i
+    end
 
-      if not ball_id.between?(1, 11) or bet_params.nil? then
-        redirect_to :action => "show", :id => "ball9", :alert => "无效投注"
-      elsif ball_id.between?(1, 8) #1至8球
-        handle_ball_bet(ball_id, bet_params)
-      elsif ball_id == 9 #两面盘
-        handle_sum_bet(ball_id, bet_params)
-      elsif ball_id == 10 #总和、龙虎
-        handle_dl_bet(ball_id, bet_params)
+    if not @ball_id.between?(1, 11) or bet_params.nil?
+      @ball_id = 0
+      redirect_to :action => "show", :id => "ball9", :alert => "无效投注"
+    end
+
+    if @lottery.accept_betting
+      if @ball_id.between?(1, 8) #1至8球
+        handle_ball_bet(@ball_id, bet_params)
+      elsif @ball_id == 9 #两面盘
+        handle_sum_bet(@ball_id, bet_params)
+      elsif @ball_id == 10 #总和、龙虎
+        handle_sum_bet(@ball_id, bet_params)
       end
 
       redirect_to :action => "show", :id => @id
