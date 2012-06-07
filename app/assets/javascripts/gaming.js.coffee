@@ -62,6 +62,10 @@ update_time = ->
 
 on_load_odds = (odds_level) ->
   $("#UserResult").text(odds_level.stat.total_win_after_return)
+  gon.available_credit = odds_level.user.available_credit
+  gon.total_credit = odds_level.user.total_credit
+  $("#available_credit").text(gon.available_credit)
+  $("#total_credit").text(gon.total_credi)
   end_time = new Date(odds_level.current_lottery.end_time)
   close_time = new Date(odds_level.current_lottery.close_at)
   refresh_time = parseInt(odds_level.refresh_time)
@@ -109,11 +113,22 @@ jQuery ->
       if isNaN(value) or value <= 0
         value = ""
       else if value > parseInt($(this).attr("max"))
-        alert "本注最大投注额度为 " + $(this).attr("max")
+        alert "本注最大投注額度爲 " + $(this).attr("max")
         value = $(this).attr("max")
 
       $(this).val(value)
     )
+
+    $("#bet_form").bind "submit", =>
+      total = 0.0
+      $(".bet_input").each (index)->
+        value = parseInt($(this).val())
+        unless isNaN(value)
+          total = total + value
+
+      if total > gon.available_credit
+        alert "不能投注: 總投注金額 " + total + " 大于可用金額 " + gon.available_credit
+        return false
 
   $(".reset").bind("click", () ->
     $(".bet_input").val("");

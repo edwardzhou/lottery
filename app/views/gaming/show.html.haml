@@ -3,7 +3,7 @@
 
 = render :partial => "header"
 
-= form_tag nil, :method => :put  do |f|
+= form_tag nil, :method => :put , :id => "bet_form"  do |f|
   %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "700"}
     %tbody
       %tr
@@ -20,4 +20,4 @@
         %td(align="center")
           %input(type="button" class="reset" value="重填")/
           \&nbsp;
-          = submit_tag "投注",:disable_with => "投注中..."
+          = submit_tag "投注", :disable_with => "投注中..."
