@@ -6,6 +6,7 @@ bet_input_enabled = false
 timer_setted = false
 end_time = null
 close_time = null
+refresh_time = 20
 
 update_time = ->
   if end_time != null
@@ -13,31 +14,57 @@ update_time = ->
     close_seconds = (close_time.getTime() - (new Date()).getTime()) / 1000
     end_min = Math.floor(end_seconds / 60)
     end_sec = Math.floor(end_seconds % 60)
+    end_hour = Math.floor(end_seconds / 3600)
     close_min = Math.floor(close_seconds / 60)
     close_sec = Math.floor(close_seconds % 60)
+    close_hour = Math.floor(close_seconds / 3600)
 
     end_str = ""
-    end_str = "0" if end_min < 10
-    end_str = end_str + end_min + ":"
-    end_str = end_str + "0" if end_sec < 10
-    end_str = end_str + end_sec
-    endstr = end_str + end_sec
+    if end_seconds > 3600
+      end_str = end_str + "0" if end_hour < 10
+      end_str = end_str + end_hour + ":"
+
+    if end_seconds > 0
+      end_str = end_str + "0" if end_min < 10
+      end_str = end_str + end_min + ":"
+      end_str = end_str + "0" if end_sec < 10
+      end_str = end_str + end_sec
+    else
+      end_str = "00:00"
 
     close_str = ""
-    close_str = "0" if close_min < 10
-    close_str = close_str + close_min + ":"
-    close_str = close_str + "0" if close_sec < 10
-    close_str = close_str + close_sec
+    if close_seconds > 3600
+      close_str = close_str + "0" if close_hour < 10
+      close_str = close_str + close_hour + ":"
+
+    if close_seconds > 0
+      close_str = close_str + "0" if close_min < 10
+      close_str = close_str + close_min + ":"
+      close_str = close_str + "0" if close_sec < 10
+      close_str = close_str + close_sec
+    else
+      close_str = "00:00"
 
     $("#close_time").text(close_str)
     $("#end_time").text(end_str)
 
+    if close_seconds > 600
+      $("#close_title").text("距離開盤：")
+    else
+      $("#close_title").text("距離封盤：")
 
+    refresh_time = refresh_time - 1
+    if refresh_time <= 0
+      refresh_time = 0
+      load_odds()
+
+    $("#Update_Time").text(refresh_time)
 
 on_load_odds = (odds_level) ->
   $("#UserResult").text(odds_level.stat.total_win_after_return)
   end_time = new Date(odds_level.current_lottery.end_time)
   close_time = new Date(odds_level.current_lottery.close_at)
+  refresh_time = parseInt(odds_level.refresh_time)
   prev_id = $('.previous_lottery_id').data("id")
   if prev_id != odds_level.previous_lottery.lottery_full_id
     $("#ball_no1").attr("class", "No_" + odds_level.previous_lottery.ball_1)
@@ -69,7 +96,7 @@ on_load_odds = (odds_level) ->
 
 load_odds = ->
   $.ajax({url: gon.ball_url+'?_time=' + (new Date()).getTime().toString()}).done( (data) => on_load_odds(data) )
-  window.setTimeout(load_odds, 10 * 1000)
+  #window.setTimeout(load_odds, 10 * 1000)
 
 jQuery ->
   if gon and gon.ball_url

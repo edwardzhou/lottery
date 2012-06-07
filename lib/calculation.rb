@@ -25,7 +25,7 @@ class Calculation
 
     max_rand = @@all_predicts_seed.size
     total_start_time = Time.now
-    predict_seeds = 2000.times.collect do
+    predict_seeds = 500.times.collect do
       lp = @@all_predicts_seed[rand(max_rand)]
       lp.shuffle_balls!
     end
@@ -33,11 +33,18 @@ class Calculation
     max_outcome = (lottery_inst.total_income * (lottery_inst.return_rate - 3) / 100.0).round(4)
     max_predicts = {}
 
+    min_predicts = {}
+
     predict_start_time = Time.now
-    1.times do |index|
+    2.times do |index|
       Rails.logger.info("[#{Time.now}] predict round \##{index} start")
       start_time = Time.now
-      predicts = predict_seeds.select{|seed| self.compute(lottery_inst, seed) <= max_outcome}
+      ##predicts = predict_seeds.select{|seed| self.compute(lottery_inst, seed) <= max_outcome}
+      calc_seeds = predict_seeds.collect do |seed|
+        self.compute(lottery_inst, seed)
+        seed
+      end
+      predicts = calc_seeds.select {|seed| seed.total_outcome <= max_outcome}
       #p predicts
       3.times() do
         max_predict = predicts.max{|a,b| a.total_outcome <=> b.total_outcome}
@@ -45,6 +52,8 @@ class Calculation
         max_predicts[max_predict.balls_to_a] = max_predict.total_outcome
         predicts.delete(max_predict)
       end
+      min_predict = calc_seeds.min { |a, b| a.total_outcome <=> b.total_outcome }
+      min_predicts[min_predict.balls_to_a] = min_predict.total_outcome
       end_time = Time.now
       predict_seeds.each(&:shuffle_balls!)
       shuffle_time = Time.now
@@ -57,8 +66,11 @@ class Calculation
     if max_predicts.size > 0
       key = max_predicts.keys.shuffle.shuffle.first
       final_result = [key, max_predicts[key]]
+      Rails.logger.info("max predicts found, use #{final_result}")
     else
-      final_result = nil
+      key = min_predicts.keys.shuffle.shuffle.first
+      final_result = [key, min_predicts[key]]
+      Rails.logger.info("no max predicts available, use min outcome: #{final_result}")
     end
 
     final_result

@@ -30,6 +30,10 @@ child(@current_daily_stat => :stat) do
   attributes :total_win_after_return
 end
 
+node(:refresh_time) do
+  20
+end
+
 
 child :rules do
   attributes :rule_name, :rule_title, :rule_description, :odds
