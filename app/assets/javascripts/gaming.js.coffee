@@ -6,12 +6,15 @@ bet_input_enabled = false
 timer_setted = false
 end_time = null
 close_time = null
+start_time = null
 refresh_time = 20
 
 update_time = ->
   if end_time != null
     end_seconds = (end_time.getTime() - (new Date()).getTime()) / 1000
     close_seconds = (close_time.getTime() - (new Date()).getTime()) / 1000
+    if close_seconds > 600
+      close_seconds = (start_time.getTime() - (new Date()).getTime()) / 1000
     end_min = Math.floor(end_seconds % 3600 / 60)
     end_sec = Math.floor(end_seconds % 60)
     end_hour = Math.floor(end_seconds / 3600)
@@ -68,6 +71,7 @@ on_load_odds = (odds_level) ->
   $("#total_credit").text(gon.total_credi)
   end_time = new Date(odds_level.current_lottery.end_time)
   close_time = new Date(odds_level.current_lottery.close_at)
+  start_time = new Date(odds_level.current_lottery.start_time)
   refresh_time = parseInt(odds_level.refresh_time)
   prev_id = $('.previous_lottery_id').data("id")
   if prev_id != odds_level.previous_lottery.lottery_full_id
