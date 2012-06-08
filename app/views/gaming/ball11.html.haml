@@ -1,0 +1,196 @@
+= render :partial => "header"
+
+= form_tag nil, :method => :put, :id => "bet_form" do |f|
+  %table.Ball_List{:border => "0", :cellpadding => "0", :cellspacing => "1", :width => "700"}
+    %tbody
+      %tr
+        %td.cell_border.td_caption_1{:width => "87"}
+          %span#jeu_s_19_289
+            %input.bet_type_c{:name => "c_type",  :type => "radio", :value => "s2", :"data-c-value" => 2}/
+        %td.cell_border.td_caption_1{:width => "87"}
+          %span#jeu_s_20_290
+        %td.cell_border.td_caption_1{:width => "87"}
+          %span#jeu_s_21_291
+            %input.bet_type_c{:name => "c_type",  :type => "radio", :value => "c2", :"data-c-value" => 2}/
+        %td.cell_border.td_caption_1{:width => "87"}
+          %span#jeu_s_22_292
+            %input.bet_type_c{:name => "c_type",  :type => "radio", :value => "s3", :"data-c-value" => 3}/
+        %td.cell_border.td_caption_1{:width => "87"}
+          %span#jeu_s_23_293
+        %td.cell_border.td_caption_1{:width => "87"}
+          %span#jeu_s_24_294
+            %input.bet_type_c{:name => "c_type",  :type => "radio", :value => "c3", :"data-c-value" => 3}/
+        %td.cell_border.td_caption_1{:width => "87"}
+          %span#jeu_s_25_295
+            %input.bet_type_c{:name => "c_type",  :type => "radio", :value => "s4", :"data-c-value" => 4}/
+        %td.cell_border.td_caption_1{:width => "87"}
+          %span#jeu_s_26_296
+            %input.bet_type_c{:name => "c_type",  :type => "radio", :value => "s5", :"data-c-value" => 5}/
+      %tr.Ball_tr_H
+        %td.cell_border
+          %span#jeu_c_289 任選二
+          %br/
+          %label.multiple_Red.odds_label{:"data-odds-rule" => "s2"} -
+        %td.cell_border
+          %span#jeu_c_290 選二連直
+          %br/
+          %span#jeu_p_20_290.multiple_Red -
+        %td.cell_border
+          %span#jeu_c_291 選二連組
+          %br/
+          %label.multiple_Red.odds_label{:"data-odds-rule" => "c2"} -
+        %td.cell_border
+          %span#jeu_c_292 任選三
+          %br/
+          %label.multiple_Red.odds_label{:"data-odds-rule" => "s3"} -
+        %td.cell_border
+          %span#jeu_c_293 選三前直
+          %br/
+          %span#jeu_p_23_293.multiple_Red -
+        %td.cell_border
+          %span#jeu_c_294 選三前組
+          %br/
+          %label.multiple_Red.odds_label{:"data-odds-rule" => "c3"} -
+        %td.cell_border
+          %span#jeu_c_295 任選四
+          %br/
+          %label.multiple_Red.odds_label{:"data-odds-rule" => "s4"} -
+        %td.cell_border
+          %span#jeu_c_296 任選五
+          %br/
+          %label.multiple_Red.odds_label{:"data-odds-rule" => "s5"} -
+
+
+  %table.table_border{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "700"}
+    %tbody
+      %tr
+        %td
+          %table.Ball_List{:border => "0", :cellpadding => "0", :cellspacing => "1", :width => "165"}
+            %tbody
+              %tr
+                %td.td_caption_1{:width => "28"} 號
+                %td.td_caption_1{:width => "147"} 勾選
+              %tr.Ball_tr_H
+                %td.No_01
+                %td#S_1
+                  %input.bet_input_c{:disabled => "", :id => "ball11_c_1", :name => "ball11[c_type_no]",  :type => "checkbox", :value => "1"}/
+              %tr.Ball_tr_H
+                %td.No_02
+                %td#S_2
+                  %input.bet_input_c{:disabled => "", :id => "ball11_c_2", :name => "ball11[c_type_no]",  :type => "checkbox", :value => "2"}/
+              %tr.Ball_tr_H
+                %td.No_03
+                %td#S_3
+                  %input.bet_input_c{:disabled => "", :id => "ball11_c_3", :name => "ball11[c_type_no]",  :type => "checkbox", :value => "3"}/
+              %tr.Ball_tr_H
+                %td.No_04
+                %td#S_4
+                  %input.bet_input_c{:disabled => "", :id => "ball11_c_4", :name => "ball11[c_type_no]",  :type => "checkbox", :value => "4"}/
+              %tr.Ball_tr_H
+                %td.No_05
+                %td#S_5
+                  %input.bet_input_c{:disabled => "", :id => "ball11_c_5", :name => "ball11[c_type_no]",  :type => "checkbox", :value => "5"}/
+        %td
+          %table.Ball_List{:border => "0", :cellpadding => "0", :cellspacing => "1", :width => "165"}
+            %tbody
+              %tr
+                %td.td_caption_1{:width => "28"} 號
+                %td.td_caption_1{:width => "147"} 勾選
+              %tr.Ball_tr_H
+                %td.No_06
+                %td#S_6
+                  %input.bet_input_c{:disabled => "", :id => "ball11_c_6", :name => "ball11[c_type_no]",  :type => "checkbox", :value => "6"}/
+              %tr.Ball_tr_H
+                %td.No_07
+                %td#S_7
+                  %input.bet_input_c{:disabled => "", :id => "ball11_c_7", :name => "ball11[c_type_no]",  :type => "checkbox", :value => "7"}/
+              %tr.Ball_tr_H
+                %td.No_08
+                %td#S_8
+                  %input.bet_input_c{:disabled => "", :id => "ball11_c_8", :name => "ball11[c_type_no]",  :type => "checkbox", :value => "8"}/
+              %tr.Ball_tr_H
+                %td.No_09
+                %td#S_9
+                  %input.bet_input_c{:disabled => "", :id => "ball11_c_9", :name => "ball11[c_type_no]",  :type => "checkbox", :value => "9"}/
+              %tr.Ball_tr_H
+                %td.No_10
+                %td#S_10
+                  %input.bet_input_c{:disabled => "", :id => "ball11_c_10", :name => "ball11[c_type_no]",  :type => "checkbox", :value => "10"}/
+        %td
+          %table.Ball_List{:border => "0", :cellpadding => "0", :cellspacing => "1", :width => "165"}
+            %tbody
+              %tr
+                %td.td_caption_1{:width => "28"} 號
+                %td.td_caption_1{:width => "147"} 勾選
+              %tr.Ball_tr_H
+                %td.No_11
+                %td#S_11
+                  %input.bet_input_c{:disabled => "", :id => "ball11_c_11", :name => "ball11[c_type_no]",  :type => "checkbox", :value => "11"}/
+              %tr.Ball_tr_H
+                %td.No_12
+                %td#S_12
+                  %input.bet_input_c{:disabled => "", :id => "ball11_c_12", :name => "ball11[c_type_no]",  :type => "checkbox", :value => "12"}/
+              %tr.Ball_tr_H
+                %td.No_13
+                %td#S_13
+                  %input.bet_input_c{:disabled => "", :id => "ball11_c_13", :name => "ball11[c_type_no]",  :type => "checkbox", :value => "13"}/
+              %tr.Ball_tr_H
+                %td.No_14
+                %td#S_14
+                  %input.bet_input_c{:disabled => "", :id => "ball11_c_14", :name => "ball11[c_type_no]",  :type => "checkbox", :value => "14"}/
+              %tr.Ball_tr_H
+                %td.No_15
+                %td#S_15
+                  %input.bet_input_c{:disabled => "", :id => "ball11_c_15", :name => "ball11[c_type_no]",  :type => "checkbox", :value => "15"}/
+        %td
+          %table.Ball_List{:border => "0", :cellpadding => "0", :cellspacing => "1", :width => "165"}
+            %tbody
+              %tr
+                %td.td_caption_1{:width => "28"} 號
+                %td.td_caption_1{:width => "147"} 勾選
+              %tr.Ball_tr_H
+                %td.No_16
+                %td#S_16
+                  %input.bet_input_c{:disabled => "", :id => "ball11_c_16", :name => "ball11[c_type_no]",  :type => "checkbox", :value => "16"}/
+              %tr.Ball_tr_H
+                %td.No_17
+                %td#S_17
+                  %input.bet_input_c{:disabled => "", :id => "ball11_c_17", :name => "ball11[c_type_no]",  :type => "checkbox", :value => "17"}/
+              %tr.Ball_tr_H
+                %td.No_18
+                %td#S_18
+                  %input.bet_input_c{:disabled => "", :id => "ball11_c_18", :name => "ball11[c_type_no]",  :type => "checkbox", :value => "18"}/
+              %tr.Ball_tr_H
+                %td.No_19
+                %td#S_19
+                  %input.bet_input_c{:disabled => "", :id => "ball11_c_19", :name => "ball11[c_type_no]",  :type => "checkbox", :value => "19"}/
+              %tr.Ball_tr_H
+                %td.No_20
+                %td#S_20
+                  %input.bet_input_c{:disabled => "", :id => "ball11_c_20", :name => "ball11[c_type_no]",  :type => "checkbox", :value => "20"}/
+  %table.table_border{:border => "1", :cellpadding => "0", :cellspacing => "0", :width => "700"}
+    %tbody
+      %tr
+        %td
+          总共注数:
+          %span#total_bet_num.sum_info 0
+        %td
+          每注金額:
+          %input.bet_input_credit.bet_input{:disabled => "", :id => "ball11_c_credit", :name => "ball11[credit]", :value => "" , :size => 7, :maxlength => 6, :max => 2000 }
+        %td(width=180)
+          总投注金額:
+          %span#total_bet_credit.sum_info.multiple_Red 0
+        %td(width=180)
+          最多可赢金額:
+          %span#total_possible_win_credit.sum_info.multiple_Red 0
+
+
+  %table(width="100%" )
+    %tbody
+      %tr
+        %td(align="center")
+          %input(type="button" class="reset" value="重填")/
+          \&nbsp;
+          = submit_tag "投注",:disable_with => "投注中..."
+
+= content_tag(:div , nil, :id => "info", "data-url" => gaming_path('ball7', :format => :json))

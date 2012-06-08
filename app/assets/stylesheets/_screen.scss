@@ -1033,6 +1033,12 @@ a.negative:active, button.negative:active {
   text-align: left;
 }
 
+.table_border {
+  td {
+    @extend .cell_border;
+  }
+}
+
 
 
 .as_table {

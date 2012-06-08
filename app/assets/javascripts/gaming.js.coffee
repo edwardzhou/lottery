@@ -8,6 +8,7 @@ end_time = null
 close_time = null
 start_time = null
 refresh_time = 20
+c_type = 0
 
 formatNumber = (num) ->
   s = parseFloat(num)
@@ -16,6 +17,33 @@ formatNumber = (num) ->
   s = s + "0" if /\.\d$/.test(s)
   s = s.replace(/(\d)(\d{3}(\.|,))/, "$1,$2") while /\d{4}(\.|,)/.test(s)
   s
+
+compute_p = (n) ->
+  sum = 1
+  while n > 0
+    sum = sum * n
+    n = n - 1
+
+  sum
+
+
+compute_c = (n, m) ->
+  return 0 if n < m
+  result = compute_p(n) / (compute_p(m) * compute_p(n-m))
+
+calc_c_type = () ->
+  selected_num = $(".bet_input_c").filter("[checked]").size()
+  bet_num = compute_c(selected_num, c_type)
+  if bet_num == 0
+    $(".sum_info").text("0")
+    return
+
+  $("#total_bet_num").text(bet_num)
+  total_credit = bet_num * parseInt($(".bet_input_credit").val())
+  $("#total_bet_credit").text( formatNumber( total_credit ) )
+
+
+
 
 update_time = ->
   if end_time != null
@@ -144,7 +172,10 @@ jQuery ->
           total_items = total_items + 1
           total_possible_win = total_possible_win + value * parseFloat($(this).data("odds"))
 
-      if total > gon.available_credit
+      if total == 0.0
+        alert "请先投注!"
+        return false
+      else if total > gon.available_credit
         alert "不能投注: 總投注金額 " + total + " 大于可用金額 " + gon.available_credit
         return false
       else
@@ -152,5 +183,19 @@ jQuery ->
         return confirm(s)
 
   $(".reset").bind("click", () ->
-    $(".bet_input").val("");
+    $(".bet_input").val("")
+    $(".sum_info").text("0")
   )
+
+  $(".bet_type_c").bind("click", () ->
+    $(".bet_input_c").attr("disabled", false).attr("checked", false)
+    $(".sum_info").text("0")
+    $(".bet_input").attr("disabled", false).val("")
+    c_type = $(this).data("c-value")
+  )
+
+  $(".bet_input_c").bind("click", =>
+    calc_c_type()
+  )
+
+
