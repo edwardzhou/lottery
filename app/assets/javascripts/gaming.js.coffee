@@ -9,6 +9,14 @@ close_time = null
 start_time = null
 refresh_time = 20
 
+formatNumber = (num) ->
+  s = parseFloat(num)
+  s = s + ""
+  s = s + ".0" if s.indexOf(".") < 0
+  s = s + "0" if /\.\d$/.test(s)
+  s = s.replace(/(\d)(\d{3}(\.|,))/, "$1,$2") while /\d{4}(\.|,)/.test(s)
+  s
+
 update_time = ->
   if end_time != null
     end_seconds = (end_time.getTime() - (new Date()).getTime()) / 1000
@@ -67,8 +75,8 @@ on_load_odds = (odds_level) ->
   $("#UserResult").text(odds_level.stat.total_win_after_return)
   gon.available_credit = odds_level.user.available_credit
   gon.total_credit = odds_level.user.total_credit
-  $("#available_credit").text(gon.available_credit)
-  $("#total_credit").text(gon.total_credi)
+  $("#available_credit").text(formatNumber(gon.available_credit))
+  $("#total_credit").text(formatNumber(gon.total_credit))
   end_time = new Date(odds_level.current_lottery.end_time)
   close_time = new Date(odds_level.current_lottery.close_at)
   start_time = new Date(odds_level.current_lottery.start_time)

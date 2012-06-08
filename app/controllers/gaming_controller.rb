@@ -184,6 +184,8 @@ class GamingController < UserBaseController
 
     (1..8).each do |ball_index|
       ball_params = bet_params["ball_#{ball_index}"]
+      next if ball_params.nil?
+
       HALF_BET_ITEMS.each do |item, item_name|
         bet_credit = ball_params[item].to_i
         if bet_credit > 0

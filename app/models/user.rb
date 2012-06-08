@@ -107,6 +107,10 @@ class User
     odds_level.try(:return)
   end
 
+  def self.find_by_username(username)
+    where(:username => username).first
+  end
+
   private
   def update_level_name
     self.odds_level_name = self.odds_level.level_name unless self.odds_level.nil?
