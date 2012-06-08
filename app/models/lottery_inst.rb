@@ -1,3 +1,5 @@
+#encoding: utf-8
+
 require "lottery_members"
 
 class LotteryInst
@@ -45,6 +47,15 @@ class LotteryInst
 
   include Mongoid::Timestamps
 
+  scope :history, where(:balanced => true).order_by(:end_time => :desc)
+
   include LotteryMembers
+
+
+  def formatted_end_time
+    I18n.l(self.end_time, :format => "%m-%d %a %H:%M")
+  end
+
+
 
 end

@@ -12,6 +12,7 @@ Lottery::Application.routes.draw do
       get "bet_list"
       get "bet_stat"
       get "test"
+      get "history"
       get "change_password"
       post "update_password"
     end
