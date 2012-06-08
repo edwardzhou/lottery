@@ -42,7 +42,11 @@ calc_c_type = () ->
   total_credit = bet_num * parseInt($(".bet_input_credit").val())
   $("#total_bet_credit").text( formatNumber( total_credit ) )
 
-
+parseDate = (date_str) ->
+  the_date = new Date(date_str)
+  return the_date unless isNaN(the_date)
+  date_str = date_str.replace(/-/g, "/").replace(/\+08:00/, "+0800")
+  return new Date(date_str)
 
 
 update_time = ->
@@ -105,9 +109,9 @@ on_load_odds = (odds_level) ->
   gon.total_credit = odds_level.user.total_credit
   $("#available_credit").text(formatNumber(gon.available_credit))
   $("#total_credit").text(formatNumber(gon.total_credit))
-  end_time = new Date(odds_level.current_lottery.end_time)
-  close_time = new Date(odds_level.current_lottery.close_at)
-  start_time = new Date(odds_level.current_lottery.start_time)
+  end_time = parseDate(odds_level.current_lottery.end_time)
+  close_time = parseDate(odds_level.current_lottery.close_at)
+  start_time = parseDate(odds_level.current_lottery.start_time)
   refresh_time = parseInt(odds_level.refresh_time)
   prev_id = $('.previous_lottery_id').data("id")
   if prev_id != odds_level.previous_lottery.lottery_full_id
