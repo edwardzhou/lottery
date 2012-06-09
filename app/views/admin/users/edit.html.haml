@@ -1,7 +1,9 @@
 %h1 修改用户
 
-= render :partial => "user_edit_form", :locals => {:user => @user}
-
+- if @user.is_agent? or @user.is_admin?
+  = render :partial => "agent_edit_form", :locals => {:user => @user}
+-else
+  = render :partial => "user_edit_form", :locals => {:user => @user}
 
 - content_for :page_include_scripts do
   = javascript_include_tag "admin/users"

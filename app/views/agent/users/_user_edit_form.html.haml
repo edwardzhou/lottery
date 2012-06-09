@@ -3,13 +3,11 @@
     %tbody
       %tr
         %td(width="450" )
-          = semantic_form_for [:admin, user], :html => {:id => "new_user_form"} do |f|
+          %br/
+          = semantic_form_for [:agent, user], :html => {:id => "new_user_form"} do |f|
             %li.string.input.optional
               %label.label 用戶名
               %span= user.username
-            %li.string.input.optional
-              %label.label 用戶類型
-              %span= t("label.user_role." + user.user_role)
             %li.string.input.optional
               %label.label 盤級
               %span
@@ -18,16 +16,16 @@
             = f.input :return, :input_html => {:size => 6, :maxlength => 6, :class => "required user_return", :min => 0, :max => user.odds_level.return }
             = f.input :true_name, :input_html => {:class => "required", :size => 20, :maxlength => 20}
             = f.input :phone, :input_html => {:class => "required", :size => 20, :maxlength => 20}
-            = f.input :total_credit, :input_html => {:class => "required number", :size => 6, :maxlength => 6, :min => 0, :max => (user.agent.available_credit + user.total_credit) }
+            = f.input :total_credit, :input_html => {:class => "required number", :size => 6, :maxlength => 6, :min => 0, :max => (current_user.available_credit + user.total_credit) }
             %li.string.input.optional
               %label.label 可用金額
               %span= number_with_delimiter(user.available_credit.round(4))
-            = f.input :password, :as => :password, :input_html => {:class => "password equalTo=user_password", :size => 10, :maxlength => 10, :minlength => 6}
+            = f.input :password, :as => :password, :input_html => {:class => "password ", :size => 10, :maxlength => 10, :minlength => 6}
             = f.input :password_confirmation, :as => :password, :input_html => {:class => "password",
-                                              :size => 10 , :maxlength => 10}
+                                              :size => 10 , :maxlength => 10 }
             %br/
             = f.actions do
               = f.action :submit
-              = link_to "取消操作", admin_users_path
+              = link_to "取消操作", agent_users_path
         %td
           #odds_level_detail

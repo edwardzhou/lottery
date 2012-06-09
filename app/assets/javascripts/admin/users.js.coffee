@@ -17,7 +17,7 @@ jQuery ->
       {name: 'odds_level_name', index: 'odds_level_name', label: "盤級", width: 40}
       {name: 'total_credit', index: 'total_credit', label: "信用額度", width: 100, formatter: "number", formatoptions: {thousandsSeparator: ","} }
       {name: 'available_credit', index: 'available_credit', label: "可用額度", width: 100, formatter: "number", formatoptions: {thousandsSeparator: ","} }
-      {name: 'locked', index: 'locked', label: "狀態", width: 100}
+      {name: 'locked', index: 'locked', label: "狀態", width: 60}
       {name: 'locked_at', index: 'locked_at', label: "鎖定時間", width: 130, formatter: "date", formatoptions: {srcformat: 'Y-m-d H:i:s',newformat : 'Y-m-d H:i:s'} }
       {name: 'show_url', index: '', label: " ", width: 60, sortable: false}
       {name: 'edit_url', index: '', label: " ", width: 60, sortable: false}
@@ -38,6 +38,7 @@ jQuery ->
     caption: '用戶',
     resizable: true,
     height: "auto",
+    width: 900
     #id: "_id"
     #autowidth: true,
 
@@ -46,4 +47,7 @@ jQuery ->
   );
 
 
-  $("#new_user_form").validate();
+  if $("#new_user_form")
+    $("#new_user_form").validate();
+    $("#user_password_confirmation").rules("add", {equalTo: "#user_password" })
+

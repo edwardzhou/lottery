@@ -30,6 +30,17 @@ class Agent::UsersController < Agent::AgentBaseController
 
   end
 
+  def edit
+    #gon.ol_page_url = agent_odds_levels_path
+    @user = User.find(params[:id])
+    if @user.agent.id != current_user.id
+      redirect_to({:action => "index"} , :alert => "无效操作!")
+      return
+    end
+
+    #@user.agent = current_user
+  end
+
   def create
     user_params = params[:user]
 
@@ -66,6 +77,39 @@ class Agent::UsersController < Agent::AgentBaseController
 
     else
       render :action => "new"
+    end
+
+  end
+
+  def update
+    @user = User.find(params[:id])
+    if @user.agent.id != current_user.id
+      redirect_to({:action => "index"} , :alert => "无效操作!")
+      return
+    end
+
+    user_params = params[:user]
+    @user.return = user_params[:return].to_f
+    @user.true_name = user_params[:true_name]
+    @user.phone = user_params[:phone]
+    old_total_credit = @user.total_credit
+    @user.total_credit = user_params[:total_credit].to_i
+
+    unless user_params[:password].blank?
+      @user.password = user_params[:password]
+      @user.password_confirmation = user_params[:password_confirmation]
+    end
+
+    if @user.total_credit > (current_user.available_credit + old_total_credit)
+      render "edit", :alert => "信用額度 超过当前代理的可用金額."
+    else
+      unless @user.save
+        return render("edit")
+      end
+
+      current_user.available_credit = current_user.available_credit + old_total_credit - @user.total_credit
+      current_user.save!
+      redirect_to({:action => :index}, :notice => "修改成功!")
     end
 
   end

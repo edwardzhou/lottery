@@ -45,7 +45,9 @@ jQuery ->
 
   );
 
-  $("#new_user_form").validate();
+  if $("#new_user_form")
+    $("#new_user_form").validate();
+    $("#user_password_confirmation").rules("add", {equalTo: "#user_password" })
 
   $(".odds_level").bind "change", (event) =>
     select_box = $(event.currentTarget)

@@ -25,8 +25,8 @@ class User
   field :user_role, type: String, default: "user"
 
   belongs_to :odds_level
-  belongs_to :agent, :class_name => "User"
-  belongs_to :top_user, :class_name => "User"
+  belongs_to :agent, :class_name => "User", :foreign_key => "agent_id"
+  belongs_to :top_user, :class_name => "User", :foreign_key => "top_user_id"
 
   has_many :users, :class_name => "User", :foreign_key => "agent_id"
 
@@ -61,6 +61,7 @@ class User
 
   scope :active_users, excludes(locked: true)
   scope :locked_users, where(locked: true)
+  scope :normal_users, where(user_role: USER)
 
 
   def self.sign_in(username, password)

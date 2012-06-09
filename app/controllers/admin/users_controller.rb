@@ -28,6 +28,10 @@ class Admin::UsersController < Admin::AdminBaseController
     @user = User.new
   end
 
+  def edit
+    @user = User.find(params[:id])
+  end
+
   def create
     user_count = Sequence.next!("user_seq")
     user_count = user_count + 100 if user_count < 100
@@ -56,9 +60,9 @@ class Admin::UsersController < Admin::AdminBaseController
     gon.page_json_url = bet_list_admin_user_path(@user, :format => "json")
   end
 
-  def edit
-    @user = User.find(params[:id])
-  end
+  #def edit
+  #  @user = User.find(params[:id])
+  #end
 
   def update
     @user = User.find(params[:id])

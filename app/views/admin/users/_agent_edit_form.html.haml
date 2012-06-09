@@ -10,21 +10,15 @@
             %li.string.input.optional
               %label.label 用戶類型
               %span= t("label.user_role." + user.user_role)
-            %li.string.input.optional
-              %label.label 盤級
-              %span
-                = user.odds_level.level_name
-                (#{user.odds_level.return})
-            = f.input :return, :input_html => {:size => 6, :maxlength => 6, :class => "required user_return", :min => 0, :max => user.odds_level.return }
             = f.input :true_name, :input_html => {:class => "required", :size => 20, :maxlength => 20}
             = f.input :phone, :input_html => {:class => "required", :size => 20, :maxlength => 20}
-            = f.input :total_credit, :input_html => {:class => "required number", :size => 6, :maxlength => 6, :min => 0, :max => (user.agent.available_credit + user.total_credit) }
+            = f.input :total_credit, :input_html => {:class => "required number", :size => 6, :maxlength => 6, :min => (user.total_credit - user.available_credit) }
             %li.string.input.optional
               %label.label 可用金額
               %span= number_with_delimiter(user.available_credit.round(4))
-            = f.input :password, :as => :password, :input_html => {:class => "password equalTo=user_password", :size => 10, :maxlength => 10, :minlength => 6}
+            = f.input :password, :as => :password, :input_html => {:class => "password ", :size => 10, :maxlength => 10, :minlength => 6}
             = f.input :password_confirmation, :as => :password, :input_html => {:class => "password",
-                                              :size => 10 , :maxlength => 10}
+                                              :size => 10 , :maxlength => 10 }
             %br/
             = f.actions do
               = f.action :submit
