@@ -9,6 +9,9 @@ close_time = null
 start_time = null
 refresh_time = 20
 c_type = 0
+c_odds = 0
+c_bet_name = ""
+c_bet_count = 0
 
 formatNumber = (num) ->
   s = parseFloat(num)
@@ -32,15 +35,34 @@ compute_c = (n, m) ->
   result = compute_p(n) / (compute_p(m) * compute_p(n-m))
 
 calc_c_type = () ->
-  selected_num = $(".bet_input_c").filter("[checked]").size()
-  bet_num = compute_c(selected_num, c_type)
+  selected_num_count = $(".bet_input_c").filter("[checked]").size()
+  selected_num_text = ""
+  nums = []
+  $(".bet_input_c").filter("[checked]").each (index) ->
+    s = $(this).val()
+    s = "0" + s if s.length == 1
+    nums.push s
+  selected_num_text = nums.join(", ")
+  selected_num_text = "(共 " + selected_num_count + "个) " + selected_num_text if selected_num_count > 0
+  $("#picked_nums").text(selected_num_text)
+
+  bet_num = compute_c(selected_num_count, c_type)
+  c_bet_count = bet_num
   if bet_num == 0
     $(".sum_info").text("0")
     return
 
+  max_credit_per_bet = Math.ceil( gon.available_credit / bet_num )
+  $("#ball11_c_credit").attr("max", max_credit_per_bet)
+  $("#max_credit_per_bet").text(max_credit_per_bet)
+
   $("#total_bet_num").text(bet_num)
   total_credit = bet_num * parseInt($(".bet_input_credit").val())
+  possible_win_credit = total_credit * c_odds
   $("#total_bet_credit").text( formatNumber( total_credit ) )
+  #$("#total_possible_win_credit").text( formatNumber( possible_win_credit ) )
+
+  $(".bet_input_c").not("[checked]").attr("disabled", selected_num_count >= 8)
 
 parseDate = (date_str) ->
   the_date = new Date(date_str)
@@ -186,6 +208,22 @@ jQuery ->
         s = total_items + " 注, 總投注金額 " + total + ", 可赢金額 " + total_possible_win
         return confirm(s)
 
+    $("#bet_c_form").bind "submit", =>
+      total = $("#total_bet_credit").text()
+      total_possible_win = 0.0
+      total_items = 0
+      bet_type_c = $(".bet_type_c").filter("[checked]")
+      if c_bet_count == 0
+        msg = bet_type_c.data("c-type") + " 至少必需选择 " + bet_type_c.data("c-value") + " 个号码!"
+        alert(msg)
+        return false
+#      else if total > gon.available_credit
+#        alert "不能投注: 總投注金額 " + total + " 大于可用金額 " + gon.available_credit
+#        return false
+      else
+        s = bet_type_c.data("c-type") + " 共 " + c_bet_count + " 组, 總投注金額 " + total + "?"
+        return confirm(s)
+
   $(".reset").bind("click", () ->
     $(".bet_input").val("")
     $(".sum_info").text("0")
@@ -194,9 +232,15 @@ jQuery ->
   $(".bet_type_c").bind("click", () ->
     $(".bet_input_c").attr("disabled", false).attr("checked", false)
     $(".sum_info").text("0")
-    $(".bet_input").attr("disabled", false).val("")
+    $(".bet_input").attr("disabled", false).val(10)
     c_type = $(this).data("c-value")
+    c_odds = parseFloat($(this).data("odds"))
+    c_bet_name = $(this).data("c-type")
+    $("#bet_name").text(c_bet_name)
   )
+
+  $("#ball11_c_credit").bind "blur", =>
+    calc_c_type()
 
   $(".bet_input_c").bind("click", =>
     calc_c_type()

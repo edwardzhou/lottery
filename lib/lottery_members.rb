@@ -1,5 +1,6 @@
 module LotteryMembers
   module InstanceMethods
+
     def get_odds_level(level_id)
       if @odds_level_map.nil?
         @odds_level_map = {}
@@ -11,7 +12,8 @@ module LotteryMembers
 
     def bet_rule(rule_id)
       rule_id = rule_id.to_sym unless rule_id.kind_of?(Symbol)
-      self.bet_rules.where(rule_id: rule_id).first
+      result = self.bet_rules.where(rule_id: rule_id).first
+      result = self.bet_rules.create({rule_id: rule_id}) if result.nil?
     end
 
     def set_ball_values(balls_values)
@@ -92,6 +94,30 @@ module LotteryMembers
     def shuffle_balls!
       set_ball_values(balls_to_a.shuffle)
       self
+    end
+
+    def is_s?(s_array)
+      @ball_values ||= balls_to_a
+      s = s_array.select {|x| @ball_values.include?(x)}
+      return s == s_array
+    end
+
+    def is_c?(c_array)
+      @ball_values ||= balls_to_a
+      @ball_values_str ||= @ball_values.join(",")
+      c_array.permutation.each do |p|
+        return true if @ball_values_str.include?(p.join(","))
+      end
+      false
+    end
+
+    def is_ps?(c_array)
+      @ball_values ||= balls_to_a
+      @ball_values_str ||= @ball_values.join(",")
+      c_array.permutation.each do |p|
+        return true if @ball_values_str.start_with?(p.join(","))
+      end
+      false
     end
 
   end

@@ -7,6 +7,13 @@ class GamingController < UserBaseController
   before_filter :init
 
   BALL_NAMES = %w(none 第一球 第二球 第三球 第四球 第五球 第六球 第七球 第八球 兩面盤 總和、龍虎 連碼)
+  COMB_NAMES = {:s2 => "任選二",
+                :c2 => "選二連組",
+                :s3 => "任選三",
+                :p3 => "選三前組",
+                :s4 => "任選四",
+                :s5 => "任選五"}
+
   HALF_BET_ITEMS = {:big => "大", :small => "小", :even => "雙",
                     :odd => "單", :trail_big => "尾大", :trail_small => "尾小",
                     :add_even => "合數雙", :add_odd => "合數單", :dragon => "龍",
@@ -63,6 +70,8 @@ class GamingController < UserBaseController
         handle_sum_bet(@ball_id, bet_params)
       elsif @ball_id == 10 #总和、龙虎
         handle_sum_bet(@ball_id, bet_params)
+      elsif @ball_id == 11 #连码
+        handle_cp_bet(@ball_id, bet_params)
       end
 
       redirect_to :action => "show", :id => @id
@@ -214,7 +223,40 @@ class GamingController < UserBaseController
     current_lottery.save!
   end
 
-  def handle_dl_bet(ball_id, bet_params)
+  def handle_cp_bet(ball_id, bet_params)
+    today_stat = UserDailyStat.get_current_stat(@current_user)
+    bet_items = []
+
+    c_type = bet_params[:c_type]
+    bet_type = c_type[0]
+    bet_gnum = c_type[1]
+    bet_nos = bet_params[:c_type_no].collect{|no| no.to_i }
+    bet_groups = bet_nos.combination
+
+    method_name = case bet_type
+                    when "c"
+                      "is_c?"
+                    when "s"
+                      "is_s?"
+                    when "p"
+                      "is_ps?"
+                  end
+
+    bet_groups.each do |group|
+      eval_expr = "#{method_name}(#{group})"
+      rule_id = "#{COMB_NAMES[c_type]}_#{group}"
+      rule_name = COMB_NAMES[c_type] + " 開 " + group
+      rule_eval = "#{method_name}(#{group})"
+      logger.info("new bet_item[rule_id: #{rule_id}, rule_name: #{rule_name}, rule_eval: #{rule_eval}]")
+      bet_item = new_bet_item(ball_index, bet_credit, today_stat, c_type, rule_id, rule_name, rule_eval)
+      bet_rule = @lottery.bet_rule(rule_id)
+      bet_rule.bet_count = bet_rule.bet_count + 1
+      bet_rule.total_income = bet_rule.total_income.to_f + bet_credit
+      bet_rule.total_outcome = bet_rule.total_outcome.to_f + bet_item.possible_win_credit
+      #bet_item.save!
+      bet_items << bet_item
+    end
+
 
   end
 

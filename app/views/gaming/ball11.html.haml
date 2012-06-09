@@ -1,31 +1,43 @@
 = render :partial => "header"
 
-= form_tag nil, :method => :put, :id => "bet_form" do |f|
+= form_tag nil, :method => :put, :id => "bet_c_form" do |f|
   %table.Ball_List{:border => "0", :cellpadding => "0", :cellspacing => "1", :width => "700"}
     %tbody
       %tr
         %td.cell_border.td_caption_1{:width => "87"}
           %span#jeu_s_19_289
-            %input.bet_type_c{:name => "c_type",  :type => "radio", :value => "s2", :"data-c-value" => 2}/
+            %input.bet_type_c{:name => "ball11[c_type]",  :type => "radio", :value => "s2",
+              :"data-c-value" => 2, :"data-odds-rule" => "s2",
+              :"data-c-type" => "任選二"}/
         %td.cell_border.td_caption_1{:width => "87"}
           %span#jeu_s_20_290
         %td.cell_border.td_caption_1{:width => "87"}
           %span#jeu_s_21_291
-            %input.bet_type_c{:name => "c_type",  :type => "radio", :value => "c2", :"data-c-value" => 2}/
+            %input.bet_type_c{:name => "ball11[c_type]",  :type => "radio", :value => "c2",
+              :"data-c-value" => 2, :"data-odds-rule" => "c2",
+              :"data-c-type" => "選二連組"}/
         %td.cell_border.td_caption_1{:width => "87"}
           %span#jeu_s_22_292
-            %input.bet_type_c{:name => "c_type",  :type => "radio", :value => "s3", :"data-c-value" => 3}/
+            %input.bet_type_c{:name => "ball11[c_type]",  :type => "radio", :value => "s3",
+              :"data-c-value" => 3, :"data-odds-rule" => "s3",
+              :"data-c-type" => "任選三"}/
         %td.cell_border.td_caption_1{:width => "87"}
           %span#jeu_s_23_293
         %td.cell_border.td_caption_1{:width => "87"}
           %span#jeu_s_24_294
-            %input.bet_type_c{:name => "c_type",  :type => "radio", :value => "c3", :"data-c-value" => 3}/
+            %input.bet_type_c{:name => "ball11[c_type]",  :type => "radio", :value => "p3",
+              :"data-c-value" => 3, :"data-odds-rule" => "c3",
+              :"data-c-type" => "選三前組"}/
         %td.cell_border.td_caption_1{:width => "87"}
           %span#jeu_s_25_295
-            %input.bet_type_c{:name => "c_type",  :type => "radio", :value => "s4", :"data-c-value" => 4}/
+            %input.bet_type_c{:name => "ball11[c_type]",  :type => "radio", :value => "s4",
+              :"data-c-value" => 4, :"data-odds-rule" => "s4",
+              :"data-c-type" => "任選四"}/
         %td.cell_border.td_caption_1{:width => "87"}
           %span#jeu_s_26_296
-            %input.bet_type_c{:name => "c_type",  :type => "radio", :value => "s5", :"data-c-value" => 5}/
+            %input.bet_type_c{:name => "ball11[c_type]",  :type => "radio", :value => "s5",
+              :"data-c-value" => 5, :"data-odds-rule" => "s4",
+              :"data-c-type" => "任選五"}/
       %tr.Ball_tr_H
         %td.cell_border
           %span#jeu_c_289 任選二
@@ -172,17 +184,31 @@
     %tbody
       %tr
         %td
-          总共注数:
-          %span#total_bet_num.sum_info 0
+          %span#bet_name.multiple_Red/
+
+        %td(style="text-align:left" colspan="2" )
+          %span
+            %b &nbsp;&nbsp;&nbsp;&nbsp; 选中号码:
+          %span#picked_nums.multiple_Red
+        %td(style="text-align:left")
+          %span
+            每組最高可下註金額：
+            %span#max_credit_per_bet.multiple_Red/
+          元
+      %tr
         %td
-          每注金額:
+          ‘復式’共分為 :
+          %span#total_bet_num.multiple_Red.sum_info 0
+          組
+        %td
+          每組金額:
           %input.bet_input_credit.bet_input{:disabled => "", :id => "ball11_c_credit", :name => "ball11[credit]", :value => "" , :size => 7, :maxlength => 6, :max => 2000 }
         %td(width=180)
           总投注金額:
           %span#total_bet_credit.sum_info.multiple_Red 0
         %td(width=180)
-          最多可赢金額:
-          %span#total_possible_win_credit.sum_info.multiple_Red 0
+          最高派彩:
+          %span#total_possible_win_credit.multiple_Red 500,000
 
 
   %table(width="100%" )
