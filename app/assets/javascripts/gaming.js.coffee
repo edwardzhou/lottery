@@ -73,8 +73,8 @@ parseDate = (date_str) ->
 
 update_time = ->
   if end_time != null
-    end_seconds = (end_time.getTime() - (new Date()).getTime()) / 1000
-    close_seconds = (close_time.getTime() - (new Date()).getTime()) / 1000
+    end_seconds = Math.ceil((end_time.getTime() - (new Date()).getTime()) / 1000)
+    close_seconds = Math.ceil( (close_time.getTime() - (new Date()).getTime()) / 1000 )
     if close_seconds > 600
       close_seconds = (start_time.getTime() - (new Date()).getTime()) / 1000
     end_min = Math.floor(end_seconds % 3600 / 60)
@@ -118,6 +118,13 @@ update_time = ->
     else
       $("#close_title").text("距離封盤：")
 
+    #if (end_seconds <=0 or close_seconds <=0) and (refresh_time > 4)
+    #  refresh_time = 4
+    if (0 == close_seconds - 1) and (refresh_time > 6)
+      refresh_time = 6
+    if (0 == end_seconds - 1) and (refresh_time > 6)
+      refresh_time = 6
+
     refresh_time = refresh_time - 1
     if refresh_time <= 0
       refresh_time = 0
@@ -151,6 +158,7 @@ on_load_odds = (odds_level) ->
 
   if odds_level.can_bet
     if !bet_input_enabled
+      $(".submit_btn").attr("disabled", false)
       bet_input_enabled = true
       for rule in odds_level.rules
         do (rule) ->
@@ -161,6 +169,7 @@ on_load_odds = (odds_level) ->
       $(".bet_lock").hide();
   else
     if bet_input_enabled
+      $(".submit_btn").attr("disabled", true)
       bet_input_enabled = false
       $(".odds_label").text("-")
       $(".bet_input").hide();
