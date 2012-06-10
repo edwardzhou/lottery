@@ -41,7 +41,7 @@ class Calculation
       Rails.logger.warn("random predict...")
       5.times do
         lp = predict_seeds[rand(predict_seeds.size)]
-        max_predicts[lp.ball_to_a] = compute(lottery_inst, lp)
+        max_predicts[lp.balls_to_a] = compute(lottery_inst, lp)
       end
     else
       2.times do |index|
