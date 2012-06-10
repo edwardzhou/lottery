@@ -10,7 +10,7 @@ class GamingController < UserBaseController
   COMB_NAMES = {:s2 => "任選二",
                 :c2 => "選二連組",
                 :s3 => "任選三",
-                :p3 => "選三前組",
+                :x3 => "選三前組",
                 :s4 => "任選四",
                 :s5 => "任選五"}
 
@@ -163,7 +163,7 @@ class GamingController < UserBaseController
     @current_user.available_credit = (@current_user.available_credit - total_bet_credit).round(4)
     @current_user.save!
 
-    current_lottery.total_income = current_lottery.total_income + total_bet_credit
+    current_lottery.total_income = (current_lottery.total_income + total_bet_credit).round(4)
     current_lottery.save!
 
   end
@@ -219,7 +219,7 @@ class GamingController < UserBaseController
     @current_user.available_credit = (@current_user.available_credit - total_bet_credit).round(4)
     @current_user.save!
 
-    current_lottery.total_income = current_lottery.total_income + total_bet_credit
+    current_lottery.total_income = (current_lottery.total_income + total_bet_credit).round(4)
     current_lottery.save!
   end
 
@@ -229,26 +229,27 @@ class GamingController < UserBaseController
 
     c_type = bet_params[:c_type]
     bet_type = c_type[0]
-    bet_gnum = c_type[1]
+    bet_gnum = c_type[1].to_i
+    bet_credit = bet_params[:credit].to_d
     bet_nos = bet_params[:c_type_no].collect{|no| no.to_i }
-    bet_groups = bet_nos.combination
+    bet_groups = bet_nos.combination(bet_gnum)
 
     method_name = case bet_type
                     when "c"
                       "is_c?"
                     when "s"
                       "is_s?"
-                    when "p"
+                    when "x"
                       "is_ps?"
                   end
 
     bet_groups.each do |group|
       eval_expr = "#{method_name}(#{group})"
-      rule_id = "#{COMB_NAMES[c_type]}_#{group}"
-      rule_name = COMB_NAMES[c_type] + " 開 " + group
+      rule_id = "#{c_type}_#{group}"
+      rule_name = COMB_NAMES[c_type.to_sym] + " 開 " + group.to_s
       rule_eval = "#{method_name}(#{group})"
       logger.info("new bet_item[rule_id: #{rule_id}, rule_name: #{rule_name}, rule_eval: #{rule_eval}]")
-      bet_item = new_bet_item(ball_index, bet_credit, today_stat, c_type, rule_id, rule_name, rule_eval)
+      bet_item = new_bet_item(ball_id, bet_credit, today_stat, c_type, rule_id, rule_name, rule_eval)
       bet_rule = @lottery.bet_rule(rule_id)
       bet_rule.bet_count = bet_rule.bet_count + 1
       bet_rule.total_income = bet_rule.total_income.to_f + bet_credit
@@ -256,6 +257,17 @@ class GamingController < UserBaseController
       #bet_item.save!
       bet_items << bet_item
     end
+
+
+    bet_items.each {|item| item.save!}
+
+    total_bet_credit = bet_items.inject(0) { |sum, item| sum + item.credit }
+    #@current_user.available_credit = @current_user.available_credit - total_bet_credit
+    @current_user.available_credit = (@current_user.available_credit - total_bet_credit).round(4)
+    @current_user.save!
+
+    current_lottery.total_income = (current_lottery.total_income + total_bet_credit).round(4)
+    current_lottery.save!
 
 
   end

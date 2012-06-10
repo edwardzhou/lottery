@@ -13,7 +13,11 @@ module LotteryMembers
     def bet_rule(rule_id)
       rule_id = rule_id.to_sym unless rule_id.kind_of?(Symbol)
       result = self.bet_rules.where(rule_id: rule_id).first
-      result = self.bet_rules.create({rule_id: rule_id}) if result.nil?
+      if result.nil?
+        result = self.bet_rules.create({rule_id: rule_id})
+      end
+
+      result
     end
 
     def set_ball_values(balls_values)
