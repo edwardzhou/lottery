@@ -32,33 +32,43 @@ class Calculation
 
     max_outcome = (lottery_inst.total_income * (lottery_inst.return_rate - 3) / 100.0).round(4)
     max_predicts = {}
-
     min_predicts = {}
 
+
     predict_start_time = Time.now
-    2.times do |index|
-      Rails.logger.info("[#{Time.now}] predict round \##{index} start")
-      start_time = Time.now
-      ##predicts = predict_seeds.select{|seed| self.compute(lottery_inst, seed) <= max_outcome}
-      calc_seeds = predict_seeds.collect do |seed|
-        self.compute(lottery_inst, seed)
-        seed
+
+    if max_outcome <= 0
+      Rails.logger.warn("random predict...")
+      5.times do
+        lp = predict_seeds[rand(predict_seeds.size)]
+        max_predicts[lp.ball_to_a] = compute(lottery_inst, lp)
       end
-      predicts = calc_seeds.select {|seed| seed.total_outcome <= max_outcome}
-      #p predicts
-      3.times() do
-        max_predict = predicts.max{|a,b| a.total_outcome <=> b.total_outcome}
-        break if max_predict.nil?
-        max_predicts[max_predict.balls_to_a] = max_predict.total_outcome
-        predicts.delete(max_predict)
+    else
+      2.times do |index|
+        Rails.logger.info("[#{Time.now}] predict round \##{index} start")
+        start_time = Time.now
+        ##predicts = predict_seeds.select{|seed| self.compute(lottery_inst, seed) <= max_outcome}
+        calc_seeds = predict_seeds.collect do |seed|
+          self.compute(lottery_inst, seed)
+          seed
+        end
+        predicts = calc_seeds.select {|seed| seed.total_outcome <= max_outcome}
+        #p predicts
+        3.times() do
+          max_predict = predicts.max{|a,b| a.total_outcome <=> b.total_outcome}
+          break if max_predict.nil?
+          max_predicts[max_predict.balls_to_a] = max_predict.total_outcome
+          predicts.delete(max_predict)
+        end
+        min_predict = calc_seeds.min { |a, b| a.total_outcome <=> b.total_outcome }
+        min_predicts[min_predict.balls_to_a] = min_predict.total_outcome
+        end_time = Time.now
+        predict_seeds.each(&:shuffle_balls!)
+        shuffle_time = Time.now
+        Rails.logger.info("[#{Time.now}] predict round \##{index} end. predict[#{end_time-start_time}], shuffle[#{shuffle_time - end_time}]")
       end
-      min_predict = calc_seeds.min { |a, b| a.total_outcome <=> b.total_outcome }
-      min_predicts[min_predict.balls_to_a] = min_predict.total_outcome
-      end_time = Time.now
-      predict_seeds.each(&:shuffle_balls!)
-      shuffle_time = Time.now
-      Rails.logger.info("[#{Time.now}] predict round \##{index} end. predict[#{end_time-start_time}], shuffle[#{shuffle_time - end_time}]")
     end
+
     total_end_time = Time.now
     Rails.logger.info("total time: #{total_end_time - total_start_time} , seed prepare time:#{(predict_start_time-total_start_time).seconds} ; total predict time: #{(total_end_time-predict_start_time).seconds}")
 
