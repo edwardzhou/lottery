@@ -14,7 +14,8 @@ test/version_tmp
 tmp
 log
 log/*
-
+public/assets
+**.swp
 # YARD artifacts
 .yardoc
 _yardoc

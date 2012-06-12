@@ -1,7 +1,7 @@
 class Agent::AgentBaseController < ApplicationController
   before_filter :agent_required
 
-  layout "admin"
+  layout "agent"
 
 
   private
