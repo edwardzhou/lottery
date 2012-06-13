@@ -9,9 +9,11 @@ class Admin::UsersController < Admin::AdminBaseController
   def index
     filter = params[:filter]
     filter = Regexp.new(filter, true) if filter
+    user_role = params[:user_role]
     @users = User.all
-    @users = @users.where(:username => filter).or(:true_name => filter).or(:phone => filter) if filter
-    @total_rows = @users.dup.count
+    @users = @users.any_of({:username => filter}, {:true_name => filter}, {:phone => filter}) if filter
+    @users = @users.where(:user_role.in => user_role) unless user_role.blank?
+    @total_rows = @users.count
     rows_per_page = params[:rows] || 20
     @page = params[:page].to_i
     @pages = (@total_rows / rows_per_page.to_f).ceil

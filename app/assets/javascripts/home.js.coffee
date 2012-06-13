@@ -5,7 +5,7 @@
 
 
 jQuery ->
-  if $("#bet_list")
+  if $("#bet_list").size() > 0
     $("#bet_list").jqGrid( {
       url: gon.page_json_url
       datatype: 'json',
@@ -47,7 +47,7 @@ jQuery ->
 
     );
 
-  if $("#uds_list")
+  if $("#uds_list").size() > 0
     $("#uds_list").jqGrid( {
       url: gon.page_json_url
       datatype: 'json',
@@ -84,7 +84,7 @@ jQuery ->
 
     );
 
-  if $("#history_list")
+  if $("#history_list").size() > 0
     $("#history_list").jqGrid( {
       url: gon.page_json_url
       datatype: 'json',
@@ -150,5 +150,5 @@ jQuery ->
 #
 #  jQuery.validator.addMethod("password", password_validate, "Your password must be at least 6 characters long and contain at least one number and one character.")
 #
-  if $("#change_password_form")
+  if $("#change_password_form").size() > 0
     $("#change_password_form").validate()
