@@ -1,6 +1,17 @@
 %h1 用户管理
 
 = link_to "新开户", new_agent_user_path
+#search_box
+  %fieldset
+    %legend 过滤条件
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    = label_tag "search_filter", "条件:"
+    = text_field_tag "search_text", nil, :class => "search_text", :"data-filter" => "filter",
+      :size => 20
+
+    = link_to "查找", "javascript:void(0)", :id => "search_button"
+    %br/
+
 %table(id="user_list")
   %tr
     %td

@@ -34,7 +34,7 @@ jQuery ->
       sortorder: 'desc',
       viewrecords: true,
       gridview: true,
-      caption: '本期下注明細',
+      caption: '下注明細',
       resizable: true,
       height: 350,
       #width: 900,

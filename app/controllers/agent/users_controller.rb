@@ -2,23 +2,34 @@
 
 class Agent::UsersController < Agent::AgentBaseController
 
+  before_filter :check_valid_agent, :except => [:index, :new, :create]
+
   include ApplicationHelper
 
   def index
-    filter = params[:filter]
-    filter = Regexp.new(filter, true) if filter
-    @users = current_user.users
-    @users = @users.where(:username => filter).or(:true_name => filter).or(:phone => filter) if filter
-    @total_rows = @users.dup.count
-    rows_per_page = params[:rows] || 20
-    @page = params[:page].to_i
-    @pages = (@total_rows / rows_per_page.to_f).ceil
-
-    @page = @pages if @page > @pages
-
     if request.xhr?
-      @users = @users.order_by(params[:sidx].to_sym => params[:sord]).paginate(:page => params[:page], :per_page => rows_per_page)
-      #@users.paginate(:page => params[:page], :per_page => rows_per_page)
+      filter = params[:filter]
+      unless filter.blank?
+        filter = Regexp.new(filter, true)
+      else
+        filter = nil
+      end
+      user_role =params[:user_role]
+      user_role = user_role.split(",") unless user_role.blank?
+      @users = current_user.users
+      @users = @users.any_of({:username => filter}, {:true_name => filter}, {:phone => filter}) unless filter.blank?
+      #@users = @users.where(:user_role.in => user_role) unless user_role.blank?
+      @total_rows = @users.dup.count
+      rows_per_page = params[:rows] || 20
+      @page = params[:page].to_i
+      @pages = (@total_rows / rows_per_page.to_f).ceil
+
+      @page = @pages if @page > @pages
+
+      if request.xhr?
+        @users = @users.order_by(params[:sidx].to_sym => params[:sord]).paginate(:page => params[:page], :per_page => rows_per_page)
+        #@users.paginate(:page => params[:page], :per_page => rows_per_page)
+      end
     end
 
   end
@@ -31,14 +42,8 @@ class Agent::UsersController < Agent::AgentBaseController
   end
 
   def edit
-    #gon.ol_page_url = agent_odds_levels_path
-    @user = User.find(params[:id])
-    if @user.agent.id != current_user.id
-      redirect_to({:action => "index"} , :alert => "无效操作!")
-      return
-    end
+    @user ||= User.find(params[:id])
 
-    #@user.agent = current_user
   end
 
   def create
@@ -82,11 +87,7 @@ class Agent::UsersController < Agent::AgentBaseController
   end
 
   def update
-    @user = User.find(params[:id])
-    if @user.agent.id != current_user.id
-      redirect_to({:action => "index"} , :alert => "无效操作!")
-      return
-    end
+    @user ||= User.find(params[:id])
 
     user_params = params[:user]
     @user.return = user_params[:return].to_f
@@ -115,12 +116,12 @@ class Agent::UsersController < Agent::AgentBaseController
   end
 
   def show
-    @user = User.find(params[:id])
+    @user ||= User.find(params[:id])
     gon.page_json_url = bet_list_agent_user_path(@user, :format => "json")
   end
 
   def bet_list
-    @user = User.find(params[:id])
+    @user ||= User.find(params[:id])
     @bet_items = BetItem.bet_items_by_user(@user, nil)
     @total_rows = @bet_items.count
     rows_per_page = params[:rows] || 20
@@ -145,14 +146,21 @@ class Agent::UsersController < Agent::AgentBaseController
 
 
   def lock
-    @user = User.find(params[:id])
+    @user ||= User.find(params[:id])
+
     @user.lock_account!
     redirect_to :action => "index"
   end
 
   def unlock
-    @user = User.find(params[:id])
+    @user ||= User.find(params[:id])
     @user.unlock_account!
+    redirect_to :action => "index"
+  end
+
+  def reset_credit
+    @user ||= User.find(params[:id])
+    @user.reset_credit!
     redirect_to :action => "index"
   end
 
@@ -168,6 +176,16 @@ class Agent::UsersController < Agent::AgentBaseController
       false
     else
       true
+    end
+
+  end
+
+  private
+  def check_valid_agent
+    @user = User.find(params[:id])
+    if @user.agent.id != current_user.id
+      redirect_to({:action => "index"} , :alert => "无效操作!")
+      return
     end
 
   end

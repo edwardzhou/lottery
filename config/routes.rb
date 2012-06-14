@@ -30,6 +30,7 @@ Lottery::Application.routes.draw do
       member do
         match 'lock' => :lock, :via => [:get, :post]
         match 'unlock' => :unlock, :via => [:get, :post]
+        match 'reset_credit' => :reset_credit, :via => [:get, :post]
         match 'bet_list' => :bet_list, :via => :get
       end
     end
@@ -51,6 +52,7 @@ Lottery::Application.routes.draw do
       member do
         match 'lock' => :lock, :via => [:get, :post]
         match 'unlock' => :unlock, :via => [:get, :post]
+        match 'reset_credit' => :reset_credit, :via => [:get, :post]
         match 'bet_list' => :bet_list, :via => :get
       end
     end

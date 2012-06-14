@@ -13,11 +13,20 @@ class LotteryTask
     end
   end
 
+  def self.reset_available_credits
+    Rails.logger.info("start to reset available credit")
+    User.normal_users.active_users.each do |user|
+      Rails.logger.info("reset #{user.username}: total_credit => #{user.total_credit}, available_credt => #{user.available_credit}")
+      user.reset_credit!
+    end
+  end
+
   def lottery_process
     p "OK"
 
     Rails.logger.debug("lottery_process")
     while true
+
       lottery_conf = LotteryConfig.first
       current_lottery = lottery_conf.lottery_inst
       Rails.logger.debug("current_lottery[#{current_lottery.lottery_full_id}, accept_betting: #{current_lottery.accept_betting}, close_at: #{current_lottery.close_at}, end_time: #{current_lottery.end_time}]")

@@ -17,11 +17,16 @@ node(:edit_url) do |user|
   link_to "修改", edit_agent_user_path(user)
 end
 
+node(:reset_credit_url) do |user|
+  link_to "恢复额度", reset_credit_agent_user_path(user), :confirm => "是否恢复 [#{user.username}] 的额度由 '#{user.available_credit}' 到 '#{user.total_credit}'?"
+end
+
+
 node(:lock_account_url) do |user|
   if user.locked?
-    link_to "解锁", unlock_agent_user_path(user)
+    link_to "解锁", unlock_agent_user_path(user), :confirm => "是否解锁 [#{user.username}]?"
   else
-    link_to "锁定", lock_agent_user_path(user)
+    link_to "锁定", lock_agent_user_path(user), :confirm => "是否锁定 [#{user.username}]?"
   end
 end
 

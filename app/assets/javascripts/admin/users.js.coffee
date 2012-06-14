@@ -8,7 +8,9 @@ getFilters = () ->
   $(".user_role").filter("[checked]").each (index) ->
     roles.push($(this).val())
   if roles.length > 0
-    filters["user_role[]"] = roles.join(",")
+    filters["user_role"] = roles.join(",")
+  else
+    filters["user_role"] = ""
 
   search_text = $(".search_text")
   if search_text.val().trim().length > 0
@@ -68,9 +70,8 @@ jQuery ->
 
 
   if $("#new_user_form").size() > 0
-    alert("new user form");
     $("#new_user_form").validate();
-    $("#user_password_confirmation").rules("add", {equalTo: "#user_password" })
+    $("#user_password_confirmation").rules("add", {equalTo: "#user_password" }) if $("#user_password_confirmation").size() > 0
 
   if $("#search_button").size() > 0
     $("#search_button").bind "click" , ->

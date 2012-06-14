@@ -7,22 +7,29 @@ class Admin::UsersController < Admin::AdminBaseController
   include ApplicationHelper
 
   def index
-    filter = params[:filter]
-    filter = Regexp.new(filter, true) if filter
-    user_role = params[:user_role]
-    @users = User.all
-    @users = @users.any_of({:username => filter}, {:true_name => filter}, {:phone => filter}) if filter
-    @users = @users.where(:user_role.in => user_role) unless user_role.blank?
-    @total_rows = @users.count
-    rows_per_page = params[:rows] || 20
-    @page = params[:page].to_i
-    @pages = (@total_rows / rows_per_page.to_f).ceil
-
-    @page = @pages if @page > @pages
-
     if request.xhr?
-      @users = @users.order_by(params[:sidx].to_sym => params[:sord]).paginate(:page => params[:page], :per_page => rows_per_page)
-      #@users.paginate(:page => params[:page], :per_page => rows_per_page)
+      filter = params[:filter]
+      unless filter.blank?
+        filter = Regexp.new(filter, true)
+      else
+        filter = nil
+      end
+      user_role =params[:user_role]
+      user_role = user_role.split(",") unless user_role.blank?
+      @users = User.scoped
+      @users = @users.any_of({:username => filter}, {:true_name => filter}, {:phone => filter}) unless filter.blank?
+      @users = @users.where(:user_role.in => user_role) unless user_role.blank?
+      @total_rows = @users.count
+      rows_per_page = params[:rows] || 20
+      @page = params[:page].to_i
+      @pages = (@total_rows / rows_per_page.to_f).ceil
+
+      @page = @pages if @page > @pages
+
+      if request.xhr?
+        @users = @users.order_by(params[:sidx].to_sym => params[:sord]).paginate(:page => params[:page], :per_page => rows_per_page)
+        #@users.paginate(:page => params[:page], :per_page => rows_per_page)
+      end
     end
   end
 
@@ -116,6 +123,15 @@ class Admin::UsersController < Admin::AdminBaseController
     render "home/bet_list"
 
   end
+
+
+  def reset_credit
+    @user ||= User.find(params[:id])
+    @user.reset_credit!
+    redirect_to :action => "index"
+  end
+
+
 
   private
   def init

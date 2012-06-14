@@ -4,6 +4,26 @@
 
 
 
+getFilters = () ->
+  filters = {}
+  roles = []
+  if roles.length > 0
+    filters["user_role"] = roles.join(",")
+  else
+    filters["user_role"] = ""
+
+  search_text = $(".search_text")
+  if search_text.val().trim().length > 0
+    filters[search_text.data("filter")] = search_text.val().trim()
+  else
+    filters[search_text.data("filter")] = ""
+  #filters["filter"] = "周"
+  return filters
+
+doUserSearch = (this_obj) ->
+  $("#user_list").jqGrid("setGridParam", {postData: getFilters()}).trigger("reloadGrid")
+
+
 jQuery ->
   if $("#user_list").size() > 0
     $("#user_list").jqGrid( {
@@ -23,6 +43,7 @@ jQuery ->
         {name: 'show_url', index: '', label: " ", width: 60, sortable: false}
         {name: 'edit_url', index: '', label: " ", width: 60, sortable: false}
         {name: 'lock_account_url', index: '', label: " ", width: 60, sortable: false}
+        {name: 'reset_credit_url', index: '', label: " ", width: 60, sortable: false}
       ],
       jsonReader : {
       root:"rows",
@@ -48,7 +69,8 @@ jQuery ->
 
   if $("#new_user_form").size() > 0
     $("#new_user_form").validate();
-    $("#user_password_confirmation").rules("add", {equalTo: "#user_password" })
+    $("#user_password_confirmation").rules("add", {equalTo: "#user_password" }) if $("#user_password_confirmation").size() > 0
+
 
   $(".odds_level").bind "change", (event) =>
     select_box = $(event.currentTarget)
@@ -57,3 +79,9 @@ jQuery ->
     the_url = gon.ol_page_url + "/" + odds_level_id
     if odds_level_id.length > 0
       $.ajax( {url: the_url, format: "js" })
+
+  if $("#search_button").size() > 0
+    $("#search_button").bind "click" , ->
+      doUserSearch(this)
+
+

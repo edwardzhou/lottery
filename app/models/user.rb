@@ -108,6 +108,12 @@ class User
     odds_level.try(:return)
   end
 
+  def reset_credit!
+    self.available_credit = self.total_credit
+    self.save!
+    self
+  end
+
   def self.find_by_username(username)
     where(:username => username).first
   end
