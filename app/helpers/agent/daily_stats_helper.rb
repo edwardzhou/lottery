@@ -1,0 +1,2 @@
+module Agent::DailyStatsHelper
+end

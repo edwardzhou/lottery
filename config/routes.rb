@@ -57,6 +57,7 @@ Lottery::Application.routes.draw do
       end
     end
     resources :odds_levels
+    resources :daily_stats
   end
 
   root :to => "sessions#new"
