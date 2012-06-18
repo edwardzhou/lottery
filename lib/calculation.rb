@@ -118,6 +118,8 @@ class Calculation
 
   end
 
+
+
   def self.balance_user(lottery_inst, want_save = true)
     user_data = {}
     lottery_inst.bet_items.each do |item|
@@ -187,6 +189,70 @@ class Calculation
     end
   end
 
+  def self.update_agents_daily_stat(lottery_date)
+    Rails.logger.debug("update_agent_daily_stat for #{lottery_date}")
+    uds = UserDailyStat.by_date(lottery_date)
+    agents = uds.collect{|u| u.agent if u.user.user_role == User::USER}.uniq.compact
+    agents.each do |agent|
+      Rails.logger.debug("agent: #{agent}")
+      agent_daily_stat = UserDailyStat.get_current_stat(agent, lottery_date)
+      total_bet_credit = 0.0
+      total_win = 0.0
+      total_win_after_return = 0.0
+      total_return = 0.0
+      total_agent_return = 0.0
+
+      uds.select{|u| u.agent_id == agent.id}.each do |ds|
+        total_bet_credit = total_bet_credit + ds.total_bet_credit
+        total_win = total_win + ds.total_win
+        total_win_after_return = total_win_after_return + ds.total_win_after_return
+        total_return = total_return + ds.total_return
+        total_agent_return = total_agent_return + ds.total_agent_return
+      end
+
+      agent_daily_stat.agent ||= agent.agent
+      agent_daily_stat.top_user ||= agent.agent
+
+      agent_daily_stat.total_bet_credit = total_bet_credit
+      agent_daily_stat.total_win = total_win
+      agent_daily_stat.total_win_after_return = total_win_after_return
+      agent_daily_stat.total_return = total_return
+      agent_daily_stat.total_agent_return = total_agent_return
+
+      agent_daily_stat.save!
+    end
+  end
+
+  def self.update_top_users_daily_stat(lottery_date)
+    uds = UserDailyStat.by_date(lottery_date)
+    top_users = uds.collect{|u| u.top_user if u.user.user_role == User::USER}.uniq.compact
+    top_users.each do |top_user|
+      top_user_daily_stat = UserDailyStat.get_current_stat(top_user, lottery_date)
+      total_bet_credit = 0.0
+      total_win = 0.0
+      total_win_after_return = 0.0
+      total_return = 0.0
+      total_agent_return = 0.0
+
+      uds.select{|u| u.top_user_id == top_user.id}.each do |ds|
+        total_bet_credit = total_bet_credit + ds.total_bet_credit
+        total_win = total_win + ds.total_win
+        total_win_after_return = total_win_after_return + ds.total_win_after_return
+        total_return = total_return + ds.total_return
+        total_agent_return = total_agent_return + ds.total_agent_return
+      end
+
+      top_user_daily_stat.total_bet_credit = total_bet_credit
+      top_user_daily_stat.total_win = total_win
+      top_user_daily_stat.total_win_after_return = total_win_after_return
+      top_user_daily_stat.total_return = total_return
+      top_user_daily_stat.total_agent_return = total_agent_return
+
+      top_user_daily_stat.save!
+    end
+  end
+
+
   def self.close_lottery(lottery_inst)
     if lottery_inst.balanced
       Rails.logger.debug("lottery_inst.balanced => #{lottery_inst.balanced}")
@@ -220,6 +286,10 @@ class Calculation
     balance_user(lottery_inst)
     Rails.logger.info("update daily stat")
     update_daily_stat(lottery_inst)
+    Rails.logger.info("update agents daily stat")
+    update_agents_daily_stat(lottery_inst.lottery_date)
+    Rails.logger.info("update top_users daily stat")
+    update_top_users_daily_stat(lottery_inst.lottery_date)
     lottery_inst.balanced = true
     lottery_inst.save!
     lottery_inst

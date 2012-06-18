@@ -85,7 +85,7 @@ class GamingController < UserBaseController
   private
 
   def handle_ball_bet(ball_id, bet_params)
-    today_stat = UserDailyStat.get_current_stat(@current_user)
+    today_stat = UserDailyStat.get_current_stat(@current_user, @lottery.lottery_date)
 
     bet_items = []
     (1..20).each do |ball_index|
@@ -169,7 +169,7 @@ class GamingController < UserBaseController
   end
 
   def handle_sum_bet(ball_id, bet_params)
-    today_stat = UserDailyStat.get_current_stat(@current_user)
+    today_stat = UserDailyStat.get_current_stat(@current_user, @lottery.lottery_date)
     bet_items = []
 
     sum_params = bet_params[:sum]
@@ -224,7 +224,7 @@ class GamingController < UserBaseController
   end
 
   def handle_cp_bet(ball_id, bet_params)
-    today_stat = UserDailyStat.get_current_stat(@current_user)
+    today_stat = UserDailyStat.get_current_stat(@current_user, @lottery.lottery_date)
     bet_items = []
 
     c_type = bet_params[:c_type]
@@ -305,7 +305,7 @@ class GamingController < UserBaseController
     gon.available_credit = current_user.available_credit
     @lottery = current_lottery
     @previous_lottery = previous_lottery
-    @current_daily_stat = UserDailyStat.get_current_stat(current_user)
+    @current_daily_stat = UserDailyStat.get_current_stat(current_user, @lottery.lottery_date)
 
     @odds_level = @lottery.get_odds_level(current_user.odds_level.level_id)
 

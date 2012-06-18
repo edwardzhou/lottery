@@ -14,4 +14,11 @@ namespace :lottery do
     require "calculation"
     LotteryTask.reset_available_credits
   end
+
+  task :test_update_agent_daily_stat => :environment do
+    require "lottery_task"
+    require "calculation"
+    Calculation.update_agents_daily_stat("2012-05-28")
+  end
+
 end

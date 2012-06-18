@@ -10,10 +10,12 @@ class UserDailyStat
 
   belongs_to :user
   belongs_to :agent, :class_name => "User", :foreign_key => "agent_id"
+  belongs_to :top_user,:class_name => "User", :foreign_key => "top_user_id"
   has_many :bet_items
 
   scope :recent, lambda {|user| where(:user_id => user.id).and(:stat_date.gte => 30.days.ago.beginning_of_day).order_by(:stat_date => :asc) }
   scope :latest, lambda {|user| where(:user_id => user.id).order_by(:stat_date => :desc).limit(1) }
+  scope :by_date, lambda {|the_date| where(:stat_date => the_date)}
 
   def self.get_current_stat(user, the_date = Date.today)
     the_date = the_date.to_time.beginning_of_day
