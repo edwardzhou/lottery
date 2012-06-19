@@ -14,7 +14,7 @@ class LotteryTask
   end
 
   def self.reset_available_credits
-    Rails.logger.info("start to reset available credit")
+    Rails.logger.info("[#{Time.now}] start to reset available credit")
     User.normal_users.active_users.each do |user|
       Rails.logger.info("reset #{user.username}: total_credit => #{user.total_credit}, available_credt => #{user.available_credit}")
       user.reset_credit!
