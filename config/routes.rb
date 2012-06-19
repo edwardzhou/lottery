@@ -43,7 +43,12 @@ Lottery::Application.routes.draw do
       resources :odds_levels
     end
     resources :bet_rules
-    resources :tasks
+    #resources :tasks
+    resources :daily_stats do
+      member do
+        get :detail_stat
+      end
+    end
   end
 
   namespace :agent do
@@ -57,7 +62,11 @@ Lottery::Application.routes.draw do
       end
     end
     resources :odds_levels
-    resources :daily_stats
+    resources :daily_stats do
+      member do
+        get :detail_stat
+      end
+    end
   end
 
   root :to => "sessions#new"

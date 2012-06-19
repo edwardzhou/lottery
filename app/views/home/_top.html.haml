@@ -11,6 +11,8 @@
           %input.top_menu_button.but_4{:name => "but_4", :"data-url" => bet_stat_home_index_path , :"data-hover" => "but_4_m", :"data-normal" => "but_4" , :type => "button"}/
         - elsif current_user.is_agent?
           %input.top_menu_button.but_4{:name => "but_4", :"data-url" => agent_daily_stats_path , :"data-hover" => "but_4_m", :"data-normal" => "but_4" , :type => "button"}/
+        - elsif current_user.is_admin?
+          %input.top_menu_button.but_4{:name => "but_4", :"data-url" => admin_daily_stats_path , :"data-hover" => "but_4_m", :"data-normal" => "but_4" , :type => "button"}/
         %input.top_menu_button.but_5{:name => "but_5", :"data-url" => history_home_index_path , :"data-hover" => "but_5_m", :"data-normal" => "but_5" , :type => "button"}/
         %input.top_menu_button.but_6{:name => "but_6", :"data-url" => rule_info_path , :"data-hover" => "but_6_m", :"data-normal" => "but_6" , :type => "button"}/
         %input.top_menu_button.but_7{:name => "but_7", :"data-url" => logout_path , :"data-hover" => "but_7_m", :"data-normal" => "but_7" , :type => "button"}/

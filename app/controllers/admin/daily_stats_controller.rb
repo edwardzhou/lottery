@@ -1,4 +1,4 @@
-class Agent::DailyStatsController < Agent::AgentBaseController
+class Admin::DailyStatsController < Admin::AdminBaseController
 
   include ApplicationHelper
 
@@ -7,7 +7,7 @@ class Agent::DailyStatsController < Agent::AgentBaseController
 
   def index
     if request.xhr?
-      @user_daily_stats = UserDailyStat.recent(current_user)
+      @user_daily_stats = UserDailyStat.agents_by_top_user(current_user)
       @total_rows = @user_daily_stats.count
       rows_per_page = params[:rows] || 20
       @page = params[:page].to_i
@@ -25,7 +25,7 @@ class Agent::DailyStatsController < Agent::AgentBaseController
 
       uds = UserDailyStat.find(params[:id])
 
-      @user_daily_stats = UserDailyStat.by_agent(current_user).by_date(uds.stat_date)
+      @user_daily_stats = UserDailyStat.by_top_user(current_user).by_date(uds.stat_date).excludes(:agent_id => current_user.id)
       @total_rows = @user_daily_stats.count
       rows_per_page = params[:rows] || 20
       @page = params[:page].to_i
@@ -40,6 +40,6 @@ class Agent::DailyStatsController < Agent::AgentBaseController
 
   private
   def init
-    gon.agent_daily_stats_path = agent_daily_stats_path
+    gon.agent_daily_stats_path = admin_daily_stats_path
   end
 end
