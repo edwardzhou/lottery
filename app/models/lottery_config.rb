@@ -37,10 +37,10 @@ class LotteryConfig
       Calculation.close_lottery(self.lottery_inst)
     end
 
-    unless self.lottery_inst.balanced
-      Rails.logger.debug("lottery_inst is not, start to balance all")
-      Calculation.balance_all(self.lottery_inst)
-    end
+    #unless self.lottery_inst.balanced
+    #  Rails.logger.debug("lottery_inst is not, start to balance all")
+    #  Calculation.balance_all(self.lottery_inst)
+    #end
 
     #if self.lottery_date.to_time < Time.now.beginning_of_day
     #  reset_seq_no(Time.now.beginning_of_day)
@@ -67,8 +67,9 @@ class LotteryConfig
     lottery.profit = 0
     lottery.is_first = self.next_seq_no == 1
     lottery.is_first_started = false
-    lottery.is_last = self.next_seq_no == 84
+    lottery.is_last = self.next_seq_no == 108
     lottery.accept_betting = !lottery.is_first
+    lottery.balance_at = lottery.end_time + (30 + rand(90)).seconds
 
 
     # 复制各盘赔率

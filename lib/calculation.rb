@@ -254,8 +254,8 @@ class Calculation
 
 
   def self.close_lottery(lottery_inst)
-    if lottery_inst.balanced
-      Rails.logger.debug("lottery_inst.balanced => #{lottery_inst.balanced}")
+    if lottery_inst.closed
+      Rails.logger.debug("lottery_inst.closed => #{lottery_inst.closed}")
       return
     end
 

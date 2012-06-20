@@ -63,6 +63,13 @@ class LotteryTask
         LotteryConfig.first.start_new_lottery
       end
 
+      prev_lottery = LotteryConfig.first.previous_lottery
+      unless prev_lottery.balanced
+        if prev_lottery.balance_at && prev_lottery.balance_at < Time.now
+          Calculation.balance_all(prev_lottery)
+        end
+      end
+
     end
 
   end
