@@ -42,8 +42,14 @@ Lottery::Application.routes.draw do
 
       resources :odds_levels
     end
+
     resources :bet_rules
-    #resources :tasks
+    resources :tasks do
+      collection do
+        get :reset_av_credit
+      end
+    end
+
     resources :daily_stats do
       member do
         get :detail_stat
