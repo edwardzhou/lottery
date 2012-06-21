@@ -53,6 +53,7 @@ calc_c_type = () ->
     return
 
   max_credit_per_bet = Math.ceil( gon.available_credit / bet_num )
+  max_credit_per_bet = Math.min(10000, max_credit_per_bet)
   $("#ball11_c_credit").attr("max", max_credit_per_bet)
   $("#max_credit_per_bet").text(max_credit_per_bet)
 
