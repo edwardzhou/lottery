@@ -360,6 +360,7 @@ class GamingController < UserBaseController
     @ball_rules << Rule.new({:rule_name => "ball_add_even", :rule_title => "合數雙"})
     @single_ball_rule = Rule.new({:rule_name => "bet", :rule_title => "", :odds => "1.96"})
 
+    @sum_analyst = LotteryAnalyst.by_sum(10)
 
   end
 

@@ -1,26 +1,28 @@
 = render :partial => "header"
 
-= form_tag nil, :method => :put, :id => "bet_form" do |f|
-  %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "700"}
-    %tbody
-      %tr
-        %td.cell_border.td_caption_1.F_bold{:colspan => "4"} 總和、龍虎
-      %tr
-        %td.cell_border
-          = render :partial => "sum_bet", :locals => {:ball_id => @ball_id, :rules => @sum_bet_big_small_rules }
-        %td.cell_border
-          = render :partial => "sum_bet", :locals => {:ball_id => @ball_id, :rules => @sum_bet_odd_even_rules }
-        %td.cell_border
-          = render :partial => "sum_bet", :locals => {:ball_id => @ball_id, :rules => @sum_bet_trail_big_small_rules }
-        %td.cell_border
-          = render :partial => "sum_bet", :locals => {:ball_id => @ball_id, :rules => @sum_bet_dt_rules }
+.span-19
+  = form_tag nil, :method => :put, :id => "bet_form" do |f|
+    %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :width => "700"}
+      %tbody
+        %tr
+          %td.cell_border.td_caption_1.F_bold{:colspan => "4"} 總和、龍虎
+        %tr
+          %td.cell_border
+            = render :partial => "sum_bet", :locals => {:ball_id => @ball_id, :rules => @sum_bet_big_small_rules }
+          %td.cell_border
+            = render :partial => "sum_bet", :locals => {:ball_id => @ball_id, :rules => @sum_bet_odd_even_rules }
+          %td.cell_border
+            = render :partial => "sum_bet", :locals => {:ball_id => @ball_id, :rules => @sum_bet_trail_big_small_rules }
+          %td.cell_border
+            = render :partial => "sum_bet", :locals => {:ball_id => @ball_id, :rules => @sum_bet_dt_rules }
 
-  %table(width="100%" )
-    %tbody
-      %tr
-        %td(align="center")
-          %input(type="button" class="reset" value="重填")/
-          \&nbsp;
-          = submit_tag "投注",:disable_with => "投注中...", :class => "submit_btn"
+    %table(width="100%" )
+      %tbody
+        %tr
+          %td(align="center")
+            %input(type="button" class="reset" value="重填")/
+            \&nbsp;
+            = submit_tag "投注",:disable_with => "投注中...", :class => "submit_btn"
 
-= content_tag(:div , nil, :id => "info", "data-url" => gaming_path('ball7', :format => :json))
+= render :partial => "sum_analyst", :locals => {:sum_analyst => @sum_analyst}
+

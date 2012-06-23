@@ -435,6 +435,25 @@ div {
 .span-26, div.span-26 {
   width: 1030px; }
 
+.span-27, div.span-26 {
+  width: 1070px; }
+
+.span-28, div.span-26 {
+  width: 1110px; }
+
+.span-29, div.span-26 {
+  width: 1150px; }
+
+
+.suffix-10px {
+  padding-right: 10px; }
+
+.suffix-20px {
+  padding-right: 20px; }
+
+.suffix-30px {
+  padding-right: 30px; }
+
 .suffix-1 {
   padding-right: 40px; }
 
@@ -503,6 +522,16 @@ div {
 
 .suffix-23 {
   padding-right: 920px; }
+
+
+.prefix-10px {
+  padding-left: 10px; }
+
+.prefix-20px {
+  padding-left: 20px; }
+
+.prefix-30px {
+  padding-left: 30px; }
 
 .prefix-1 {
   padding-left: 40px; }
@@ -582,6 +611,9 @@ div {
     padding-right: 24px;
     margin-right: 25px;
     border-right: 1px solid #eee; } }
+
+.pull-30px {
+  margin-left: -30px; }
 
 .pull-1 {
   margin-left: -40px; }
@@ -734,6 +766,10 @@ div {
 .push-1, .push-2, .push-3, .push-4, .push-5, .push-6, .push-7, .push-8, .push-9, .push-10, .push-11, .push-12, .push-13, .push-14, .push-15, .push-16, .push-17, .push-18, .push-19, .push-20, .push-21, .push-22, .push-23, .push-24 {
   float: right;
   position: relative; }
+
+.no-float {
+  float: none;;
+}
 
 hr {
   background: #ddd;

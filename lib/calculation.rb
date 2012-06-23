@@ -268,6 +268,8 @@ class Calculation
     lottery_inst.closed = true
     lottery_inst.save!
 
+    LotteryAnalyst.update_analyst(lottery_inst)
+
     #Rails.logger.info("balance lottery")
     #balance_lottery(lottery_inst)
     #Rails.logger.info("balance users")
