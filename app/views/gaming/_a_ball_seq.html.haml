@@ -1,0 +1,10 @@
+%table.table_border(width="96%")
+  %tbody
+    %tr
+      - (25 - analyst.appr_data.size).times do
+        %td &nbsp;
+
+      - analyst.appr_data.each do |ad|
+        %td(width="23" )
+          != [].fill(ad[0], 0, ad[1]).join("<br/>")
+

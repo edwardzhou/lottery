@@ -22,7 +22,11 @@ Lottery::Application.routes.draw do
 
   get "ten_minute/bet"
 
-  resources :gaming
+  resources :gaming do
+    member do
+      match 'analyst' => :analyst, :iva => [:get, :post]
+    end
+  end
 
   namespace :admin do
     root :to => "users#index"

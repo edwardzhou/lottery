@@ -1,0 +1,7 @@
+%table.table_border(width="96%")
+  %tbody
+    %tr
+      - analyst.appr_data.each do |ad|
+        %td
+          != [].fill(ad[0], 0, ad[1]).join("<br/>")
+

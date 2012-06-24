@@ -176,6 +176,12 @@ on_load_odds = (odds_level) ->
       $(".bet_input").hide();
       $(".bet_lock").show()
 
+  if $("#sum_analyst").size() > 0
+    $.ajax({url: gon.ball_9_analyst_url + '?g=sum'})
+  if $("#sum_detail").size() > 0
+    $.ajax({url: gon.ball_9_analyst_url + '?g=dragon_tiger_seq'})
+
+
 load_odds = ->
   $.ajax({url: gon.ball_url+'?_time=' + (new Date()).getTime().toString()}).done( (data) => on_load_odds(data) )
   #window.setTimeout(load_odds, 10 * 1000)

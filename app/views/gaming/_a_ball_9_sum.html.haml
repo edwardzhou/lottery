@@ -1,0 +1,9 @@
+%table.table_border(width="130px")
+  %thead
+    %tr
+      %td(colspan="2") 兩面長龍排行
+  %tbody
+    - analyst.each do |sa|
+      %tr
+        %td(style="width: 80%; text-align: left; color: blue")= sa.analyst_name
+        %td(style="color: red") #{sa.appr_count}期

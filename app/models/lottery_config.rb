@@ -28,6 +28,9 @@ class LotteryConfig
     start_time = lottery_def.start_time.strftime("%H:%M:%S +0800")
     self.next_start_time = Time.parse(the_date.strftime("%Y%m%d " + start_time))
     save!
+
+    LotteryAnalyst.reset_all
+
     self
   end
 

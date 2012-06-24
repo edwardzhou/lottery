@@ -37,15 +37,17 @@
             = submit_tag "投注",:disable_with => "投注中...", :class => "submit_btn"
 
 
-= render :partial => "sum_analyst", :locals => {:sum_analyst => @sum_analyst}
+//= render :partial => "sum_analyst", :locals => {:sum_analyst => @sum_analyst}
+#sum_analyst.span-4.pull-30px.last
 
-.sum.span-20
-  %table.cell_border
-    %thead
-      %tr
-        %td(colspan="2") 兩面长龙
+.sum.span-19
+  %table.table_border(width="96%")
     %tbody
       %tr
-        %td= "bbb"
-        %td= 3
+        %td.td_caption_1.F_bold(width="25%") 總和大小
+        %td.td_caption_1.F_bold(width="25%") 總和單雙
+        %td.td_caption_1.F_bold(width="25%") 總和尾數大小
+        %td.td_caption_1.F_bold(width="25%") 總和龍虎
+
+  #sum_detail
 

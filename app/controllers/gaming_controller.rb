@@ -1,25 +1,15 @@
 #encoding: utf-8
 
+require "lottery_rule_names"
+
 class GamingController < UserBaseController
 
   include ApplicationHelper
+  include LotteryRuleNames
+
 
   before_filter :init
 
-  BALL_NAMES = %w(none 第一球 第二球 第三球 第四球 第五球 第六球 第七球 第八球 兩面盤 總和、龍虎 連碼)
-  COMB_NAMES = {:s2 => "任選二",
-                :c2 => "選二連組",
-                :s3 => "任選三",
-                :x3 => "選三前組",
-                :s4 => "任選四",
-                :s5 => "任選五"}
-
-  HALF_BET_ITEMS = {:big => "大", :small => "小", :even => "雙",
-                    :odd => "單", :trail_big => "尾大", :trail_small => "尾小",
-                    :add_even => "合數雙", :add_odd => "合數單", :dragon => "龍",
-                    :tiger => "虎"}
-  QUARTER_BET_ITEMS = {:east => "東", :south => "南", :west => "西", :north => "北"}
-  THIRD_BET_ITEMS = {:middle => "中", :fa => "發", :white => "白"}
 
   #helper_method
 
@@ -42,6 +32,8 @@ class GamingController < UserBaseController
     end
 
     gon.ball_url = gaming_path(@id, format: :json)
+    gon.ball_analyst_url = analyst_gaming_path(@id, format: :js)
+    gon.ball_9_analyst_url = analyst_gaming_path("ball9", format: :js)
 
     if @ball_id > 8 and not request.xhr?
       render "ball#{@ball_id}"
@@ -78,6 +70,43 @@ class GamingController < UserBaseController
     else
       redirect_to :action => "show", :id => @id, :alert => "投注失败，已关闭投注！"
     end
+
+  end
+
+  def analyst
+    @id = params[:id]
+    @group = params[:g]
+    @ball_id = 0
+    ball_regex = /^ball(\d\d?)$/
+    if @id =~ ball_regex then
+      @ball_id = ball_regex.match(@id)[1].to_i
+    end
+
+    @ball_id = 9 if (@ball_id == 0) or (@ball_id > 10)
+
+    analyst_id = "ball_#{@ball_id}_#{@group}"
+
+    logger.debug("analyst_id => #{analyst_id}")
+
+    @analyst = LotteryAnalyst.get_by_id(analyst_id, false)
+    @item_holder = "sum_analyst"
+
+    #@analyst =  if @analyst.nil?
+
+    if @ball_id > 8
+      partial_item = "a_ball_9_#{@group}"
+      if @group == "sum"
+        @analyst = LotteryAnalyst.by_sum(10)
+      else
+        @item_holder = "sum_detail"
+        partial_item = "a_ball_seq"
+      end
+
+    else
+      partial_item = "a_ball_#{@group}"
+    end
+
+    render :partial => "analyst", :locals => {:item_holder => @item_holder, :analyst => @analyst, :ball_id => @ball_id, :item_name => partial_item}
 
   end
 
