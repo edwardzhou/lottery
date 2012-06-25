@@ -122,7 +122,7 @@ update_time = ->
     #if (end_seconds <=0 or close_seconds <=0) and (refresh_time > 4)
     #  refresh_time = 4
     if (0 == close_seconds - 1)
-      refresh_time = 10
+      refresh_time = 3
     if (0 == end_seconds - 1)
       refresh_time = 10
 

@@ -57,7 +57,7 @@ class LotteryAnalyst
         a_id = "ball_#{ball_id}_#{index}"
         la = self.get_by_id(a_id)
         la.analyst_name ||= "#{BALL_NAMES[ball_id]} - #{format('%02d', index)}"
-        la.analyst_group ||= "ball_appr"
+        la.analyst_group ||= "ball_#{ball_id}_appr"
         if ball.ball_value == index
           la.appr_count = la.appr_count + 1
           la.no_appr_count = 0
