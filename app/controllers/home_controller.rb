@@ -18,6 +18,10 @@ class HomeController < ApplicationController
   def user
   end
 
+  def credit_info
+
+  end
+
   def rule_info
 
   end

@@ -121,15 +121,20 @@ update_time = ->
 
     #if (end_seconds <=0 or close_seconds <=0) and (refresh_time > 4)
     #  refresh_time = 4
-    if (0 == close_seconds - 1) and (refresh_time > 6)
-      refresh_time = 6
-    if (0 == end_seconds - 1) and (refresh_time > 6)
-      refresh_time = 6
+    if (0 == close_seconds - 1)
+      refresh_time = 10
+    if (0 == end_seconds - 1)
+      refresh_time = 10
 
     refresh_time = refresh_time - 1
     if refresh_time <= 0
       refresh_time = 0
       load_odds()
+      if end_seconds <=0
+        if $("#sum_analyst").size() > 0
+          $.ajax({url: gon.ball_9_analyst_url + '?g=sum'})
+        if $("#sum_detail").size() > 0
+          $.ajax({url: gon.ball_9_analyst_url + '?g=' + $(".sum_detail_menu.td_caption_2").data("g")})
 
     $("#Update_Time").text(refresh_time)
 
@@ -175,11 +180,6 @@ on_load_odds = (odds_level) ->
       $(".odds_label").text("-")
       $(".bet_input").hide();
       $(".bet_lock").show()
-
-  if $("#sum_analyst").size() > 0
-    $.ajax({url: gon.ball_9_analyst_url + '?g=sum'})
-  if $("#sum_detail").size() > 0
-    $.ajax({url: gon.ball_9_analyst_url + '?g=dragon_tiger_seq'})
 
 
 load_odds = ->
@@ -261,5 +261,18 @@ jQuery ->
   $(".bet_input_c").bind("click", =>
     calc_c_type()
   )
+
+  if $("#sum_analyst").size() > 0
+    $.ajax({url: gon.ball_9_analyst_url + '?g=sum'})
+  if $("#sum_detail").size() > 0
+    $.ajax({url: gon.ball_9_analyst_url + '?g=' + $(".sum_detail_menu.td_caption_2").data("g")})
+
+  if $(".sum_detail_menu").size() > 0
+    $(".sum_detail_menu").bind "click", ->
+      if !$(this).hasClass("td_caption_2")
+        $(".sum_detail_menu.td_caption_2").removeClass("td_caption_2").addClass("td_caption_1")
+        $(this).removeClass("td_caption_1").addClass("td_caption_2")
+        q = $(this).data("g")
+        $.ajax({url: gon.ball_9_analyst_url + '?g=' + q})
 
 
