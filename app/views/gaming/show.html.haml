@@ -25,4 +25,4 @@
 #sum_analyst.span-4.pull-30px.last
 
 #ball_sum_analyst.span-19.last
-  = render :partial => "a_ball_sum"
+  = render :partial => "a_ball_sum", :locals => {:ball_apprs => @ball_apprs, :ball_no_apprs => @ball_no_apprs, :ball_id => @ball_id}

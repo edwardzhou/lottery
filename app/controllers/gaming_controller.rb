@@ -35,6 +35,9 @@ class GamingController < UserBaseController
     gon.ball_analyst_url = analyst_gaming_path(@id, format: :js)
     gon.ball_9_analyst_url = analyst_gaming_path("ball9", format: :js)
 
+    @ball_apprs = LotteryAnalyst.by_group("ball_1_appr")
+    @ball_no_apprs = LotteryAnalyst.by_group("no_no_appr")
+
     if @ball_id > 8 and not request.xhr?
       render "ball#{@ball_id}"
     end

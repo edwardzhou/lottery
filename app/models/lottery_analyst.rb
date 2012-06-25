@@ -27,7 +27,7 @@ class LotteryAnalyst
       la.no_appr_count = la.no_appr_count + 1
       la.save!
     end
-    where(:updated_at.lt => before_time).update(:appr_count => 0)
+    where(:updated_at.lt => before_time).and(:lottery_group.not => /ball_\d\d?_appr/).update(:appr_count => 0)
   end
 
   def self.get_by_id(id, create_on_not_found = true)
@@ -54,29 +54,31 @@ class LotteryAnalyst
       ball = lottery.send(:eval, "ball_#{ball_id}")
 
       (1..20).each do |index|
-        a_id = "ball_#{ball_id}_#{index}"
+        a_id = "ball_#{ball_id}_#{format('%02d', index)}"
         la = self.get_by_id(a_id)
         la.analyst_name ||= "#{BALL_NAMES[ball_id]} - #{format('%02d', index)}"
         la.analyst_group ||= "ball_#{ball_id}_appr"
         if ball.ball_value == index
           la.appr_count = la.appr_count + 1
-          la.no_appr_count = 0
         else
-          la.no_appr_count = la.no_appr_count + 1
+          #la.no_appr_count = la.no_appr_count + 1
           #la.appr_count = 0
         end
         la.save!
 
-        self.get_by_id("no_#{index}_no_appr")
+        no_appr_la = self.get_by_id("no_#{format("%02d", index)}_no_appr")
+        no_appr_la.analyst_name ||= "#{format("%02d", index)} - 无出期数"
+        no_appr_la.analyst_group ||= "no_no_appr"
+        no_appr_la.save!
       end
 
       # 复位无出期数
-      a_id = "no_#{ball.ball_value}_no_appr"
-      la = self.get_by_id(a_id)
-      la.analyst_name ||= "#{format("%2d", ball.ball_value)} 无出期数"
-      la.analyst_group ||= "no_no_appr"
-      la.no_appr_count = 0
-      la.save!
+      no_appr_a_id = "no_#{format("%02d", ball.ball_value)}_no_appr"
+      no_appr_la = self.get_by_id(no_appr_a_id)
+      no_appr_la.analyst_name ||= "#{format("%2d", ball.ball_value)} 无出期数"
+      no_appr_la.analyst_group ||= "no_no_appr"
+      no_appr_la.no_appr_count = 0
+      no_appr_la.save!
 
 
       HALF_BET_ITEMS.each do |key, name|

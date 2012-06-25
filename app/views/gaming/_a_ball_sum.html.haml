@@ -4,4 +4,14 @@
       %td 今天
       - 20.times do |index|
         %td= format("%02d", index+1)
+    %tr
+      %td 出球率
+      - ball_apprs.each do |ba|
+        %td= ba.appr_count
+    %tr
+      %td(nowrap=true) 无出期数
+      - ball_no_apprs.each do |ba|
+        %td= ba.no_appr_count
+
+
 
