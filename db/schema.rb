@@ -11,12 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120602122901) do
+ActiveRecord::Schema.define(:version => 20120626074304) do
 
   create_table "lock_objects", :force => true do |t|
     t.string   "lock_name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.datetime "lock_time"
   end
 
 end

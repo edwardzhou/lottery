@@ -217,7 +217,7 @@ jQuery ->
     #$.ajax({url: gon.ball_url}).done( (data) => on_load_odds(data) )
     $(".bet_input").bind("blur", () ->
       value = parseInt($(this).val())
-      if isNaN(value) or value <= 0
+      if isNaN(value) or value < 10
         value = ""
       else if value > parseInt($(this).attr("max"))
         alert "本注最大投注額度爲 " + $(this).attr("max")

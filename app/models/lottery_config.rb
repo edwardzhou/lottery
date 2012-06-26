@@ -54,6 +54,8 @@ class LotteryConfig
       reset_seq_no(self.lottery_date.to_date.next.to_time)
     end
 
+    LotteryAnalyst.update_analyst(self.lottery_inst)
+
     lottery = LotteryInst.new
     lottery.lottery_name = self.lottery_def.lottery_name
     lottery.lottery_date = self.lottery_date

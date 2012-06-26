@@ -60,17 +60,23 @@ class GamingController < UserBaseController
     end
 
     if @lottery.accept_betting
-      if @ball_id.between?(1, 8) #1至8球
-        handle_ball_bet(@ball_id, bet_params)
-      elsif @ball_id == 9 #两面盘
-        handle_sum_bet(@ball_id, bet_params)
-      elsif @ball_id == 10 #总和、龙虎
-        handle_sum_bet(@ball_id, bet_params)
-      elsif @ball_id == 11 #连码
-        handle_cp_bet(@ball_id, bet_params)
+      LockObject.lock_on(@current_user.username) do
+        @current_user.reload
+        @lottery.reload
+        @current_daily_stat.reload
+        if @ball_id.between?(1, 8) #1至8球
+          handle_ball_bet(@ball_id, bet_params)
+        elsif @ball_id == 9 #两面盘
+          handle_sum_bet(@ball_id, bet_params)
+        elsif @ball_id == 10 #总和、龙虎
+          handle_sum_bet(@ball_id, bet_params)
+        elsif @ball_id == 11 #连码
+          handle_cp_bet(@ball_id, bet_params)
+        end
       end
 
       redirect_to :action => "show", :id => @id
+
     else
       redirect_to :action => "show", :id => @id, :alert => "投注失败，已关闭投注！"
     end
@@ -210,15 +216,18 @@ class GamingController < UserBaseController
       end
     end
 
-    bet_items.each {|item| item.save!}
-
     total_bet_credit = bet_items.inject(0) { |sum, item| sum + item.credit }
-    #@current_user.available_credit = @current_user.available_credit - total_bet_credit
-    @current_user.available_credit = (@current_user.available_credit - total_bet_credit).round(4)
-    @current_user.save!
 
-    current_lottery.total_income = (current_lottery.total_income + total_bet_credit).round(4)
-    current_lottery.save!
+    if total_bet_credit < @current_user.available_credit
+      bet_items.each {|item| item.save!}
+
+      #@current_user.available_credit = @current_user.available_credit - total_bet_credit
+      @current_user.available_credit = (@current_user.available_credit - total_bet_credit).round(4)
+      @current_user.save!
+
+      current_lottery.total_income = (current_lottery.total_income + total_bet_credit).round(4)
+      current_lottery.save!
+    end
 
   end
 
@@ -267,14 +276,17 @@ class GamingController < UserBaseController
       end
     end
 
-    bet_items.each {|item| item.save!}
-
     total_bet_credit = bet_items.inject(0) { |sum, item| sum + item.credit }
-    @current_user.available_credit = (@current_user.available_credit - total_bet_credit).round(4)
-    @current_user.save!
 
-    current_lottery.total_income = (current_lottery.total_income + total_bet_credit).round(4)
-    current_lottery.save!
+    if total_bet_credit < @current_user.available_credit
+      bet_items.each {|item| item.save!}
+
+      @current_user.available_credit = (@current_user.available_credit - total_bet_credit).round(4)
+      @current_user.save!
+
+      current_lottery.total_income = (current_lottery.total_income + total_bet_credit).round(4)
+      current_lottery.save!
+    end
   end
 
   def handle_cp_bet(ball_id, bet_params)
@@ -312,16 +324,18 @@ class GamingController < UserBaseController
       bet_items << bet_item
     end
 
-
-    bet_items.each {|item| item.save!}
-
     total_bet_credit = bet_items.inject(0) { |sum, item| sum + item.credit }
-    #@current_user.available_credit = @current_user.available_credit - total_bet_credit
-    @current_user.available_credit = (@current_user.available_credit - total_bet_credit).round(4)
-    @current_user.save!
 
-    current_lottery.total_income = (current_lottery.total_income + total_bet_credit).round(4)
-    current_lottery.save!
+    if total_bet_credit < @current_user.available_credit
+      bet_items.each {|item| item.save!}
+
+      #@current_user.available_credit = @current_user.available_credit - total_bet_credit
+      @current_user.available_credit = (@current_user.available_credit - total_bet_credit).round(4)
+      @current_user.save!
+
+      current_lottery.total_income = (current_lottery.total_income + total_bet_credit).round(4)
+      current_lottery.save!
+    end
 
 
   end
