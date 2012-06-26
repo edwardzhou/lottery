@@ -1,0 +1,2 @@
+$("#ball_appr_rate").html("<%= escape_javascript( render(:partial => "a_ball_sum_apprs", :locals => {:ball_apprs => ball_apprs, :ball_id => ball_id}) )%>")
+$("#ball_no_appr_rate").html("<%= escape_javascript( render(:partial => "a_ball_sum_no_apprs", :locals => {:ball_no_apprs => ball_no_apprs, :ball_id => ball_id}) )%>")

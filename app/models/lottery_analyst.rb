@@ -27,7 +27,7 @@ class LotteryAnalyst
       la.no_appr_count = la.no_appr_count + 1
       la.save!
     end
-    where(:updated_at.lt => before_time).and(:lottery_group.not => /ball_\d\d?_appr/).update(:appr_count => 0)
+    where(:updated_at.lt => before_time).and(:analyst_group.not => /ball_\d\d?_appr/).update(:appr_count => 0)
   end
 
   def self.get_by_id(id, create_on_not_found = true)
@@ -67,7 +67,7 @@ class LotteryAnalyst
         la.save!
 
         no_appr_la = self.get_by_id("no_#{format("%02d", index)}_no_appr")
-        no_appr_la.analyst_name ||= "#{format("%02d", index)} - 无出期数"
+        no_appr_la.analyst_name ||= "#{format("%02d", index)} - 無出期數"
         no_appr_la.analyst_group ||= "no_no_appr"
         no_appr_la.save!
       end
@@ -75,7 +75,7 @@ class LotteryAnalyst
       # 复位无出期数
       no_appr_a_id = "no_#{format("%02d", ball.ball_value)}_no_appr"
       no_appr_la = self.get_by_id(no_appr_a_id)
-      no_appr_la.analyst_name ||= "#{format("%2d", ball.ball_value)} 无出期数"
+      no_appr_la.analyst_name ||= "#{format("%2d", ball.ball_value)} 無出期數"
       no_appr_la.analyst_group ||= "no_no_appr"
       no_appr_la.no_appr_count = 0
       no_appr_la.save!
@@ -125,10 +125,11 @@ class LotteryAnalyst
 
       self.update_ball_sum_analyst(ball, ball_id, "big_small", "big", "大小", ["大", "小"])
       self.update_ball_sum_analyst(ball, ball_id, "odd_even", "odd", "單雙", ["單", "雙"])
-      self.update_ball_sum_analyst(ball, ball_id, "trail_big_small", "trail_big", "尾大小", ["大", "小"])
+      self.update_ball_sum_analyst(ball, ball_id, "trail_big_small", "trail_big", "尾數大小", ["大", "小"])
       self.update_ball_sum_analyst(ball, ball_id, "add_odd_even", "add_odd", "合數單雙", ["單", "雙"])
       self.update_ball_dir_analyst(ball, ball_id)
       self.update_ball_zfb_analyst(ball, ball_id)
+      self.update_ball_appr_seq_analyst(ball, ball_id)
 
     end
 
@@ -218,6 +219,28 @@ class LotteryAnalyst
     la.save!
   end
 
+  def self.update_ball_appr_seq_analyst(ball, ball_id)
+    # 大小
+    a_id = "ball_#{ball_id}_appr_seq"
+    la = self.get_by_id(a_id)
+    la.analyst_name ||= "#{BALL_NAMES[ball_id]} - 出球"
+    la.analyst_group ||= "ball_#{ball_id}_appr_seq"
+    item_name = format("%02d", ball.ball_value)
+
+    if la.appr_data.size == 0
+      la.appr_data.push([ item_name , 1])
+    else
+      last_item = la.appr_data.last
+      if last_item[0] == item_name
+        last_item[1] = last_item[1] + 1
+      else
+        la.appr_data.push( [item_name, 1] )
+      end
+    end
+    la.appr_data.shift if la.appr_data.size > 25
+
+    la.save!
+  end
 
 
   def self.update_sum_analyst(lottery)

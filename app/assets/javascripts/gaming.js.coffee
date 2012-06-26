@@ -71,6 +71,29 @@ parseDate = (date_str) ->
   date_str = date_str.replace(/-/g, "/").replace(/\+08:00/, "+0800")
   return new Date(date_str)
 
+refresh_sum_analyst = ()->
+  if $("#sum_analyst").size() > 0
+    $.ajax({url: gon.ball_9_analyst_url + '?g=sum' +'&_time=' + (new Date()).getTime().toString()})
+
+refresh_sum_detail_analyst = ()->
+  if $("#sum_detail").size() > 0
+    $.ajax({url: gon.ball_9_analyst_url + '?g=' + $(".sum_detail_menu.td_caption_2").data("g") + '&_time=' + (new Date()).getTime().toString()})
+
+refresh_ball_sum_analyst = ()->
+  if $("#sum_detail").size() > 0
+    $.ajax({url: gon.ball_analyst_url + '?g=ball_sum' + '&_time=' + (new Date()).getTime().toString()})
+
+
+refresh_ball_detail_analyst = ()->
+  if $("#ball_detail").size() > 0
+    item = $(".ball_detail_menu.td_caption_2")
+    q = item.data("g")
+    t = item.data("t")
+    if "sum" == t
+      $.ajax({url: gon.ball_9_analyst_url + '?g=' + q + "&ball=true" + '&_time=' + (new Date()).getTime().toString() })
+    else
+      $.ajax({url: gon.ball_analyst_url + '?g=' + q + '&_time=' + (new Date()).getTime().toString()})
+
 
 update_time = ->
   if end_time != null
@@ -131,10 +154,10 @@ update_time = ->
       refresh_time = 0
       load_odds()
       if end_seconds <=0
-        if $("#sum_analyst").size() > 0
-          $.ajax({url: gon.ball_9_analyst_url + '?g=sum'})
-        if $("#sum_detail").size() > 0
-          $.ajax({url: gon.ball_9_analyst_url + '?g=' + $(".sum_detail_menu.td_caption_2").data("g")})
+        refresh_sum_analyst()
+        refresh_sum_detail_analyst()
+        refresh_ball_detail_analyst()
+        refresh_ball_sum_analyst()
 
     $("#Update_Time").text(refresh_time)
 
@@ -183,7 +206,7 @@ on_load_odds = (odds_level) ->
 
 
 load_odds = ->
-  $.ajax({url: gon.ball_url+'?_time=' + (new Date()).getTime().toString()}).done( (data) => on_load_odds(data) )
+  $.ajax({url: gon.ball_url + '?_time=' + (new Date()).getTime().toString()}).done( (data) => on_load_odds(data) )
   #window.setTimeout(load_odds, 10 * 1000)
 
 jQuery ->
@@ -262,17 +285,30 @@ jQuery ->
     calc_c_type()
   )
 
-  if $("#sum_analyst").size() > 0
-    $.ajax({url: gon.ball_9_analyst_url + '?g=sum'})
-  if $("#sum_detail").size() > 0
-    $.ajax({url: gon.ball_9_analyst_url + '?g=' + $(".sum_detail_menu.td_caption_2").data("g")})
+  refresh_sum_analyst()
+  refresh_sum_detail_analyst()
+  refresh_ball_detail_analyst()
+  refresh_ball_sum_analyst()
 
   if $(".sum_detail_menu").size() > 0
     $(".sum_detail_menu").bind "click", ->
       if !$(this).hasClass("td_caption_2")
         $(".sum_detail_menu.td_caption_2").removeClass("td_caption_2").addClass("td_caption_1")
         $(this).removeClass("td_caption_1").addClass("td_caption_2")
-        q = $(this).data("g")
-        $.ajax({url: gon.ball_9_analyst_url + '?g=' + q})
+        #q = $(this).data("g")
+        #$.ajax({url: gon.ball_9_analyst_url + '?g=' + q})
+        refresh_sum_detail_analyst()
 
 
+  if $(".ball_detail_menu").size() > 0
+    $(".ball_detail_menu").bind "click", ->
+      if !$(this).hasClass("td_caption_2")
+        $(".ball_detail_menu.td_caption_2").removeClass("td_caption_2").addClass("td_caption_1")
+        $(this).removeClass("td_caption_1").addClass("td_caption_2")
+        refresh_ball_detail_analyst()
+#        q = $(this).data("g")
+#        t = $(this).data("t")
+#        if "sum" == t
+#          $.ajax({url: gon.ball_9_analyst_url + '?g=' + q + "&ball=true"})
+#        else
+#          $.ajax({url: gon.ball_analyst_url + '?g=' + q})

@@ -2,9 +2,9 @@
   %tbody
     %tr
       - (25 - analyst.appr_data.size).times do
-        %td &nbsp;
+        %td(width="23" class="#{cycle('', 'Jut_caption_1')}" ) &nbsp;
 
       - analyst.appr_data.each do |ad|
-        %td(width="23" )
+        %td(width="23" class="#{cycle('', 'Jut_caption_1')}" )
           != [].fill(ad[0], 0, ad[1]).join("<br/>")
 

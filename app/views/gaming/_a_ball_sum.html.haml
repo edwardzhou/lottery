@@ -1,17 +1,32 @@
 %table.table_border(width="96%")
   %tbody
     %tr
-      %td 今天
-      - 20.times do |index|
-        %td= format("%02d", index+1)
-    %tr
-      %td 出球率
+      %td.td_caption_1.F_bold 今天
+      - 18.times do |index|
+        %td.td_caption_1.F_bold.Font_B= format("%02d", index+1)
+      %td.td_caption_1.F_bold.Font_R 19
+      %td.td_caption_1.F_bold.Font_R 20
+    %tr(id="ball_appr_rate")
+      %td.td_caption_1.F_bold 出球率
       - ball_apprs.each do |ba|
         %td= ba.appr_count
-    %tr
-      %td(nowrap=true) 无出期数
+    %tr(id="ball_no_appr_rate")
+      %td.td_caption_1.F_bold(nowrap=true) 無出期數
       - ball_no_apprs.each do |ba|
         %td= ba.no_appr_count
 
-
-
+%table.table_border(width="96%")
+  %tbody
+    %tr
+      %td.td_caption_2.F_bold.Font_B.ball_detail_menu{"data-g" => "appr_seq"}= ball_name
+      %td.td_caption_1.F_bold.Font_B.ball_detail_menu{"data-g" => "big_small_seq"} 大小
+      %td.td_caption_1.F_bold.Font_B.ball_detail_menu{"data-g" => "odd_even_seq"} 單雙
+      %td.td_caption_1.F_bold.Font_B.ball_detail_menu{"data-g" => "trail_big_small_seq"} 尾數大小
+      %td.td_caption_1.F_bold.Font_B.ball_detail_menu{"data-g" => "add_odd_even_seq"} 合數單雙
+      %td.td_caption_1.F_bold.Font_B.ball_detail_menu{"data-g" => "dir_seq"} 方位
+      %td.td_caption_1.F_bold.Font_B.ball_detail_menu{"data-g" => "zfb_seq"} 中發白
+      %td.td_caption_1.F_bold.Font_B.ball_detail_menu{"data-g" => "big_small_seq", "data-t" => "sum"} 總和大小
+      %td.td_caption_1.F_bold.Font_B.ball_detail_menu{"data-g" => "odd_even_seq", "data-t" => "sum"} 總和單雙
+      %td.td_caption_1.F_bold.Font_B.ball_detail_menu{"data-g" => "trail_big_small_seq", "data-t" => "sum"} 總和尾數大小
+      %td.td_caption_1.F_bold.Font_B.ball_detail_menu{"data-g" => "dragon_tiger_seq", "data-t" => "sum"} 總和龍虎
+#ball_detail

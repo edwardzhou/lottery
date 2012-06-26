@@ -35,8 +35,9 @@ class GamingController < UserBaseController
     gon.ball_analyst_url = analyst_gaming_path(@id, format: :js)
     gon.ball_9_analyst_url = analyst_gaming_path("ball9", format: :js)
 
-    @ball_apprs = LotteryAnalyst.by_group("ball_1_appr")
+    @ball_apprs = LotteryAnalyst.by_group("ball_#{@ball_id}_appr")
     @ball_no_apprs = LotteryAnalyst.by_group("no_no_appr")
+    @ball_name = BALL_NAMES[1]
 
     if @ball_id > 8 and not request.xhr?
       render "ball#{@ball_id}"
@@ -95,21 +96,41 @@ class GamingController < UserBaseController
     @item_holder = "sum_analyst"
 
     #@analyst =  if @analyst.nil?
+    @ball_name = BALL_NAMES[@ball_id]
 
     if @ball_id > 8
       partial_item = "a_ball_9_#{@group}"
       if @group == "sum"
         @analyst = LotteryAnalyst.by_sum(10)
       else
-        @item_holder = "sum_detail"
+        @item_holder = params["ball"].blank? ? "sum_detail" : "ball_detail"
         partial_item = "a_ball_seq"
       end
 
     else
-      partial_item = "a_ball_#{@group}"
+
+      if @group != "ball_sum"
+        @item_holder = "ball_detail"
+        partial_item = "a_ball_seq"
+      else
+        @ball_apprs = LotteryAnalyst.by_group("ball_#{@ball_id}_appr")
+        @ball_no_apprs = LotteryAnalyst.by_group("no_no_appr")
+        render :partial => "a_ball_sum_info", :locals => {:analyst => @analyst,
+                                                  :ball_id => @ball_id,
+                                                  #:item_name => partial_item,
+                                                  :ball_apprs => @ball_apprs,
+                                                  :ball_no_apprs => @ball_no_aprs,
+                                                  :ball_name => @ball_name,}
+      end
     end
 
-    render :partial => "analyst", :locals => {:item_holder => @item_holder, :analyst => @analyst, :ball_id => @ball_id, :item_name => partial_item}
+    render :partial => "analyst", :locals => {:item_holder => @item_holder,
+                                              :analyst => @analyst,
+                                              :ball_id => @ball_id,
+                                              :item_name => partial_item,
+                                              :ball_apprs => @ball_apprs,
+                                              :ball_no_apprs => @ball_no_aprs,
+                                              :ball_name => @ball_name,}
 
   end
 
