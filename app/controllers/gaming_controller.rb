@@ -37,7 +37,7 @@ class GamingController < UserBaseController
 
     @ball_apprs = LotteryAnalyst.by_group("ball_#{@ball_id}_appr")
     @ball_no_apprs = LotteryAnalyst.by_group("no_no_appr")
-    @ball_name = BALL_NAMES[1]
+    @ball_name = BALL_NAMES[@ball_id]
 
     if @ball_id > 8 and not request.xhr?
       render "ball#{@ball_id}"
@@ -119,8 +119,9 @@ class GamingController < UserBaseController
                                                   :ball_id => @ball_id,
                                                   #:item_name => partial_item,
                                                   :ball_apprs => @ball_apprs,
-                                                  :ball_no_apprs => @ball_no_aprs,
+                                                  :ball_no_apprs => @ball_no_apprs,
                                                   :ball_name => @ball_name,}
+        return
       end
     end
 

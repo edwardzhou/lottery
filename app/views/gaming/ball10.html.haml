@@ -16,6 +16,8 @@
           %td.cell_border
             = render :partial => "sum_bet", :locals => {:ball_id => @ball_id, :rules => @sum_bet_dt_rules }
 
+    %br/
+
     %table(width="100%" )
       %tbody
         %tr
@@ -23,6 +25,21 @@
             %input(type="button" class="reset" value="重填")/
             \&nbsp;
             = submit_tag "投注",:disable_with => "投注中...", :class => "submit_btn"
+
+  %br/
+
+  .sum.span-19
+    %table.table_border(width="96%")
+      %tbody
+        %tr
+          %td.td_caption_1.F_bold.sum_detail_menu{:width=>"25%", "data-g" => "big_small_seq" } 總和大小
+          %td.td_caption_1.F_bold.sum_detail_menu{:width=>"25%", "data-g" => "odd_even_seq"  } 總和單雙
+          %td.td_caption_1.F_bold.sum_detail_menu{:width=>"25%", "data-g" => "trail_big_small_seq"  } 總和尾數大小
+          %td.td_caption_2.F_bold.sum_detail_menu{:width=>"25%", "data-g" => "dragon_tiger_seq"  } 總和龍虎
+
+    #sum_detail
+
+
 
 //= render :partial => "sum_analyst", :locals => {:sum_analyst => @sum_analyst}
 #sum_analyst.span-4.pull-30px.last

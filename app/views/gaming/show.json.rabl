@@ -31,7 +31,7 @@ child(@current_daily_stat => :stat) do
 end
 
 node(:refresh_time) do
-  20
+  90
 end
 
 

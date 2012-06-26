@@ -7,7 +7,7 @@ timer_setted = false
 end_time = null
 close_time = null
 start_time = null
-refresh_time = 20
+refresh_time = 90
 c_type = 0
 c_odds = 0
 c_bet_name = ""
@@ -80,7 +80,7 @@ refresh_sum_detail_analyst = ()->
     $.ajax({url: gon.ball_9_analyst_url + '?g=' + $(".sum_detail_menu.td_caption_2").data("g") + '&_time=' + (new Date()).getTime().toString()})
 
 refresh_ball_sum_analyst = ()->
-  if $("#sum_detail").size() > 0
+  if $("#ball_appr_rate").size() > 0
     $.ajax({url: gon.ball_analyst_url + '?g=ball_sum' + '&_time=' + (new Date()).getTime().toString()})
 
 
