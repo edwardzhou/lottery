@@ -5,7 +5,7 @@
         = ball_title
     - ball_rules.each do |ball_rule|
       %tr.Ball_tr_H
-        %td#jeu_n_9_161.cell_border.Jut_caption_1{:width => "54"}
+        %td#jeu_n_9_161.cell_border.Jut_caption_1{:width => "54", :nowrap => true}
           = label_tag "ball9[ball_#{ball_no}[#{ball_rule.rule_name}]]", ball_rule.rule_title
         %td#jeu_p_9_161.cell_border{:width => "59"}
           = label_tag "ball9[ball_#{ball_no}[#{ball_rule.rule_name}]]", "-", :class => "multiple_Red odds_label", :title => "按此下註", :"data-odds-rule" => "half"
