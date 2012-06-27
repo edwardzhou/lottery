@@ -30,6 +30,10 @@ class HomeController < ApplicationController
 
   end
 
+  def agreement
+
+  end
+
   def update_password
 
     @user = current_user

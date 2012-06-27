@@ -152,3 +152,22 @@ jQuery ->
 #
   if $("#change_password_form").size() > 0
     $("#change_password_form").validate()
+
+
+  if $("#dialog-message").size() > 0
+    dlg = $("#dialog-message").dialog( {
+      resizable: false,
+      height: 500,
+      width: 850,
+      modal: true
+      buttons: {
+        "同意": ->
+          $(this).dialog("close")
+          window.location.href = $(".menu_ball9").attr("href")
+        ,
+        "不同意": ->
+          $(this).dialog("close")
+          $(".but_7").click()
+      }
+    })
+    dlg.dialog("open")

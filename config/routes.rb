@@ -14,6 +14,7 @@ Lottery::Application.routes.draw do
       get "test"
       get "history"
       get "credit_info"
+      get "agreement"
       get "change_password"
       post "update_password"
     end

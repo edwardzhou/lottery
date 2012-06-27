@@ -32,7 +32,7 @@ class SessionsController < ApplicationController
       elsif @sign_user.is_agent?
         redirect_to agent_users_path
       else
-        redirect_to gaming_path("ball9")
+        redirect_to agreement_home_index_path
       end
     else
       redirect_to({:action => "new"}, :alert => alert)
