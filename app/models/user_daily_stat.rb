@@ -14,6 +14,7 @@ class UserDailyStat
   has_many :bet_items
 
   scope :recent, lambda {|user| where(:user_id => user.id).and(:stat_date.gte => 30.days.ago.beginning_of_day).order_by(:stat_date => :asc) }
+  scope :recent_2weeks, lambda {|user| where(:user_id => user.id).and(:stat_date.gte => DateTime.now.prev_week).order_by(:stat_date => :asc) }
   scope :latest, lambda {|user| where(:user_id => user.id).order_by(:stat_date => :desc).limit(1) }
   scope :by_date, lambda {|the_date| where(:stat_date => the_date)}
   scope :by_agent, lambda {|user| where(:agent_id => user.id) }

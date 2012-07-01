@@ -87,6 +87,7 @@ class HomeController < ApplicationController
 
   def bet_stat
     if request.xhr?
+      (DateTime.now.prev_week .. DateTime.now).each {|d| UserDailyStat.recent_2weeks(current_current, d) }
       @user_daily_stats = UserDailyStat.recent(current_user)
       @total_rows = @user_daily_stats.count
       @page = 1
