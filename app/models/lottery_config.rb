@@ -35,7 +35,7 @@ class LotteryConfig
   end
 
   def start_new_lottery
-    unless self.lottery_inst.closed
+    unless self.lottery_inst.nil? or self.lottery_inst.closed
       Rails.logger.debug("lottery_inst is not closed, start to close it")
       Calculation.close_lottery(self.lottery_inst)
     end
@@ -54,7 +54,7 @@ class LotteryConfig
       reset_seq_no(self.lottery_date.to_date.next.to_time)
     end
 
-    LotteryAnalyst.update_analyst(self.lottery_inst)
+    LotteryAnalyst.update_analyst(self.lottery_inst) unless self.lottery_inst.nil?
 
     lottery = LotteryInst.new
     lottery.lottery_name = self.lottery_def.lottery_name
